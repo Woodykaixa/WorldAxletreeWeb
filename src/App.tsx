@@ -1,5 +1,6 @@
 import { Header } from '@/components';
-import { BrowserRouter } from 'react-router-dom';
+import { Main } from '@/pages';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 function App() {
   console.log(import.meta.env.WEB_TITLE);
@@ -7,6 +8,11 @@ function App() {
     <div>
       <BrowserRouter>
         <Header></Header>
+        <Switch>
+          <Route path='/' exact>
+            <Main />
+          </Route>
+        </Switch>
       </BrowserRouter>
     </div>
   );

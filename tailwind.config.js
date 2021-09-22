@@ -668,6 +668,7 @@ module.exports = {
       DEFAULT: '100%',
     },
     skew: {
+      '-45': '-45deg',
       '-12': '-12deg',
       '-6': '-6deg',
       '-3': '-3deg',
@@ -679,6 +680,7 @@ module.exports = {
       3: '3deg',
       6: '6deg',
       12: '12deg',
+      45: '45deg',
     },
     space: (theme, { negative }) => ({
       ...theme('spacing'),
@@ -799,7 +801,9 @@ module.exports = {
       auto: 'auto',
       0: '0',
       10: '10',
+      '-10': '-10',
       20: '20',
+      '-20': '-20',
       30: '30',
       40: '40',
       50: '50',
