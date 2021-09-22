@@ -15,7 +15,7 @@ const TextWrapper = styled.div<Omit<TextProps, 'children' | 'className'>>`
 `;
 export function Text({ children, className, ...rest }: TextProps) {
   return (
-    <TextWrapper {...rest} className={'text-3xl pl-4 text-white ' + className}>
+    <TextWrapper {...rest} className={'text-3xl pl-6 text-white ' + className}>
       {children}
     </TextWrapper>
   );

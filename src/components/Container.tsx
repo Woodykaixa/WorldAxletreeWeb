@@ -9,10 +9,20 @@ const ContainerWrapper = styled.div<{ path: string }>`
   height: 45vw;
 `;
 
-export function Container({ path, children }: { path: string; children: ReactNode }) {
+export function Container({
+  path,
+  children,
+  className,
+  containerClassName,
+}: {
+  path: string;
+  children: ReactNode;
+  className?: string;
+  containerClassName?: string;
+}) {
   return (
-    <ContainerWrapper path={path} className='flex justify-center items-end'>
-      <div className='flex flex-col w-3/4 h-1/2 '>
+    <ContainerWrapper path={path} className={'flex justify-center ' + className}>
+      <div className={'flex flex-col w-3/4 ' + containerClassName}>
         <div>{children}</div>
       </div>
     </ContainerWrapper>
