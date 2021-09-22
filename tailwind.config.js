@@ -669,6 +669,7 @@ module.exports = {
     },
     skew: {
       '-45': '-45deg',
+      '-30': '-30deg',
       '-12': '-12deg',
       '-6': '-6deg',
       '-3': '-3deg',
@@ -680,6 +681,7 @@ module.exports = {
       3: '3deg',
       6: '6deg',
       12: '12deg',
+      30: '30deg',
       45: '45deg',
     },
     space: (theme, { negative }) => ({
