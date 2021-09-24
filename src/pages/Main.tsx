@@ -73,20 +73,20 @@ export function Main() {
             desc='独一无二的游戏以外内容，包括全新设计的UI和成就功能，满足收集癖玩家的需求'
           />
         </div>
-        <SkewButton skewX={0} className='w-1/3 mt-24 rounded-md'>
+        <SkewButton skewX={0} className='w-full xl:w-2/3 2xl:w-1/3 mx-32 mt-24 rounded-md'>
           立即下载《世界轴承》
         </SkewButton>
       </Container>
       <Container
         path='/assets/gw05.png'
         className='items-center'
-        containerClassName='w-5/6 grid grid-rows-3 gap-4 1920:gap-12'
+        containerClassName='w-5/6 grid grid-rows-3 gap-4 2xl:gap-12'
       >
         {PART_5_BUTTON_PROPS.map(props => (
           <ImageButton
             key={props.text}
             imagePath={props.imagePath}
-            className='text-white font-bold w-full text-7xl py-8 1920:py-16'
+            className='text-white font-bold w-full text-7xl py-8 2xl:py-16'
           >
             {props.text}
           </ImageButton>
