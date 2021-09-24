@@ -65,7 +65,7 @@ export function Main() {
           <FeaturePanel
             imagePath='/assets/gw04_ui02.png'
             title='新面孔'
-            desc='新添上百单位，几乎重制原作所有内容可以看作一款全新游戏'
+            desc='新添上百单位，几乎重制原作所有内容，可以看作一款全新游戏'
           />
           <FeaturePanel
             imagePath='/assets/gw04_ui03.png'
