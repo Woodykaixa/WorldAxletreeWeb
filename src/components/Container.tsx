@@ -21,7 +21,7 @@ export function Container({
   containerClassName?: string;
 }) {
   return (
-    <ContainerWrapper path={path} className={'flex justify-center py-4 ' + className}>
+    <ContainerWrapper path={path} className={'flex justify-center py-16 2xl:py-4 ' + className}>
       <div className={'flex flex-col w-3/4 ' + containerClassName}>{children}</div>
     </ContainerWrapper>
   );
