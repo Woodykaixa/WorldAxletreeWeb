@@ -1,4 +1,4 @@
-import { Container, FeaturePanel, ImageButton, SkewButton, Text } from '@/components';
+import { Container, FeaturePanel, Footer, ImageButton, SkewButton, Text } from '@/components';
 
 export function Main() {
   return (
@@ -92,6 +92,7 @@ export function Main() {
           </ImageButton>
         ))}
       </Container>
+      <Footer />
     </div>
   );
 }
