@@ -1,4 +1,4 @@
-import { Container, FeaturePanel, SkewButton, Text } from '@/components';
+import { Container, FeaturePanel, ImageButton, SkewButton, Text } from '@/components';
 
 export function Main() {
   return (
@@ -77,6 +77,36 @@ export function Main() {
           立即下载《世界轴承》
         </SkewButton>
       </Container>
+      <Container
+        path='/assets/gw05.png'
+        className='items-center'
+        containerClassName='w-5/6 grid grid-rows-3 gap-4 1920:gap-12'
+      >
+        {PART_5_BUTTON_PROPS.map(props => (
+          <ImageButton
+            key={props.text}
+            imagePath={props.imagePath}
+            className='text-white font-bold w-full text-7xl py-8 1920:py-16'
+          >
+            {props.text}
+          </ImageButton>
+        ))}
+      </Container>
     </div>
   );
 }
+
+const PART_5_BUTTON_PROPS = [
+  {
+    imagePath: '/assets/gw05_ui01.png',
+    text: '新闻资讯',
+  },
+  {
+    imagePath: '/assets/gw05_ui02.png',
+    text: '游戏社群',
+  },
+  {
+    imagePath: '/assets/gw05_ui03.png',
+    text: '常见答疑',
+  },
+];
