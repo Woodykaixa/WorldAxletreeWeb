@@ -19,47 +19,7 @@ export function Header() {
         />
       </div>
       <div className='w-4  '></div>
-      <HeaderMenu
-        layout={[
-          {
-            text: (
-              <>
-                资讯 <DownOutlined className='text-2xl' />
-              </>
-            ),
-            key: 'news',
-            menu: [
-              { link: '/', title: '最新版本' },
-              { link: '/', title: '动态' },
-            ],
-          },
-          {
-            text: (
-              <>
-                介绍 <DownOutlined className='text-2xl' />
-              </>
-            ),
-            key: 'introduction',
-            menu: [
-              { link: '/', title: '故事背景' },
-              { link: '/', title: '单位百科' },
-              { link: '/', title: '食用指南' },
-            ],
-          },
-          {
-            text: (
-              <>
-                社群 <DownOutlined className='text-2xl' />
-              </>
-            ),
-            key: 'groups',
-            menu: [
-              { link: '/', title: '官方社群' },
-              { link: '/', title: '加入我们' },
-            ],
-          },
-        ]}
-      />
+      <HeaderMenu layout={HeaderLayout} />
       <div className='flex-1 flex justify-center'>
         <button className='border-white border-2 px-6 py-2 hover:bg-gray-700'>简体中文</button>
       </div>
@@ -86,6 +46,46 @@ type DropdownMenu = {
 type HeaderMenuProps = {
   layout: DropdownMenu[];
 };
+
+const HeaderLayout: HeaderMenuProps['layout'] = [
+  {
+    text: (
+      <>
+        资讯 <DownOutlined className='text-2xl' />
+      </>
+    ),
+    key: 'news',
+    menu: [
+      { link: '/', title: '最新版本' },
+      { link: '/', title: '动态' },
+    ],
+  },
+  {
+    text: (
+      <>
+        介绍 <DownOutlined className='text-2xl' />
+      </>
+    ),
+    key: 'introduction',
+    menu: [
+      { link: '/', title: '故事背景' },
+      { link: '/', title: '单位百科' },
+      { link: '/', title: '食用指南' },
+    ],
+  },
+  {
+    text: (
+      <>
+        社群 <DownOutlined className='text-2xl' />
+      </>
+    ),
+    key: 'groups',
+    menu: [
+      { link: '/', title: '官方社群' },
+      { link: '/', title: '加入我们' },
+    ],
+  },
+];
 
 function HeaderMenu({ layout }: HeaderMenuProps) {
   return (
