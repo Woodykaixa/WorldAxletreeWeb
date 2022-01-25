@@ -2,7 +2,7 @@ import { Container, FeaturePanel, ImageButton, SkewButton, Text } from '@/compon
 
 export default function Main() {
   return (
-    <div className='flex flex-col p-40'>
+    <div className='flex flex-col'>
       <Container path={'/assets/gw01.png'} className='items-center'>
         <div className='mt-80'>
           <SkewButton skewX={-30} className='text-5xl' link='#welcome-to-world-axletree'>

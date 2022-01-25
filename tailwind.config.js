@@ -28,6 +28,7 @@ module.exports = {
       indigo: colors.indigo,
       purple: colors.violet,
       pink: colors.pink,
+      'article-main': '#1d1d1d',
     },
     spacing: {
       px: '1px',
@@ -433,6 +434,7 @@ module.exports = {
       '5/6': '83.333333%',
       full: '100%',
       screen: '100vh',
+      '2/5-screen': '40vh',
       fit: 'fit-content',
     }),
     inset: (theme, { negative }) => ({

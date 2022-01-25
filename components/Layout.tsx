@@ -4,8 +4,8 @@ import { Footer } from '.';
 import styled from 'styled-components';
 
 import Image from 'next/image';
-const MainContainer = styled.main`
-  background-color: red;
+const Mask = styled.div`
+  background-image: linear-gradient(to bottom, transparent 0%, #414141 40%);
 `;
 
 export function Layout({ children }: { children: ReactNode }) {
@@ -13,14 +13,12 @@ export function Layout({ children }: { children: ReactNode }) {
     <div>
       <Header />
       <main>
+        <p className='fixed top-0 -z-10 w-screen h-2/5-screen overflow-hidden'>
+          <Image src={'/assets/gw01.png'} alt='' layout='fill' objectFit='cover' quality={50}></Image>
+        </p>
+        <Mask className='fixed top-0 w-screen h-screen -z-10 ' />
+        {/* <p className='fixed top-0 bg-gradient-to-t from-gray-900 w-screen h-screen'></p> */}
         {children}
-        <Image
-          src={'/assets/gw03.png'}
-          alt=''
-          layout='fill'
-          objectFit='cover'
-          className='-z-10 bg-gradient-to-t from-gray-700'
-        ></Image>
       </main>
       <Footer />
     </div>
