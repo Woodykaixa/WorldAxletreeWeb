@@ -1,11 +1,11 @@
 {
-    "recommendations": [
-        "naumovs.color-highlight",
-        "msjsdiag.debugger-for-chrome",
-        "dbaeumer.vscode-eslint",
-        "bradlc.vscode-tailwindcss",
-        "streetsidesoftware.code-spell-checker",
-        "mkaufman.htmlhint",
-        "jpoissonnier.vscode-styled-components"
-    ]
+  "recommendations": [
+    "naumovs.color-highlight",
+    "dbaeumer.vscode-eslint",
+    "bradlc.vscode-tailwindcss",
+    "streetsidesoftware.code-spell-checker",
+    "mkaufman.htmlhint",
+    "styled-components.vscode-styled-components",
+    "Prisma.prisma"
+  ]
 }

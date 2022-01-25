@@ -1,64 +1,57 @@
 {
-    "search.useIgnoreFiles": true,
-    "search.exclude": {
-        "**/node_modules": true,
-        "**/bower_components": true,
-        "**/*.code-search": true,
-        "**/dist": true,
-        "**/build": true
+  "search.useIgnoreFiles": true,
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true,
+    "**/dist": true,
+    "**/build": true
+  },
+  "files.eol": "\n",
+  "editor.fontLigatures": false,
+  "editor.rulers": [120],
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.trimAutoWhitespace": true,
+  "todo-tree.general.tags": ["FIXME:", "TODO:"],
+  "todo-tree.highlights.defaultHighlight": {
+    "gutterIcon": true
+  },
+  "todo-tree.highlights.customHighlight": {
+    "TODO": {
+      "foreground": "#fff",
+      "background": "#ffbd2a",
+      "iconColour": "#ffbd2a"
     },
-    "files.eol": "\n",
-    "editor.fontLigatures": false,
-    "editor.rulers": [
-        120
-    ],
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "editor.trimAutoWhitespace": true,
-    "todo-tree.general.tags": [
-        "FIXME:",
-        "TODO:"
-    ],
-    "todo-tree.highlights.defaultHighlight": {
-        "gutterIcon": true
-    },
-    "todo-tree.highlights.customHighlight": {
-        "TODO": {
-            "foreground": "#fff",
-            "background": "#ffbd2a",
-            "iconColour": "#ffbd2a"
-        },
-        "FIXME": {
-            "icon": "flame",
-            "foreground": "#fff",
-            "background": "#f06292",
-            "iconColour": "#f06292"
-        }
-    },
-    "todo-tree.filtering.excludeGlobs": [
-        "**/node_modules"
-    ],
-    "prettier.useEditorConfig": false,
-    "cSpell.diagnosticLevel": "Hint",
-    "editor.codeActionsOnSave": {
-        "source.fixAll": false,
-        "source.organizeImports": true
-    },
-    "htmlhint.enable": true,
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[typescriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[typescript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[json{c}]": {
-        "editor.quickSuggestions": {
-            "strings": true
-        },
-        "editor.suggest.insertMode": "replace",
-        "editor.defaultFormatter": "vscode.typescript-language-features"
+    "FIXME": {
+      "icon": "flame",
+      "foreground": "#fff",
+      "background": "#f06292",
+      "iconColour": "#f06292"
     }
+  },
+  "todo-tree.filtering.excludeGlobs": ["**/node_modules"],
+  "prettier.useEditorConfig": false,
+  "cSpell.diagnosticLevel": "Hint",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": false,
+    "source.organizeImports": false
+  },
+  "htmlhint.enable": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json{c}]": {
+    "editor.quickSuggestions": {
+      "strings": true
+    },
+    "editor.suggest.insertMode": "replace",
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  }
 }

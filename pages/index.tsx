@@ -1,9 +1,13 @@
 import { Container, FeaturePanel, Footer, ImageButton, SkewButton, Text } from '@/components';
-
-export function Main() {
+import background01 from '@/assets/gw01.png';
+import background02 from '@/assets/gw02.png';
+import background03 from '@/assets/gw03.png';
+import background04 from '@/assets/gw04.png';
+import background05 from '@/assets/gw05.png';
+export default function Main() {
   return (
     <div className='flex flex-col'>
-      <Container path='/assets/gw01.png' className='items-center'>
+      <Container path={background01.src} className='items-center'>
         <div className='mt-80'>
           <SkewButton skewX={-30}>探索《世界轴承》</SkewButton>
         </div>
@@ -11,7 +15,7 @@ export function Main() {
           红色警戒写实现代战争模组，全新故事背景，全新参战阵营，等待你的加入
         </Text>
       </Container>
-      <Container path='/assets/gw02.png' className='items-center'>
+      <Container path={background02.src} className='items-center'>
         <div className='text-white text-7xl text-center mb-12 font-bold'>欢迎来到《世界轴承》</div>
         <Text
           decorationColor='red'
@@ -34,7 +38,7 @@ export function Main() {
           </SkewButton>
         </div>
       </Container>
-      <Container path='/assets/gw03.png' className='items-center'>
+      <Container path={background03.src} className='items-center'>
         <div className='text-white text-7xl text-center mb-12 font-bold'>故事背景</div>
         <Text
           decorationColor='red'
@@ -55,7 +59,7 @@ export function Main() {
           </p>
         </Text>
       </Container>
-      <Container path='/assets/gw04.png' className='items-center' containerClassName='w-5/6 items-center'>
+      <Container path={background04.src} className='items-center' containerClassName='w-5/6 items-center'>
         <div className='grid grid-cols-3 gap-4'>
           <FeaturePanel
             imagePath='/assets/gw04_ui01.png'
@@ -78,7 +82,7 @@ export function Main() {
         </SkewButton>
       </Container>
       <Container
-        path='/assets/gw05.png'
+        path={background05.src}
         className='items-center'
         containerClassName='w-5/6 grid grid-rows-3 gap-4 2xl:gap-12'
       >
