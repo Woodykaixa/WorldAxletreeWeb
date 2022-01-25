@@ -4,6 +4,13 @@ import background02 from '@/assets/gw02.png';
 import background03 from '@/assets/gw03.png';
 import background04 from '@/assets/gw04.png';
 import background05 from '@/assets/gw05.png';
+import part4Button01 from '@/assets/gw04_ui01.png';
+import part4Button02 from '@/assets/gw04_ui02.png';
+import part4Button03 from '@/assets/gw04_ui03.png';
+import part5Button01 from '@/assets/gw05_ui01.png';
+import part5Button02 from '@/assets/gw05_ui02.png';
+import part5Button03 from '@/assets/gw05_ui03.png';
+
 export default function Main() {
   return (
     <div className='flex flex-col'>
@@ -27,13 +34,13 @@ export default function Main() {
           Project制作的PC游戏《命令与征服：红色警戒2尤里的复仇》的非官方模组。WA是一款以高质量美工和创意作为亮点的MOD，虽然是以《尤里的复仇》作为载体但是抛弃了几乎所有和《尤里的复仇》有关的东西，抛弃引擎来说可以看做是一款全新的游戏。
         </Text>
         <div className='flex justify-between mt-20'>
-          <SkewButton className='px-20' skewX={-30}>
+          <SkewButton className='px-20 text-5xl ' skewX={-30}>
             故事背景
           </SkewButton>
-          <SkewButton className='px-20' skewX={-30}>
+          <SkewButton className='px-20 text-5xl ' skewX={-30}>
             游戏特色
           </SkewButton>
-          <SkewButton className='px-20' skewX={-30}>
+          <SkewButton className='px-20 text-5xl ' skewX={-30}>
             玩法介绍
           </SkewButton>
         </div>
@@ -62,22 +69,22 @@ export default function Main() {
       <Container path={background04.src} className='items-center' containerClassName='w-5/6 items-center'>
         <div className='grid grid-cols-3 gap-4'>
           <FeaturePanel
-            imagePath='/assets/gw04_ui01.png'
+            imagePath={part4Button01.src}
             title='第三次世界大战'
             desc='全新五大阵营加入游戏，并各自拥有独立的战役'
           />
           <FeaturePanel
-            imagePath='/assets/gw04_ui02.png'
+            imagePath={part4Button02.src}
             title='新面孔'
             desc='新添上百单位，几乎重制原作所有内容，可以看作一款全新游戏'
           />
           <FeaturePanel
-            imagePath='/assets/gw04_ui03.png'
+            imagePath={part4Button03.src}
             title='额外内容'
             desc='独一无二的游戏以外内容，包括全新设计的UI和成就功能，满足收集癖玩家的需求'
           />
         </div>
-        <SkewButton skewX={0} className='w-full xl:w-2/3 2xl:w-1/3 mx-32 mt-24 rounded-md'>
+        <SkewButton skewX={0} className='w-full xl:w-2/3 2xl:w-1/3 mx-32 mt-24 rounded-md text-4xl'>
           立即下载《世界轴承》
         </SkewButton>
       </Container>
@@ -103,15 +110,15 @@ export default function Main() {
 
 const PART_5_BUTTON_PROPS = [
   {
-    imagePath: '/assets/gw05_ui01.png',
+    imagePath: part5Button01.src,
     text: '新闻资讯',
   },
   {
-    imagePath: '/assets/gw05_ui02.png',
+    imagePath: part5Button02.src,
     text: '游戏社群',
   },
   {
-    imagePath: '/assets/gw05_ui03.png',
+    imagePath: part5Button03.src,
     text: '常见答疑',
   },
 ];
