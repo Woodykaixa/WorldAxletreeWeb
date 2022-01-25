@@ -8,12 +8,12 @@ import { ReactNode } from 'react';
 
 export function Header() {
   return (
-    <header className='flex text-xl bg-black py-2 text-white items-center pl-4 pr-8'>
+    <header className='flex text-xl bg-black py-2 text-white items-center px-4'>
       <div className='px-6 border-r-2 border-white '>
         <Image
           src={WaLogo.src}
           alt='World Axletree Logo'
-          layout='fixed'
+          layout='intrinsic'
           width={WaLogo.width / 4}
           height={WaLogo.height / 4}
         />
@@ -59,9 +59,9 @@ export function Header() {
         src={AntimoLogo.src}
         alt='Antimo Project Logo'
         className='w-16 mx-6'
-        width={AntimoLogo.width / 3}
-        height={AntimoLogo.height / 3}
-        layout='fixed'
+        width={AntimoLogo.width / 13}
+        height={AntimoLogo.height / 13}
+        layout='intrinsic'
       />
     </header>
   );
