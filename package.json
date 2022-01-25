@@ -1,7 +1,12 @@
 {
-  "name": "vite-project",
-  "version": "0.0.1",
+  "name": "world-axletree-website",
+  "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/Woodykaixa/WorldAxletreeWeb#readme",
+  "author": {
+    "name": "Woodykaixa",
+    "url": "https://github.com/Woodykaixa"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
