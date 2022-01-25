@@ -25,7 +25,7 @@ export default function Main() {
           Project制作的PC游戏《命令与征服：红色警戒2尤里的复仇》的非官方模组。WA是一款以高质量美工和创意作为亮点的MOD，虽然是以《尤里的复仇》作为载体但是抛弃了几乎所有和《尤里的复仇》有关的东西，抛弃引擎来说可以看做是一款全新的游戏。
         </Text>
         <div className='flex justify-between mt-20'>
-          <SkewButton className='px-20 text-5xl ' skewX={-30}>
+          <SkewButton className='px-20 text-5xl ' skewX={-30} link='/example'>
             故事背景
           </SkewButton>
           <SkewButton className='px-20 text-5xl ' skewX={-30}>
