@@ -8,7 +8,7 @@ import { ReactNode } from 'react';
 
 export function Header() {
   return (
-    <header className='flex text-xl bg-black py-2 text-white items-center'>
+    <header className='flex text-xl bg-black py-2 text-white items-center pl-4 pr-8'>
       <div className='px-6 border-r-2 border-white '>
         <Image
           src={WaLogo.src}
