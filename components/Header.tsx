@@ -34,7 +34,11 @@ export function Header() {
             ],
           },
           {
-            text: ' 介绍',
+            text: (
+              <>
+                介绍 <DownOutlined className='text-2xl' />
+              </>
+            ),
             key: 'introduction',
             menu: [
               { link: '/', title: '故事背景' },
@@ -43,7 +47,11 @@ export function Header() {
             ],
           },
           {
-            text: ' 社群',
+            text: (
+              <>
+                社群 <DownOutlined className='text-2xl' />
+              </>
+            ),
             key: 'groups',
             menu: [
               { link: '/', title: '官方社群' },
