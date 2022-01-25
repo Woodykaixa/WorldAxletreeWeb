@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import AntimoLogo from '@/assets/antimo-logo.png';
-import WaLogo from '@/assets/wa-logo.png';
+import WaLogo from '@/assets/wa.png';
 
 function Button({ to, text }: { to: string; text: string }) {
   return (
@@ -18,8 +18,8 @@ export function Header() {
           src={WaLogo.src}
           alt='World Axletree Logo'
           layout='fixed'
-          width={WaLogo.width / 2}
-          height={WaLogo.height / 2}
+          width={WaLogo.width / 4}
+          height={WaLogo.height / 4}
         />
       </div>
       <div className='w-4  '></div>
