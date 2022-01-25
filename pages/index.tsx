@@ -3,7 +3,7 @@ import { SEOHeaders } from '@/components/SEO';
 export default function Main() {
   return (
     <>
-      <SEOHeaders.Index title='世界轴承官网 RA2现代战争模组' keywords={[]} />
+      <SEOHeaders.Index title='世界轴承: RA2现代战争模组' keywords={[]} />
       <div className='flex flex-col'>
         <Container path={'/assets/gw01.png'} className='items-center'>
           <div className='mt-80'>
