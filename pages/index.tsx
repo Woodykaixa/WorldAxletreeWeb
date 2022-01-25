@@ -1,20 +1,9 @@
-import { Container, FeaturePanel, Footer, ImageButton, SkewButton, Text } from '@/components';
-import background01 from '@/assets/gw01.png';
-import background02 from '@/assets/gw02.png';
-import background03 from '@/assets/gw03.png';
-import background04 from '@/assets/gw04.png';
-import background05 from '@/assets/gw05.png';
-import part4Button01 from '@/assets/gw04_ui01.png';
-import part4Button02 from '@/assets/gw04_ui02.png';
-import part4Button03 from '@/assets/gw04_ui03.png';
-import part5Button01 from '@/assets/gw05_ui01.png';
-import part5Button02 from '@/assets/gw05_ui02.png';
-import part5Button03 from '@/assets/gw05_ui03.png';
+import { Container, FeaturePanel, ImageButton, SkewButton, Text } from '@/components';
 
 export default function Main() {
   return (
-    <div className='flex flex-col'>
-      <Container path={background01.src} className='items-center'>
+    <div className='flex flex-col p-40'>
+      <Container path={'/assets/gw01.png'} className='items-center'>
         <div className='mt-80'>
           <SkewButton skewX={-30} className='text-5xl' link='#welcome-to-world-axletree'>
             探索《世界轴承》
@@ -24,7 +13,7 @@ export default function Main() {
           红色警戒写实现代战争模组，全新故事背景，全新参战阵营，等待你的加入
         </Text>
       </Container>
-      <Container id='welcome-to-world-axletree' path={background02.src} className='items-center'>
+      <Container id='welcome-to-world-axletree' path={'/assets/gw02.png'} className='items-center'>
         <div className='text-white text-7xl text-center mb-12 font-bold'>欢迎来到《世界轴承》</div>
         <Text
           decorationColor='red'
@@ -47,7 +36,7 @@ export default function Main() {
           </SkewButton>
         </div>
       </Container>
-      <Container path={background03.src} className='items-center'>
+      <Container path={'/assets/gw03.png'} className='items-center'>
         <div className='text-white text-7xl text-center mb-12 font-bold'>故事背景</div>
         <Text
           decorationColor='red'
@@ -68,20 +57,20 @@ export default function Main() {
           </p>
         </Text>
       </Container>
-      <Container path={background04.src} className='items-center' containerClassName='w-5/6 items-center'>
+      <Container path={'/assets/gw04.png'} className='items-center' containerClassName='w-5/6 items-center'>
         <div className='grid grid-cols-3 gap-4'>
           <FeaturePanel
-            imagePath={part4Button01.src}
+            imagePath={'/assets/gw04_ui01.png'}
             title='第三次世界大战'
             desc='全新五大阵营加入游戏，并各自拥有独立的战役'
           />
           <FeaturePanel
-            imagePath={part4Button02.src}
+            imagePath={'/assets/gw04_ui02.png'}
             title='新面孔'
             desc='新添上百单位，几乎重制原作所有内容，可以看作一款全新游戏'
           />
           <FeaturePanel
-            imagePath={part4Button03.src}
+            imagePath={'/assets/gw04_ui03.png'}
             title='额外内容'
             desc='独一无二的游戏以外内容，包括全新设计的UI和成就功能，满足收集癖玩家的需求'
           />
@@ -91,7 +80,7 @@ export default function Main() {
         </SkewButton>
       </Container>
       <Container
-        path={background05.src}
+        path={'/assets/gw05.png'}
         className='items-center'
         containerClassName='w-5/6 grid grid-rows-3 gap-4 2xl:gap-12'
       >
@@ -105,22 +94,21 @@ export default function Main() {
           </ImageButton>
         ))}
       </Container>
-      <Footer />
     </div>
   );
 }
 
 const PART_5_BUTTON_PROPS = [
   {
-    imagePath: part5Button01.src,
+    imagePath: '/assets/gw05_ui01.png',
     text: '新闻资讯',
   },
   {
-    imagePath: part5Button02.src,
+    imagePath: '/assets/gw05_ui02.png',
     text: '游戏社群',
   },
   {
-    imagePath: part5Button03.src,
+    imagePath: '/assets/gw05_ui03.png',
     text: '支持我们',
   },
 ];
