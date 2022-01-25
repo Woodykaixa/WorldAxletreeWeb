@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import AntimoLogo from '@/assets/antimo-logo.png';
-import WaLogo from '@/assets/wa.png';
+import AntimoLogo from '@/public/assets/antimo-logo.png';
+import WaLogo from '@/public/assets/wa.png';
 import { Dropdown, Menu, MenuProps, Button } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { ReactNode } from 'react';
