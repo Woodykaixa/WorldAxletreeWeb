@@ -5,7 +5,6 @@ export function Footer() {
         <Button text='浏览游戏' />
         <Button text='支持我们' />
         <Button text='问题反馈' />
-        <Button text='加入我们' />
       </div>
     </div>
   );

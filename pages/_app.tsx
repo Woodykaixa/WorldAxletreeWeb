@@ -1,5 +1,5 @@
+import 'antd/dist/antd.css';
 import '@/styles/index.css';
-import '~antd/dist/antd.css';
 
 import { Layout } from '@/components/Layout';
 import type { AppProps } from 'next/app';

@@ -16,7 +16,9 @@ export default function Main() {
     <div className='flex flex-col'>
       <Container path={background01.src} className='items-center'>
         <div className='mt-80'>
-          <SkewButton skewX={-30}>探索《世界轴承》</SkewButton>
+          <SkewButton skewX={-30} className='text-5xl'>
+            探索《世界轴承》
+          </SkewButton>
         </div>
         <Text decorationColor='white' decorationWidth={2} decorationPositions={['left']} className='py-6 my-8'>
           红色警戒写实现代战争模组，全新故事背景，全新参战阵营，等待你的加入
@@ -41,7 +43,7 @@ export default function Main() {
             游戏特色
           </SkewButton>
           <SkewButton className='px-20 text-5xl ' skewX={-30}>
-            玩法介绍
+            单位百科
           </SkewButton>
         </div>
       </Container>
@@ -119,6 +121,6 @@ const PART_5_BUTTON_PROPS = [
   },
   {
     imagePath: part5Button03.src,
-    text: '常见答疑',
+    text: '支持我们',
   },
 ];
