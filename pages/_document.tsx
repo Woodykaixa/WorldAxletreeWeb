@@ -1,6 +1,10 @@
+import * as React from 'react';
+// https://github.com/ant-design/ant-design/issues/30396#issuecomment-927299855
+// @ts-ignore Ugly fix ssr problem
+React.useLayoutEffect = React.useEffect;
+
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
-
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet();
