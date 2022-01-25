@@ -14,14 +14,16 @@ export function Container({
   children,
   className,
   containerClassName,
+  id,
 }: {
   path: string;
   children: ReactNode;
   className?: string;
   containerClassName?: string;
+  id?: string;
 }) {
   return (
-    <ContainerWrapper path={path} className={'flex justify-center py-16 2xl:py-4 ' + className}>
+    <ContainerWrapper id={id} path={path} className={'flex justify-center py-16 2xl:py-4 ' + className}>
       <div className={'flex flex-col w-3/4 ' + containerClassName}>{children}</div>
     </ContainerWrapper>
   );

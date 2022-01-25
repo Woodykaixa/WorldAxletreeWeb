@@ -16,7 +16,7 @@ export default function Main() {
     <div className='flex flex-col'>
       <Container path={background01.src} className='items-center'>
         <div className='mt-80'>
-          <SkewButton skewX={-30} className='text-5xl'>
+          <SkewButton skewX={-30} className='text-5xl' link='#welcome-to-world-axletree'>
             探索《世界轴承》
           </SkewButton>
         </div>
@@ -24,7 +24,7 @@ export default function Main() {
           红色警戒写实现代战争模组，全新故事背景，全新参战阵营，等待你的加入
         </Text>
       </Container>
-      <Container path={background02.src} className='items-center'>
+      <Container id='welcome-to-world-axletree' path={background02.src} className='items-center'>
         <div className='text-white text-7xl text-center mb-12 font-bold'>欢迎来到《世界轴承》</div>
         <Text
           decorationColor='red'
