@@ -89,7 +89,7 @@ const HeaderLayout: HeaderMenuProps['layout'] = [
 
 function HeaderMenu({ layout }: HeaderMenuProps) {
   return (
-    <ul className='flex-1 flex w-2/5 2xl:w-1/3 justify-between text-white'>
+    <ul className='hidden md:flex flex-1 w-2/5 2xl:w-1/3 justify-between text-white'>
       {layout.map(menu => (
         <li key={menu.key}>
           <Dropdown
