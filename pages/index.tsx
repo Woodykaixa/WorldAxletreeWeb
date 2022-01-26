@@ -5,7 +5,7 @@ export default function Main() {
     <>
       <SEOHeaders.Index title='世界轴承: RA2现代战争模组' keywords={[]} />
       <div className='flex flex-col'>
-        <Container path={'/assets/gw01.png'} className='items-center'>
+        <Container path={'/assets/gw01.webp'} className='items-center'>
           <div className='mt-80'>
             <SkewButton skewX={-30} className='text-5xl' link='#welcome-to-world-axletree'>
               探索《世界轴承》
@@ -15,7 +15,7 @@ export default function Main() {
             红色警戒写实现代战争模组，全新故事背景，全新参战阵营，等待你的加入
           </Text>
         </Container>
-        <Container id='welcome-to-world-axletree' path={'/assets/gw02.png'} className='items-center'>
+        <Container id='welcome-to-world-axletree' path={'/assets/gw02.webp'} className='items-center'>
           <div className='text-white text-7xl text-center mb-12 font-bold'>欢迎来到《世界轴承》</div>
           <Text
             decorationColor='red'
@@ -38,7 +38,7 @@ export default function Main() {
             </SkewButton>
           </div>
         </Container>
-        <Container path={'/assets/gw03.png'} className='items-center'>
+        <Container path={'/assets/gw03.webp'} className='items-center'>
           <div className='text-white text-7xl text-center mb-12 font-bold'>故事背景</div>
           <Text
             decorationColor='red'
@@ -59,20 +59,20 @@ export default function Main() {
             </p>
           </Text>
         </Container>
-        <Container path={'/assets/gw04.png'} className='items-center' containerClassName='w-5/6 items-center'>
+        <Container path={'/assets/gw04.webp'} className='items-center' containerClassName='w-5/6 items-center'>
           <div className='grid grid-cols-3 gap-4'>
             <FeaturePanel
-              imagePath={'/assets/gw04_ui01.png'}
+              imagePath={'/assets/gw04_ui01.webp'}
               title='第三次世界大战'
               desc='全新五大阵营加入游戏，并各自拥有独立的战役'
             />
             <FeaturePanel
-              imagePath={'/assets/gw04_ui02.png'}
+              imagePath={'/assets/gw04_ui02.webp'}
               title='新面孔'
               desc='新添上百单位，几乎重制原作所有内容，可以看作一款全新游戏'
             />
             <FeaturePanel
-              imagePath={'/assets/gw04_ui03.png'}
+              imagePath={'/assets/gw04_ui03.webp'}
               title='额外内容'
               desc='独一无二的游戏以外内容，包括全新设计的UI和成就功能，满足收集癖玩家的需求'
             />
@@ -82,7 +82,7 @@ export default function Main() {
           </SkewButton>
         </Container>
         <Container
-          path={'/assets/gw05.png'}
+          path={'/assets/gw05.webp'}
           className='items-center'
           containerClassName='w-5/6 grid grid-rows-3 gap-4 2xl:gap-12'
         >
@@ -103,15 +103,15 @@ export default function Main() {
 
 const PART_5_BUTTON_PROPS = [
   {
-    imagePath: '/assets/gw05_ui01.png',
+    imagePath: '/assets/gw05_ui01.webp',
     text: '新闻资讯',
   },
   {
-    imagePath: '/assets/gw05_ui02.png',
+    imagePath: '/assets/gw05_ui02.webp',
     text: '游戏社群',
   },
   {
-    imagePath: '/assets/gw05_ui03.png',
+    imagePath: '/assets/gw05_ui03.webp',
     text: '支持我们',
   },
 ];

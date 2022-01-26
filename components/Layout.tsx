@@ -21,7 +21,7 @@ export function Layout({ children }: { children: ReactNode }) {
       </AntHeader>
       <div style={{ marginTop: '100px' }}>
         <p className='fixed top-24 -z-10 w-screen h-2/5-screen overflow-hidden'>
-          <Image src={'/assets/gw01.png'} alt='' layout='fill' objectFit='cover' quality={50}></Image>
+          <Image src={'/assets/gw01.webp'} alt='' layout='fill' objectFit='cover' quality={50}></Image>
         </p>
         <Mask className='fixed top-0 w-screen h-screen -z-10 ' />
         <Content>{children}</Content>
