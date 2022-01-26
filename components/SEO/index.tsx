@@ -49,7 +49,7 @@ export namespace SEOHeaders {
         <meta name='og:title' content={title} />
         <title>{title}</title>
         <meta name='og:type' content='website' />
-        {process.env.APP_ENV === 'production' && url && <meta name='og:url' content={url} />}
+        {process.env.NEXT_PUBLIC_APP_ENV === 'production' && url && <meta name='og:url' content={url} />}
         <meta name='og:locale' content='zh_CN' />
         <meta property='og:description' content={description} />
         <meta name='keywords' content={kw.join(',')} />
