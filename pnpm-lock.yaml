@@ -3,6 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@ant-design/icons': ^4.7.0
   '@bytemd/plugin-footnotes': ^1.10.13
+  '@bytemd/plugin-frontmatter': ^1.10.13
   '@bytemd/plugin-gfm': ^1.10.13
   '@bytemd/react': ^1.10.13
   '@types/node': ^16.9.1
@@ -11,6 +12,7 @@ specifiers:
   '@types/styled-components': ^5.1.14
   antd: ^4.18.5
   autoprefixer: ^10.4.2
+  bytemd: ^1.10.13
   eslint: 8.5.0
   eslint-config-next: 12.0.7
   eslint-config-prettier: ^8.3.0
@@ -28,10 +30,12 @@ specifiers:
 
 dependencies:
   '@ant-design/icons': 4.7.0_react-dom@17.0.2+react@17.0.2
-  '@bytemd/plugin-footnotes': 1.10.13
-  '@bytemd/plugin-gfm': 1.10.13
+  '@bytemd/plugin-footnotes': 1.10.13_bytemd@1.10.13
+  '@bytemd/plugin-frontmatter': 1.10.13_bytemd@1.10.13
+  '@bytemd/plugin-gfm': 1.10.13_bytemd@1.10.13
   '@bytemd/react': 1.10.13_react@17.0.2
   antd: 4.18.5_react-dom@17.0.2+react@17.0.2
+  bytemd: 1.10.13
   next: 12.0.8_react-dom@17.0.2+react@17.0.2
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
@@ -250,21 +254,34 @@ packages:
       to-fast-properties: 2.0.0
     dev: false
 
-  /@bytemd/plugin-footnotes/1.10.13:
+  /@bytemd/plugin-footnotes/1.10.13_bytemd@1.10.13:
     resolution: {integrity: sha1-Jlx6sJ33cYzNd/FA4T9IDwBHsTQ=, tarball: '@bytemd/plugin-footnotes/download/@bytemd/plugin-footnotes-1.10.13.tgz'}
     peerDependencies:
       bytemd: ^1.5.0
     dependencies:
+      bytemd: 1.10.13
       remark-footnotes: 3.0.0
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@bytemd/plugin-gfm/1.10.13:
+  /@bytemd/plugin-frontmatter/1.10.13_bytemd@1.10.13:
+    resolution: {integrity: sha1-fAz1tAj1DanJZ8k16NJicdWwf5E=, tarball: '@bytemd/plugin-frontmatter/download/@bytemd/plugin-frontmatter-1.10.13.tgz'}
+    peerDependencies:
+      bytemd: ^1.5.0
+    dependencies:
+      '@types/js-yaml': 3.12.7
+      bytemd: 1.10.13
+      js-yaml: 3.14.1
+      remark-frontmatter: 3.0.0
+    dev: false
+
+  /@bytemd/plugin-gfm/1.10.13_bytemd@1.10.13:
     resolution: {integrity: sha1-jAvCmIomwckXKLP34lGdsehu9mc=, tarball: '@bytemd/plugin-gfm/download/@bytemd/plugin-gfm-1.10.13.tgz'}
     peerDependencies:
       bytemd: ^1.5.0
     dependencies:
+      bytemd: 1.10.13
       remark-gfm: 1.0.0
     transitivePeerDependencies:
       - supports-color
@@ -508,6 +525,10 @@ packages:
       '@types/react': 17.0.38
       hoist-non-react-statics: 3.3.2
     dev: true
+
+  /@types/js-yaml/3.12.7:
+    resolution: {integrity: sha1-Mwxdl6NQDpyQMhDW5J8ClkrwSg4=, tarball: '@types/js-yaml/download/@types/js-yaml-3.12.7.tgz'}
+    dev: false
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha1-7ihweulOEdK4J7y+UnC86n8+ce4=, tarball: '@types/json5/download/@types/json5-0.0.29.tgz'}
@@ -791,6 +812,12 @@ packages:
   /arg/5.0.1:
     resolution: {integrity: sha512-e0hDa9H2Z9AwFkk2qDlwhoMYE4eToKarchkQHovNdLTCYMHZHeRjI71crOh+dio4K6u1IcwubQqo79Ga4CyAQA==, tarball: arg/download/arg-5.0.1.tgz}
     dev: true
+
+  /argparse/1.0.10:
+    resolution: {integrity: sha1-vNZ5HqWuCXJeF+WtmIE0zUCz2RE=, tarball: argparse/download/argparse-1.0.10.tgz}
+    dependencies:
+      sprintf-js: 1.0.3
+    dev: false
 
   /argparse/2.0.1:
     resolution: {integrity: sha1-JG9Q88p4oyQPbJl+ipvR6sSeSzg=, tarball: argparse/download/argparse-2.0.1.tgz}
@@ -1599,6 +1626,12 @@ packages:
       eslint-visitor-keys: 3.2.0
     dev: true
 
+  /esprima/4.0.1:
+    resolution: {integrity: sha1-E7BM2z5sXRnfkatph6hpVhmwqnE=, tarball: esprima/download/esprima-4.0.1.tgz}
+    engines: {node: '>=4'}
+    hasBin: true
+    dev: false
+
   /esquery/1.4.0:
     resolution: {integrity: sha1-IUj/w4uC6McFff7UhCWz5h8PJKU=, tarball: esquery/download/esquery-1.4.0.tgz}
     engines: {node: '>=0.10'}
@@ -1671,6 +1704,12 @@ packages:
       reusify: 1.0.4
     dev: true
 
+  /fault/1.0.4:
+    resolution: {integrity: sha1-6vz8Cm0hT8lGAeFw3ymVSk+ELxM=, tarball: fault/download/fault-1.0.4.tgz}
+    dependencies:
+      format: 0.2.2
+    dev: false
+
   /file-entry-cache/6.0.1:
     resolution: {integrity: sha1-IRst2WWcsDlLBz5zI6w8kz1SICc=, tarball: file-entry-cache/download/file-entry-cache-6.0.1.tgz}
     engines: {node: ^10.12.0 || >=12.0.0}
@@ -1703,6 +1742,11 @@ packages:
   /flatted/3.2.4:
     resolution: {integrity: sha512-8/sOawo8tJ4QOBX8YlQBMxL8+RLZfxMQOif9o0KUKTNTjMYElWPE0r/m5VNFxTRd0NSw8qSy8dajrwX4RYI1Hw==, tarball: flatted/download/flatted-3.2.4.tgz}
     dev: true
+
+  /format/0.2.2:
+    resolution: {integrity: sha1-1hcBB+nv3E7TDJ3DkBbflCtctYs=, tarball: format/download/format-0.2.2.tgz}
+    engines: {node: '>=0.4.x'}
+    dev: false
 
   /fraction.js/4.1.2:
     resolution: {integrity: sha512-o2RiJQ6DZaR/5+Si0qJUIy637QMRudSi9kU/FFzx9EZazrIdnBgpU+3sEWCxAVhH2RtxW2Oz+T4p2o8uOPVcgA==, tarball: fraction.js/download/fraction.js-4.1.2.tgz}
@@ -2181,6 +2225,14 @@ packages:
   /js-tokens/4.0.0:
     resolution: {integrity: sha1-GSA/tZmR35jjoocFDUZHzerzJJk=, tarball: js-tokens/download/js-tokens-4.0.0.tgz}
 
+  /js-yaml/3.14.1:
+    resolution: {integrity: sha512-okMH7OXXJ7YrN9Ok3/SXrnu4iX9yOk+25nqX4imS2npuvTYDmo/QEZoqwZkYaIDk3jVvBOTOIEgEhaLOynBS9g==, tarball: js-yaml/download/js-yaml-3.14.1.tgz}
+    hasBin: true
+    dependencies:
+      argparse: 1.0.10
+      esprima: 4.0.1
+    dev: false
+
   /js-yaml/4.1.0:
     resolution: {integrity: sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==, tarball: js-yaml/download/js-yaml-4.1.0.tgz}
     hasBin: true
@@ -2394,6 +2446,12 @@ packages:
       - supports-color
     dev: false
 
+  /mdast-util-frontmatter/0.2.0:
+    resolution: {integrity: sha1-i9XNVeI2wD4gSgNvc3Lr6eZ0gkA=, tarball: mdast-util-frontmatter/download/mdast-util-frontmatter-0.2.0.tgz}
+    dependencies:
+      micromark-extension-frontmatter: 0.2.2
+    dev: false
+
   /mdast-util-gfm-autolink-literal/0.1.3:
     resolution: {integrity: sha1-nE/zmcXd0uzkC9OxPlRH2E44X7c=, tarball: mdast-util-gfm-autolink-literal/download/mdast-util-gfm-autolink-literal-0.1.3.tgz}
     dependencies:
@@ -2485,6 +2543,12 @@ packages:
       micromark: 2.11.4
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /micromark-extension-frontmatter/0.2.2:
+    resolution: {integrity: sha1-YbjpLpIT4dPBP1pZ54YvXKmN+lM=, tarball: micromark-extension-frontmatter/download/micromark-extension-frontmatter-0.2.2.tgz}
+    dependencies:
+      fault: 1.0.4
     dev: false
 
   /micromark-extension-gfm-autolink-literal/0.5.7:
@@ -3540,6 +3604,13 @@ packages:
       - supports-color
     dev: false
 
+  /remark-frontmatter/3.0.0:
+    resolution: {integrity: sha1-yl2ZY2F2XIWb2URQXzd9axhqbsY=, tarball: remark-frontmatter/download/remark-frontmatter-3.0.0.tgz}
+    dependencies:
+      mdast-util-frontmatter: 0.2.0
+      micromark-extension-frontmatter: 0.2.2
+    dev: false
+
   /remark-gfm/1.0.0:
     resolution: {integrity: sha512-KfexHJCiqvrdBZVbQ6RopMZGwaXz6wFJEfByIuEwGf0arvITHjiKKZ1dpXujjH9KZdm1//XJQwgfnJ3lmXaDPA==, tarball: remark-gfm/download/remark-gfm-1.0.0.tgz}
     dependencies:
@@ -3744,6 +3815,10 @@ packages:
 
   /space-separated-tokens/1.1.5:
     resolution: {integrity: sha1-hfMsPRDZaCAH6RdBTdxcJtGqaJk=, tarball: space-separated-tokens/download/space-separated-tokens-1.1.5.tgz}
+    dev: false
+
+  /sprintf-js/1.0.3:
+    resolution: {integrity: sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=, tarball: sprintf-js/download/sprintf-js-1.0.3.tgz}
     dev: false
 
   /stream-browserify/3.0.0:
