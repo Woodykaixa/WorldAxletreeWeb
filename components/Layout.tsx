@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Header, Footer } from '.';
 import styled from 'styled-components';
-import { Layout as AntLayout } from 'antd';
+import { Layout as AntLayout, Affix } from 'antd';
 const { Header: AntHeader, Content, Footer: AntFooter } = AntLayout;
 import Image from 'next/image';
 const Mask = styled.div`
@@ -11,15 +11,12 @@ const Mask = styled.div`
 export function Layout({ children }: { children: ReactNode }) {
   return (
     <AntLayout className='layout bg-transparent'>
-      <AntHeader
-        className='fixed z-10 w-full p-0'
-        style={{
-          height: '100px',
-        }}
-      >
-        <Header />
-      </AntHeader>
-      <div style={{ marginTop: '100px' }}>
+      <Affix offsetTop={0}>
+        <AntHeader className='h-full w-full p-0'>
+          <Header />
+        </AntHeader>
+      </Affix>
+      <div>
         <p className='fixed top-24 -z-10 w-screen h-2/5-screen overflow-hidden'>
           <Image src={'/assets/gw01.webp'} alt='' layout='fill' objectFit='cover' quality={50}></Image>
         </p>
