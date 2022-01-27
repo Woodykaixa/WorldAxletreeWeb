@@ -1,4 +1,4 @@
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.dark.css';
 import '@/styles/index.css';
 import 'bytemd/dist/index.css';
 
