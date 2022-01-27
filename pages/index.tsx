@@ -106,7 +106,7 @@ const PART_5_BUTTON_PROPS = [
   {
     imagePath: '/assets/gw05_ui01.webp',
     text: '新闻资讯',
-    href: '/',
+    href: '/news',
   },
   {
     imagePath: '/assets/gw05_ui02.webp',
