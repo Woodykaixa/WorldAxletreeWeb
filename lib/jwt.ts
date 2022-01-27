@@ -29,4 +29,5 @@ export function signJwt() {
 
 export const JwtConfig = {
   Secret: process.env.JWT_SECRET,
+  Key: 'auth-jwt',
 };

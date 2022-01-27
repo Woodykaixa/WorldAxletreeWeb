@@ -19,5 +19,11 @@ export const setCookie = (
     options.maxAge /= 1000;
   }
 
-  res.setHeader('Set-Cookie', serialize(name, value, options));
+  res.setHeader(
+    'Set-Cookie',
+    serialize(name, value, {
+      ...CookieOptions,
+      ...options,
+    })
+  );
 };
