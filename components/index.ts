@@ -1,4 +1,4 @@
-export * from './ArticleContainer';
+export * from './Container';
 export * from './BackgroundImage';
 export * from './IndexWrapper';
 export * from './FeaturePanel';

@@ -6,12 +6,12 @@ const Mask = styled.div`
   background-image: linear-gradient(to bottom, transparent 0%, #414141 40%);
 `;
 
-export type ArticleContainerProps = {
+export type ContainerProps = {
   children: ReactNode;
   background?: string;
   preloadBackground?: boolean;
 };
-export function ArticleContainer({ children, background, preloadBackground }: ArticleContainerProps) {
+export function Container({ children, background, preloadBackground }: ContainerProps) {
   return (
     <div className='flex flex-col m-16 mt-24 bg-article-main min-h-screen p-4'>
       <div className='h-screen w-screen -z-20 bg-[#414141] fixed left-0 top-0' />
