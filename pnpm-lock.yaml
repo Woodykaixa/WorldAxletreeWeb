@@ -6,6 +6,7 @@ specifiers:
   '@bytemd/plugin-frontmatter': 1.10.13
   '@bytemd/plugin-gfm': 1.10.13
   '@bytemd/react': 1.10.13
+  '@prisma/client': ^3.8.1
   '@types/node': ^16.9.1
   '@types/react': ^17.0.21
   '@types/react-dom': ^17.0.0
@@ -22,6 +23,7 @@ specifiers:
   next: ^12.0.8
   postcss: ^8.4.5
   prettier: ^2.4.0
+  prisma: ^3.8.1
   react: ^17.0.0
   react-dom: ^17.0.0
   react-infinite-scroll-component: ^6.1.0
@@ -35,9 +37,11 @@ dependencies:
   '@bytemd/plugin-frontmatter': 1.10.13_bytemd@1.10.13
   '@bytemd/plugin-gfm': 1.10.13_bytemd@1.10.13
   '@bytemd/react': 1.10.13_react@17.0.2
+  '@prisma/client': 3.8.1_prisma@3.8.1
   antd: 4.18.5_react-dom@17.0.2+react@17.0.2
   bytemd: 1.10.13
   next: 12.0.8_react-dom@17.0.2+react@17.0.2
+  prisma: 3.8.1
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-infinite-scroll-component: 6.1.0_react@17.0.2
@@ -499,6 +503,29 @@ packages:
 
   /@popperjs/core/2.11.2:
     resolution: {integrity: sha512-92FRmppjjqz29VMJ2dn+xdyXZBrMlE42AV6Kq6BwjWV7CNUW1hs2FtxSNLQE+gJhaZ6AAmYuO9y8dshhcBl7vA==, tarball: '@popperjs/core/download/@popperjs/core-2.11.2.tgz'}
+    dev: false
+
+  /@prisma/client/3.8.1_prisma@3.8.1:
+    resolution: {integrity: sha512-NxD1Xbkx1eT1mxSwo1RwZe665mqBETs0VxohuwNfFIxMqcp0g6d4TgugPxwZ4Jb4e5wCu8mQ9quMedhNWIWcZQ==, tarball: '@prisma/client/download/@prisma/client-3.8.1.tgz'}
+    engines: {node: '>=12.6'}
+    requiresBuild: true
+    peerDependencies:
+      prisma: '*'
+    peerDependenciesMeta:
+      prisma:
+        optional: true
+    dependencies:
+      '@prisma/engines-version': 3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f
+      prisma: 3.8.1
+    dev: false
+
+  /@prisma/engines-version/3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f:
+    resolution: {integrity: sha512-G2JH6yWt6ixGKmsRmVgaQYahfwMopim0u/XLIZUo2o/mZ5jdu7+BL+2V5lZr7XiG1axhyrpvlyqE/c0OgYSl3g==, tarball: '@prisma/engines-version/download/@prisma/engines-version-3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f.tgz'}
+    dev: false
+
+  /@prisma/engines/3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f:
+    resolution: {integrity: sha512-bHYubuItSN/DGYo36aDu7xJiJmK52JOSHs4MK+KbceAtwS20BCWadRgtpQ3iZ2EXfN/B1T0iCXlNraaNwnpU2w==, tarball: '@prisma/engines/download/@prisma/engines-3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f.tgz'}
+    requiresBuild: true
     dev: false
 
   /@rushstack/eslint-patch/1.1.0:
@@ -2987,6 +3014,15 @@ packages:
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
+
+  /prisma/3.8.1:
+    resolution: {integrity: sha512-Q8zHwS9m70TaD7qI8u+8hTAmiTpK+IpvRYF3Rgb/OeWGQJOMgZCFFvNCiSfoLEQ95wilK7ctW3KOpc9AuYnRUA==, tarball: prisma/download/prisma-3.8.1.tgz}
+    engines: {node: '>=12.6'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      '@prisma/engines': 3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f
+    dev: false
 
   /progress/2.0.3:
     resolution: {integrity: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==, tarball: progress/download/progress-2.0.3.tgz}
