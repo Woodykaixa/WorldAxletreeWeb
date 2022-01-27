@@ -1,14 +1,12 @@
 const { copyFile } = require('fs/promises');
-const MAPPING = {
-  dev: 'env/.env.development',
-  staging: 'env/.env.staging',
-  prod: 'env/.env.production',
-};
 
-console.log('arg:', process.argv);
-const type = process.argv[2];
-const source = MAPPING[type];
+const source = {
+  staging: 'env/.env.staging',
+  production: 'env/.env.production',
+  // APP_ENV defined on vercel
+}[process.env.APP_ENV];
+
 if (!source) {
-  throw new Error('unknown type: ' + type);
+  throw new Error('unknown type: ' + process.env.APP_ENV);
 }
 copyFile(source, '.env');

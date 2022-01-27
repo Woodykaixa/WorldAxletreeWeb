@@ -14,6 +14,7 @@ specifiers:
   antd: ^4.18.5
   autoprefixer: ^10.4.2
   bytemd: 1.10.13
+  cross-env: ^7.0.3
   eslint: 8.5.0
   eslint-config-next: 12.0.7
   eslint-config-prettier: ^8.3.0
@@ -53,6 +54,7 @@ devDependencies:
   '@types/react-dom': 17.0.11
   '@types/styled-components': 5.1.21
   autoprefixer: 10.4.2_postcss@8.4.5
+  cross-env: 7.0.3
   eslint: 8.5.0
   eslint-config-next: 12.0.7_51f15da099eaec2c03c341b67a359283
   eslint-config-prettier: 8.3.0_eslint@8.5.0
@@ -1196,6 +1198,14 @@ packages:
       parse-json: 5.2.0
       path-type: 4.0.0
       yaml: 1.10.2
+    dev: true
+
+  /cross-env/7.0.3:
+    resolution: {integrity: sha1-hlJkspZ33AFbqEGJGJZd0jL8VM8=, tarball: cross-env/download/cross-env-7.0.3.tgz}
+    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
+    hasBin: true
+    dependencies:
+      cross-spawn: 7.0.3
     dev: true
 
   /cross-spawn/7.0.3:

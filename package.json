@@ -8,9 +8,9 @@
     "url": "https://github.com/Woodykaixa"
   },
   "scripts": {
-    "dev": "node scripts/copy-env dev && next dev",
-    "build": "node scripts/copy-env prod && next build",
-    "build:staging": "node scripts/copy-env staging && next build",
+    "dev": "next dev",
+    "build": "node scripts/copy-env && next build",
+    "build:staging": "cross-env APP_ENV=staging pnpm build",
     "start": "next start",
     "lint": "next lint",
     "generate": "prisma generate"
@@ -37,6 +37,7 @@
     "@types/react-dom": "^17.0.0",
     "@types/styled-components": "^5.1.14",
     "autoprefixer": "^10.4.2",
+    "cross-env": "^7.0.3",
     "eslint": "8.5.0",
     "eslint-config-next": "12.0.7",
     "eslint-config-prettier": "^8.3.0",
