@@ -11,6 +11,111 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model M {
+/// 深度好文
+model PlayerArticle {
   id String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+
+  /// 标题
+  title String
+
+  /// 关键词
+  keywords String[]
+
+  /// 作者
+  author String
+
+  /// 内容
+  content DateTime
+
+  /// 发布时间
+  date DateTime
+}
+
+enum Side {
+
+  /// 北美联合打击力量
+  /// Northern American Coalition Strike Force
+  NACSF
+
+  /// 独联体国家联合部队
+  /// Commonwealth of Independent States United Force
+  CISUF
+
+  /// 欧洲联邦快速反应部队
+  /// European Federation Rapid Response Force
+  EFRRF
+
+  /// 远东合作组织
+  /// Far East Cooperation Organization
+  FECO
+
+  /// 虹
+  /// Regenbogen
+  RITC
+}
+
+/// 百科
+model WikiArticle {
+  id String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+
+  /// 标题
+  title String
+
+  /// 阵营所属
+  side Side
+
+  /// 发布/更新时间
+  date DateTime
+
+  /// 内容
+  content String
+}
+
+/// 一个 Changelog 对应一个版本的更新
+/// Changelog 页面查询所有的 Changelog 然后按照版本/时间降序排列、渲染
+model Changelog {
+  id String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+
+  /// Changelog 内容
+  content String
+
+  /// 发布时间
+  date DateTime
+
+  /// 游戏主版本号
+  majorVersion Int
+
+  /// 游戏次版本号
+  minorVersion Int
+
+  /// 游戏补丁版本号
+  patchVersion Int
+
+}
+
+/// 公告
+model Notice {
+  id String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+
+  /// 公告内容
+  content String
+
+  /// 发布时间
+  date DateTime
+
+}
+
+/// 资讯/专栏
+model News {
+  id String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+
+  /// 标题
+  title String
+
+  /// 资讯内容
+  content String
+
+  /// 资讯封面
+  coverUrl String?
+
 }
