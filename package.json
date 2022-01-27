@@ -12,7 +12,8 @@
     "build": "node scripts/copy-env prod && next build",
     "build:staging": "node scripts/copy-env staging && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate": "prisma generate"
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",

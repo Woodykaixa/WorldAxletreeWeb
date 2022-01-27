@@ -10,3 +10,7 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+model M {
+  id String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+}

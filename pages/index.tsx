@@ -1,6 +1,18 @@
 import { IndexWrapper, FeaturePanel, ImageLink, SkewButton, Text } from '@/components';
 import { SEOHeaders } from '@/components/SEO';
+import { useEffect } from 'react';
 export default function Main() {
+  useEffect(() => {
+    fetch('/api/test')
+      .then(async res => {
+        if (res.ok) {
+          return res.text();
+        }
+        throw await res.json();
+      })
+      .then(console.log)
+      .catch(console.error);
+  }, []);
   return (
     <>
       <SEOHeaders.Index title='世界轴承: RA2现代战争模组' keywords={[]} />
