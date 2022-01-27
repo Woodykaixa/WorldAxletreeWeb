@@ -7,7 +7,7 @@ export default function Main() {
       <div className='flex flex-col'>
         <IndexWrapper path={'/assets/gw01.webp'} className='items-center'>
           <div className='mt-80'>
-            <SkewButton skewX={-30} className='text-3xl lg:text-5xl' link='#welcome-to-world-axletree'>
+            <SkewButton skewX={-30} className='text-white text-3xl lg:text-5xl' link='#welcome-to-world-axletree'>
               探索《世界轴承》
             </SkewButton>
           </div>
@@ -27,15 +27,11 @@ export default function Main() {
             Project制作的PC游戏《命令与征服：红色警戒2尤里的复仇》的非官方模组。WA是一款以高质量美工和创意作为亮点的MOD，虽然是以《尤里的复仇》作为载体但是抛弃了几乎所有和《尤里的复仇》有关的东西，抛弃引擎来说可以看做是一款全新的游戏。
           </Text>
           <div className='flex flex-col lg:flex-row justify-between mt-20'>
-            <SkewButton className='px-20 my-4 text-3xl lg:text-5xl ' skewX={-30} link='/example'>
-              故事背景
-            </SkewButton>
-            <SkewButton className='px-20 my-4 text-3xl lg:text-5xl ' skewX={-30}>
-              游戏特色
-            </SkewButton>
-            <SkewButton className='px-20 my-4 text-3xl lg:text-5xl ' skewX={-30}>
-              单位百科
-            </SkewButton>
+            {PART_4_BUTTON_PROPS.map(props => (
+              <SkewButton key={props.text} className='px-20 my-4 text-3xl lg:text-5xl ' skewX={-30} link={props.href}>
+                {props.text}
+              </SkewButton>
+            ))}
           </div>
         </IndexWrapper>
         <IndexWrapper path={'/assets/gw03.webp'} className='items-center'>
@@ -101,6 +97,21 @@ export default function Main() {
     </>
   );
 }
+
+const PART_4_BUTTON_PROPS = [
+  {
+    text: '故事背景',
+    href: '/example',
+  },
+  {
+    text: '游戏特色',
+    href: '/',
+  },
+  {
+    text: '单位百科',
+    href: '/',
+  },
+];
 
 const PART_5_BUTTON_PROPS = [
   {

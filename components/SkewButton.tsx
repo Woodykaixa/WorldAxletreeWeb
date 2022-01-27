@@ -12,7 +12,9 @@ export function SkewButton({
 }) {
   return (
     <button
-      className={'font-bold bg-red-500 hover:bg-red-400 py-10 px-10 ease-linear transition ' + className ?? ''}
+      className={
+        'text-black font-bold bg-red-500 hover:bg-red-400 py-10 px-10 ease-linear transition ' + className ?? ''
+      }
       style={{ transform: `skewX(${skewX}deg)` }}
     >
       <div className='mx-15' style={{ transform: `skewX(${-skewX}deg)` }}>
