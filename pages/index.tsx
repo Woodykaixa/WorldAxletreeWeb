@@ -1,11 +1,11 @@
-import { Container, FeaturePanel, ImageLink, SkewButton, Text } from '@/components';
+import { IndexWrapper, FeaturePanel, ImageLink, SkewButton, Text } from '@/components';
 import { SEOHeaders } from '@/components/SEO';
 export default function Main() {
   return (
     <>
       <SEOHeaders.Index title='世界轴承: RA2现代战争模组' keywords={[]} />
       <div className='flex flex-col'>
-        <Container path={'/assets/gw01.webp'} className='items-center'>
+        <IndexWrapper path={'/assets/gw01.webp'} className='items-center'>
           <div className='mt-80'>
             <SkewButton skewX={-30} className='text-3xl lg:text-5xl' link='#welcome-to-world-axletree'>
               探索《世界轴承》
@@ -14,8 +14,8 @@ export default function Main() {
           <Text decorationColor='white' decorationWidth={2} decorationPositions={['left']} className='py-6 my-8'>
             红色警戒写实现代战争模组，全新故事背景，全新参战阵营，等待你的加入
           </Text>
-        </Container>
-        <Container id='welcome-to-world-axletree' path={'/assets/gw02.webp'} className='items-center'>
+        </IndexWrapper>
+        <IndexWrapper id='welcome-to-world-axletree' path={'/assets/gw02.webp'} className='items-center'>
           <div className='text-white text-7xl text-center mb-12 font-bold'>欢迎来到《世界轴承》</div>
           <Text
             decorationColor='red'
@@ -37,8 +37,8 @@ export default function Main() {
               单位百科
             </SkewButton>
           </div>
-        </Container>
-        <Container path={'/assets/gw03.webp'} className='items-center'>
+        </IndexWrapper>
+        <IndexWrapper path={'/assets/gw03.webp'} className='items-center'>
           <div className='text-white text-7xl text-center mb-12 font-bold'>故事背景</div>
           <Text
             decorationColor='red'
@@ -58,8 +58,8 @@ export default function Main() {
               北约的解体也促进了欧盟的解体，但是过不了多久便建立了欧洲联邦来对抗新的恐怖主义，而在大陆的另一头，当美国的战略重心逐渐向东倾斜时，亚太地区正逐渐成为中国的势力范围。
             </p>
           </Text>
-        </Container>
-        <Container path={'/assets/gw04.webp'} className='items-center' containerClassName='w-5/6 items-center'>
+        </IndexWrapper>
+        <IndexWrapper path={'/assets/gw04.webp'} className='items-center' containerClassName='w-5/6 items-center'>
           <div className='grid grid-cols-3 gap-4'>
             <FeaturePanel
               imagePath={'/assets/gw04_ui01.webp'}
@@ -80,8 +80,8 @@ export default function Main() {
           <SkewButton skewX={0} className='w-full xl:w-2/3 2xl:w-1/3 mx-32 mt-24 rounded-md text-4xl'>
             立即下载《世界轴承》
           </SkewButton>
-        </Container>
-        <Container
+        </IndexWrapper>
+        <IndexWrapper
           path={'/assets/gw05.webp'}
           className='items-center'
           containerClassName='w-5/6 flex flex-col items-center justify-center'
@@ -96,7 +96,7 @@ export default function Main() {
               {props.text}
             </ImageLink>
           ))}
-        </Container>
+        </IndexWrapper>
       </div>
     </>
   );

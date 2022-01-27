@@ -1,6 +1,6 @@
 export * from './ArticleContainer';
 export * from './BackgroundImage';
-export * from './Container';
+export * from './IndexWrapper';
 export * from './FeaturePanel';
 export * from './Footer';
 export * from './Header';
