@@ -1,4 +1,4 @@
-import { Container, FeaturePanel, ImageButton, SkewButton, Text } from '@/components';
+import { Container, FeaturePanel, ImageLink, SkewButton, Text } from '@/components';
 import { SEOHeaders } from '@/components/SEO';
 export default function Main() {
   return (
@@ -84,16 +84,17 @@ export default function Main() {
         <Container
           path={'/assets/gw05.webp'}
           className='items-center'
-          containerClassName='w-5/6 grid grid-rows-3 gap-4 2xl:gap-12'
+          containerClassName='w-5/6 flex flex-col items-center justify-center'
         >
           {PART_5_BUTTON_PROPS.map(props => (
-            <ImageButton
+            <ImageLink
               key={props.text}
-              imagePath={props.imagePath}
-              className='text-white font-bold w-full text-7xl py-8 2xl:py-16'
+              image={props.imagePath}
+              href={props.href}
+              className='text-white opacity-80 hover:opacity-100 ease-linear transition font-bold w-3/4-screen text-7xl py-8 '
             >
               {props.text}
-            </ImageButton>
+            </ImageLink>
           ))}
         </Container>
       </div>
@@ -105,13 +106,16 @@ const PART_5_BUTTON_PROPS = [
   {
     imagePath: '/assets/gw05_ui01.webp',
     text: '新闻资讯',
+    href: '/',
   },
   {
     imagePath: '/assets/gw05_ui02.webp',
     text: '游戏社群',
+    href: '/',
   },
   {
     imagePath: '/assets/gw05_ui03.webp',
     text: '支持我们',
+    href: '/',
   },
 ];

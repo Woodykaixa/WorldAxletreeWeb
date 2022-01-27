@@ -1,19 +1,12 @@
+import Image from 'next/image';
 import { ReactNode } from 'react';
-import styled from 'styled-components';
-
-const ContainerWrapper = styled.div<{ path: string }>`
-  background-image: url(${props => props.path});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 45vw;
-`;
+import { BackgroundImage } from '.';
 
 export function Container({
   path,
   children,
   className,
-  containerClassName,
+  containerClassName = '',
   id,
 }: {
   path: string;
@@ -23,8 +16,9 @@ export function Container({
   id?: string;
 }) {
   return (
-    <ContainerWrapper id={id} path={path} className={'flex justify-center py-16 2xl:py-4 ' + className}>
-      <div className={'flex flex-col w-3/4 ' + containerClassName}>{children}</div>
-    </ContainerWrapper>
+    <div id={id} className={'relative flex justify-center py-16 2xl:py-4 h-full ' + className}>
+      <BackgroundImage path={path} alt='' preload />
+      <div className={' flex flex-col justify-evenly w-3/4 min-h-[45vw] ' + containerClassName}>{children}</div>
+    </div>
   );
 }
