@@ -24,6 +24,7 @@ specifiers:
   prettier: ^2.4.0
   react: ^17.0.0
   react-dom: ^17.0.0
+  react-infinite-scroll-component: ^6.1.0
   styled-components: ^5.3.1
   tailwindcss: ^3.0.16
   typescript: ^4.3.2
@@ -39,6 +40,7 @@ dependencies:
   next: 12.0.8_react-dom@17.0.2+react@17.0.2
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
+  react-infinite-scroll-component: 6.1.0_react@17.0.2
   styled-components: 5.3.3_react-dom@17.0.2+react@17.0.2
 
 devDependencies:
@@ -3525,6 +3527,15 @@ packages:
       scheduler: 0.20.2
     dev: false
 
+  /react-infinite-scroll-component/6.1.0_react@17.0.2:
+    resolution: {integrity: sha1-flEeeqD3KKw+UfZKOKYHmsUiQH8=, tarball: react-infinite-scroll-component/download/react-infinite-scroll-component-6.1.0.tgz}
+    peerDependencies:
+      react: '>=16.0.0'
+    dependencies:
+      react: 17.0.2
+      throttle-debounce: 2.3.0
+    dev: false
+
   /react-is/16.13.1:
     resolution: {integrity: sha1-eJcppNw23imZ3BVt1sHZwYzqVqQ=, tarball: react-is/download/react-is-16.13.1.tgz}
 
@@ -4044,6 +4055,11 @@ packages:
   /text-table/0.2.0:
     resolution: {integrity: sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=, tarball: text-table/download/text-table-0.2.0.tgz}
     dev: true
+
+  /throttle-debounce/2.3.0:
+    resolution: {integrity: sha1-/TGGXmZQIHHkEYF+JBRls+nDcuI=, tarball: throttle-debounce/download/throttle-debounce-2.3.0.tgz}
+    engines: {node: '>=8'}
+    dev: false
 
   /through/2.3.8:
     resolution: {integrity: sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU=, tarball: through/download/through-2.3.8.tgz}
