@@ -14,6 +14,7 @@ declare global {
       NEXT_PUBLIC_APP_ENV: 'development' | 'production';
       ADMIN: string;
       DATABASE_URL: string;
+      JWT_SECRET: string;
     }
   }
 }

@@ -7,6 +7,8 @@ specifiers:
   '@bytemd/plugin-gfm': 1.10.13
   '@bytemd/react': 1.10.13
   '@prisma/client': ^3.8.1
+  '@types/cookie': ^0.4.1
+  '@types/jsonwebtoken': ^8.5.8
   '@types/node': ^16.9.1
   '@types/react': ^17.0.21
   '@types/react-dom': ^17.0.0
@@ -14,12 +16,14 @@ specifiers:
   antd: ^4.18.5
   autoprefixer: ^10.4.2
   bytemd: 1.10.13
+  cookie: ^0.4.1
   cross-env: ^7.0.3
   eslint: 8.5.0
   eslint-config-next: 12.0.7
   eslint-config-prettier: ^8.3.0
   husky: ^7.0.2
   install: ^0.13.0
+  jsonwebtoken: ^8.5.1
   lint-staged: ^11.1.2
   next: ^12.0.8
   postcss: ^8.4.5
@@ -41,6 +45,8 @@ dependencies:
   '@prisma/client': 3.8.1_prisma@3.8.1
   antd: 4.18.5_react-dom@17.0.2+react@17.0.2
   bytemd: 1.10.13
+  cookie: 0.4.1
+  jsonwebtoken: 8.5.1
   next: 12.0.8_react-dom@17.0.2+react@17.0.2
   prisma: 3.8.1
   react: 17.0.2
@@ -49,6 +55,8 @@ dependencies:
   styled-components: 5.3.3_react-dom@17.0.2+react@17.0.2
 
 devDependencies:
+  '@types/cookie': 0.4.1
+  '@types/jsonwebtoken': 8.5.8
   '@types/node': 16.11.21
   '@types/react': 17.0.38
   '@types/react-dom': 17.0.11
@@ -540,6 +548,10 @@ packages:
       '@types/tern': 0.23.4
     dev: false
 
+  /@types/cookie/0.4.1:
+    resolution: {integrity: sha1-v9AsHyIkVnZ2wVRRmfh8OoYdh40=, tarball: '@types/cookie/download/@types/cookie-0.4.1.tgz'}
+    dev: true
+
   /@types/estree/0.0.50:
     resolution: {integrity: sha1-Hgyqk2TT/M0pMcPtlv2+ql1MyoM=, tarball: '@types/estree/download/@types/estree-0.0.50.tgz'}
     dev: false
@@ -563,6 +575,12 @@ packages:
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha1-7ihweulOEdK4J7y+UnC86n8+ce4=, tarball: '@types/json5/download/@types/json5-0.0.29.tgz'}
+    dev: true
+
+  /@types/jsonwebtoken/8.5.8:
+    resolution: {integrity: sha512-zm6xBQpFDIDM6o9r6HSgDeIcLy82TKWctCXEPbJJcXb5AKmi5BNNdLXneixK4lplX3PqIVcwLBCGE/kAGnlD4A==, tarball: '@types/jsonwebtoken/download/@types/jsonwebtoken-8.5.8.tgz'}
+    dependencies:
+      '@types/node': 16.11.21
     dev: true
 
   /@types/lodash.debounce/4.0.6:
@@ -997,6 +1015,10 @@ packages:
       picocolors: 1.0.0
     dev: true
 
+  /buffer-equal-constant-time/1.0.1:
+    resolution: {integrity: sha1-+OcRMvf/5uAaXJaXpMbz5I1cyBk=, tarball: buffer-equal-constant-time/download/buffer-equal-constant-time-1.0.1.tgz}
+    dev: false
+
   /bytemd/1.10.13:
     resolution: {integrity: sha1-pPr1IbCxwd+//Vpb9SNRYxiQUjo=, tarball: bytemd/download/bytemd-1.10.13.tgz}
     dependencies:
@@ -1176,6 +1198,11 @@ packages:
     resolution: {integrity: sha1-F6LLiC1/d9NJBYXizmxSRCSjpEI=, tarball: convert-source-map/download/convert-source-map-1.7.0.tgz}
     dependencies:
       safe-buffer: 5.1.2
+    dev: false
+
+  /cookie/0.4.1:
+    resolution: {integrity: sha512-ZwrFkGJxUR3EIoXtO+yVE69Eb7KlixbaeAWfBQB9vVsNn/o+Yw69gBWSSDK825hQNdN+wF8zELf3dFNl/kxkUA==, tarball: cookie/download/cookie-0.4.1.tgz}
+    engines: {node: '>= 0.6'}
     dev: false
 
   /copy-to-clipboard/3.3.1:
@@ -1358,6 +1385,12 @@ packages:
 
   /dom-align/1.12.2:
     resolution: {integrity: sha1-D4Fk69DJwhsMeQMQSTzYVYkqzUs=, tarball: dom-align/download/dom-align-1.12.2.tgz}
+    dev: false
+
+  /ecdsa-sig-formatter/1.0.11:
+    resolution: {integrity: sha1-rg8PothQRe8UqBfao86azQSJ5b8=, tarball: ecdsa-sig-formatter/download/ecdsa-sig-formatter-1.0.11.tgz}
+    dependencies:
+      safe-buffer: 5.2.1
     dev: false
 
   /electron-to-chromium/1.4.52:
@@ -2309,6 +2342,22 @@ packages:
     dependencies:
       minimist: 1.2.5
 
+  /jsonwebtoken/8.5.1:
+    resolution: {integrity: sha512-XjwVfRS6jTMsqYs0EsuJ4LGxXV14zQybNd4L2r0UvbVnSF9Af8x7p5MzbJ90Ioz/9TI41/hTCvznF/loiSzn8w==, tarball: jsonwebtoken/download/jsonwebtoken-8.5.1.tgz}
+    engines: {node: '>=4', npm: '>=1.4.28'}
+    dependencies:
+      jws: 3.2.2
+      lodash.includes: 4.3.0
+      lodash.isboolean: 3.0.3
+      lodash.isinteger: 4.0.4
+      lodash.isnumber: 3.0.3
+      lodash.isplainobject: 4.0.6
+      lodash.isstring: 4.0.1
+      lodash.once: 4.1.1
+      ms: 2.1.3
+      semver: 5.7.1
+    dev: false
+
   /jsx-ast-utils/3.2.1:
     resolution: {integrity: sha1-cguXv+fZAbkn2Hw3c2N66OpIeBs=, tarball: jsx-ast-utils/download/jsx-ast-utils-3.2.1.tgz}
     engines: {node: '>=4.0'}
@@ -2316,6 +2365,21 @@ packages:
       array-includes: 3.1.4
       object.assign: 4.1.2
     dev: true
+
+  /jwa/1.4.1:
+    resolution: {integrity: sha1-dDwymFy56YZVUw1TZBtmyGRbA5o=, tarball: jwa/download/jwa-1.4.1.tgz}
+    dependencies:
+      buffer-equal-constant-time: 1.0.1
+      ecdsa-sig-formatter: 1.0.11
+      safe-buffer: 5.2.1
+    dev: false
+
+  /jws/3.2.2:
+    resolution: {integrity: sha1-ABCZ82OUaMlBQADpmZX6UvtHgwQ=, tarball: jws/download/jws-3.2.2.tgz}
+    dependencies:
+      jwa: 1.4.1
+      safe-buffer: 5.2.1
+    dev: false
 
   /language-subtag-registry/0.3.21:
     resolution: {integrity: sha1-BKwhi+pG8EywOQhGAsbanniN1Fo=, tarball: language-subtag-registry/download/language-subtag-registry-0.3.21.tgz}
@@ -2405,9 +2469,37 @@ packages:
     resolution: {integrity: sha1-gteb/zCmfEAF/9XiUVMArZyk168=, tarball: lodash.debounce/download/lodash.debounce-4.0.8.tgz}
     dev: false
 
+  /lodash.includes/4.3.0:
+    resolution: {integrity: sha1-YLuYqHy5I8aMoeUTJUgzFISfVT8=, tarball: lodash.includes/download/lodash.includes-4.3.0.tgz}
+    dev: false
+
+  /lodash.isboolean/3.0.3:
+    resolution: {integrity: sha512-Bz5mupy2SVbPHURB98VAcw+aHh4vRV5IPNhILUCsOzRmsTmSQ17jIuqopAentWoehktxGd9e/hbIXq980/1QJg==, tarball: lodash.isboolean/download/lodash.isboolean-3.0.3.tgz}
+    dev: false
+
+  /lodash.isinteger/4.0.4:
+    resolution: {integrity: sha1-YZwK89A/iwTDH1iChAt3sRzWg0M=, tarball: lodash.isinteger/download/lodash.isinteger-4.0.4.tgz}
+    dev: false
+
+  /lodash.isnumber/3.0.3:
+    resolution: {integrity: sha1-POdoEMWSjQM1IwGsKHMX8RwLH/w=, tarball: lodash.isnumber/download/lodash.isnumber-3.0.3.tgz}
+    dev: false
+
+  /lodash.isplainobject/4.0.6:
+    resolution: {integrity: sha1-fFJqUtibRcRcxpC4gWO+BJf1UMs=, tarball: lodash.isplainobject/download/lodash.isplainobject-4.0.6.tgz}
+    dev: false
+
+  /lodash.isstring/4.0.1:
+    resolution: {integrity: sha1-1SfftUVuynzJu5XV2ur4i6VKVFE=, tarball: lodash.isstring/download/lodash.isstring-4.0.1.tgz}
+    dev: false
+
   /lodash.merge/4.6.2:
     resolution: {integrity: sha1-VYqlO0O2YeGSWgr9+japoQhf5Xo=, tarball: lodash.merge/download/lodash.merge-4.6.2.tgz}
     dev: true
+
+  /lodash.once/4.1.1:
+    resolution: {integrity: sha1-DdOXEhPHxW34gJd9UEyI+0cal6w=, tarball: lodash.once/download/lodash.once-4.1.1.tgz}
+    dev: false
 
   /lodash.throttle/4.1.1:
     resolution: {integrity: sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=, tarball: lodash.throttle/download/lodash.throttle-4.1.1.tgz}
@@ -2683,7 +2775,6 @@ packages:
 
   /ms/2.1.3:
     resolution: {integrity: sha1-V0yBOM4dK1hh8LRFedut1gxmFbI=, tarball: ms/download/ms-2.1.3.tgz}
-    dev: true
 
   /nanoid/3.2.0:
     resolution: {integrity: sha512-fmsZYa9lpn69Ad5eDn7FMcnnSR+8R34W9qJEijxYhTbfOWzr22n1QxCMzXLK+ODyW2973V3Fux959iQoUxzUIA==, tarball: nanoid/download/nanoid-3.2.0.tgz}
@@ -3785,6 +3876,11 @@ packages:
   /semver-compare/1.0.0:
     resolution: {integrity: sha1-De4hahyUGrN+nvsXiPavxf9VN/w=, tarball: semver-compare/download/semver-compare-1.0.0.tgz}
     dev: true
+
+  /semver/5.7.1:
+    resolution: {integrity: sha1-qVT5Ma66UI0we78Gnv8MAclhFvc=, tarball: semver/download/semver-5.7.1.tgz?cache=0&sync_timestamp=1634019726791&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fsemver%2Fdownload%2Fsemver-5.7.1.tgz}
+    hasBin: true
+    dev: false
 
   /semver/6.3.0:
     resolution: {integrity: sha1-7gpkyK9ejO6mdoexM3YeG+y9HT0=, tarball: semver/download/semver-6.3.0.tgz?cache=0&sync_timestamp=1634019726791&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fsemver%2Fdownload%2Fsemver-6.3.0.tgz}
