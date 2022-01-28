@@ -8,3 +8,4 @@ export * from './ImageLink';
 export * from './Layout';
 export * from './SkewButton';
 export * from './Text';
+export * from './EditorStyle';
