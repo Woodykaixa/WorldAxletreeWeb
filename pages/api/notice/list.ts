@@ -6,20 +6,28 @@ import { greater } from '@/lib/game-ver';
 import prismaClient from '@/lib/prisma';
 import { pick } from 'lodash';
 const {
-  parser: { intGe, intGt },
+  parser: { intGe, intGt, strLengthGt, secondaryCheck },
 } = parseParam;
 const handler: NextApiHandler<Notice.ListResp | Err.Resp> = async (req, res) => {
   try {
     await ensureMethod(req.method, ['GET']);
     const connection = prismaClient.$connect();
 
-    const parse = parseParam<Notice.ListDTO>(req.query, {
-      page: intGe(0),
-      size: intGt(0),
+    const dto = await parseParam<{
+      page: string;
+      size: string;
+    }>(req.query, {
+      page: secondaryCheck(strLengthGt(0), param => {
+        return !isNaN(parseInt(param, 10));
+      }),
+      size: secondaryCheck(strLengthGt(0), param => {
+        return !isNaN(parseInt(param, 10));
+      }),
     });
 
     await connection;
-    const { page, size } = await parse;
+    const page = parseInt(dto.page);
+    const size = parseInt(dto.size);
     const notices = await prismaClient.notice.findMany({
       take: size,
       skip: size * page,
@@ -30,6 +38,8 @@ const handler: NextApiHandler<Notice.ListResp | Err.Resp> = async (req, res) => 
     res.status(OK.code).json(notices);
   } catch (err) {
     errorHandler(res)(err);
+  } finally {
+    await prismaClient.$disconnect();
   }
 };
 

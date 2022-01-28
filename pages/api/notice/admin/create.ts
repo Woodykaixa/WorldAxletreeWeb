@@ -30,6 +30,8 @@ const handler: NextApiHandler<Notice.CreateResp | Err.Resp> = async (req, res) =
     res.status(OK.code).json(notice);
   } catch (err) {
     errorHandler(res)(err);
+  } finally {
+    await prismaClient.$disconnect();
   }
 };
 
