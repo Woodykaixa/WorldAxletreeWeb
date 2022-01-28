@@ -1,5 +1,5 @@
 import { Container } from '@/components';
-import { SEOHeaders } from '@/components/SEO';
+import { SEOHeaders } from '@/components/seo';
 import { List, Avatar, Space, Skeleton } from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';

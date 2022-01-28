@@ -1,5 +1,5 @@
 import { IndexWrapper, FeaturePanel, ImageLink, SkewButton, Text } from '@/components';
-import { SEOHeaders } from '@/components/SEO';
+import { SEOHeaders } from '@/components/seo';
 import { useEffect } from 'react';
 export default function Main() {
   useEffect(() => {
