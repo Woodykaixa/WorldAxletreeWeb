@@ -37,7 +37,7 @@ class MyDocument extends Document {
       <Html lang='zh-CN'>
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <Head>{process.env.APP_ENV === 'development' && <script src='http://localhost:8097'></script>}</Head>
-        <body style={{ backgroundColor: 'rgb(240, 242, 245)' }}>
+        <body>
           <Main />
           <NextScript />
         </body>

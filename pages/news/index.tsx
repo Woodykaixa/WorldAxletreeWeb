@@ -1,9 +1,9 @@
 import { Container } from '@/components';
-import { SEOHeaders } from '@/components/seo';
 import { List, Avatar, Space, Skeleton } from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import Head from 'next/head';
 
 type Item = {
   href: string;
@@ -59,7 +59,13 @@ export default function NewsIndex() {
   }, []);
   return (
     <>
-      <SEOHeaders.Index title='资讯 - 世界轴承' keywords={[]} />
+      <Head>
+        <meta name='og:title' content='资讯 - 世界轴承' />
+        <title>资讯 - 世界轴承</title>
+        {process.env.NEXT_PUBLIC_APP_ENV !== 'development' && (
+          <meta name='og:url' content={process.env.NEXT_PUBLIC_BASE_URL + '/news'} />
+        )}
+      </Head>
       <Container background='/assets/gw01.webp' preloadBackground>
         <div id='news-list'>
           <InfiniteScroll

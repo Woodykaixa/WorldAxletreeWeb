@@ -1,5 +1,4 @@
 import { Container } from '@/components';
-import { SEOHeaders } from '@/components/seo';
 import { List, Divider, Space, Skeleton } from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
@@ -12,6 +11,7 @@ import frontmatter from '@bytemd/plugin-frontmatter';
 import footnotes from '@bytemd/plugin-footnotes';
 import { EditorStyle } from '@/components/editor';
 import moment from 'moment';
+import Head from 'next/head';
 
 type Notice = Notice.ListResp[number];
 const PAGE_SIZE = 5;
@@ -48,8 +48,14 @@ export default function NoticePage() {
   }, []);
   return (
     <>
-      <SEOHeaders.Index title='资讯 - 世界轴承' keywords={[]} />
-      <Container background='/assets/gw01.webp' preloadBackground>
+      <Head>
+        <meta name='og:title' content='动态 - 世界轴承' />
+        <title>动态 - 世界轴承</title>
+        {process.env.NEXT_PUBLIC_APP_ENV !== 'development' && (
+          <meta name='og:url' content={process.env.NEXT_PUBLIC_BASE_URL + '/notice'} />
+        )}
+      </Head>
+      <Container background='/assets/gw02.webp' preloadBackground>
         <div id='news-list'>
           <InfiniteScroll
             hasMore={hasMore}
