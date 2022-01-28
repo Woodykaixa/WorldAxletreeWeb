@@ -1,6 +1,6 @@
 import { IndexWrapper, FeaturePanel, ImageLink, SkewButton, Text } from '@/components';
-import { SEOHeaders } from '@/components/seo';
 import { useEffect } from 'react';
+import { SEOHeaders } from '@/components/seo/index';
 export default function Main() {
   useEffect(() => {
     fetch('/api/test')
