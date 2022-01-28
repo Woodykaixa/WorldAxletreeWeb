@@ -1,6 +1,6 @@
 import type { NextApiHandler } from 'next';
 import { Cl, Err, Notice, OK } from '@/dto';
-import { parseParam, errorHandler } from '@/lib/api';
+import { parseParam, errorHandler, ensureMethod } from '@/lib/api';
 import { BadRequest } from '@/lib/error';
 import { greater } from '@/lib/game-ver';
 import prismaClient from '@/lib/prisma';
@@ -10,6 +10,7 @@ const {
 } = parseParam;
 const handler: NextApiHandler<Notice.ListResp | Err.Resp> = async (req, res) => {
   try {
+    await ensureMethod(req.method, ['GET']);
     const connection = prismaClient.$connect();
 
     const parse = parseParam<Notice.ListDTO>(req.query, {
