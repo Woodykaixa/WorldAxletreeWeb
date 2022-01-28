@@ -1,5 +1,5 @@
 import { Container } from '@/components';
-import { List, Divider, Space, Skeleton } from 'antd';
+import { List, Divider, Space, Skeleton, Typography } from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -74,13 +74,15 @@ export default function NoticePage() {
               }}
               dataSource={data}
               renderItem={item => (
-                <div className='bg-[#686868] m-4 mb-8'>
+                <div className='bg-[#383838] m-4 mb-8'>
                   <List.Item
                     key={item.id}
                     actions={[<Space key='date'>{moment(item.date).format('yyyy年MM月DD日 HH:mm:ss')}</Space>]}
                   >
                     <EditorStyle>
-                      <Viewer value={item.content} plugins={[gfm(), frontmatter(), footnotes()]}></Viewer>
+                      <Typography>
+                        <Viewer value={item.content} plugins={[gfm(), frontmatter(), footnotes()]}></Viewer>
+                      </Typography>
                     </EditorStyle>
                   </List.Item>
                 </div>

@@ -107,7 +107,7 @@ export const EditorStyle = styled.div`
   }
 
   & .cm-def {
-    color: #4545b4;
+    color: #5b5bbb;
   }
 
   & .cm-atom,
@@ -133,16 +133,22 @@ export const EditorStyle = styled.div`
     color: #519ff8;
   }
 
+  & .cm-keyword {
+    color: #4ec9b0;
+  }
+  & .cm-string {
+    color: #b87171;
+  }
   /* Markdown preview styles */
-  & .bytemd-preview {
+  & .markdown-body {
     user-select: none;
   }
 
-  & .bytemd-preview blockquote {
+  & .markdown-body blockquote {
     border-left-color: rgba(0, 122, 204, 0.5);
   }
 
-  & .bytemd-preview a:hover {
+  & .markdown-body a:hover {
     color: #3794ff;
     text-decoration: underline;
   }
