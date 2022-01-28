@@ -1,3 +1,4 @@
+import { Err } from '@/dto';
 export class HttpError extends Error {
   public readonly code: number;
   constructor(message: string, code: number) {
@@ -33,4 +34,10 @@ export class MethodNotAllowed extends HttpError {
     super(message, 405);
     this.name = 'MessageNotAllowed';
   }
+}
+
+export function makeError(errResp: Err.Resp) {
+  const error = new Error(errResp.description);
+  error.name = errResp.error;
+  throw error;
 }
