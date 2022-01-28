@@ -13,7 +13,7 @@ const handler: NextApiHandler<Cl.CreateResp | Err.Resp> = async (req, res) => {
     await ensureMethod(req.method, ['POST']);
     const connection = prismaClient.$connect();
 
-    const parse = parseParam<Cl.CreateDTO>(req.query, {
+    const parse = parseParam<Cl.CreateDTO>(req.body, {
       content: strLengthGt(0),
       majorVersion: int,
       minorVersion: int,

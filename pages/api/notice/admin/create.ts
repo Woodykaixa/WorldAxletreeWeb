@@ -14,7 +14,7 @@ const handler: NextApiHandler<Notice.CreateResp | Err.Resp> = async (req, res) =
 
     const connection = prismaClient.$connect();
 
-    const parse = parseParam<Notice.CreateDTO>(req.query, {
+    const parse = parseParam<Notice.CreateDTO>(req.body, {
       content: strLengthGt(0),
     });
 
