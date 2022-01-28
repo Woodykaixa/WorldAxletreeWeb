@@ -1,6 +1,5 @@
 import { IndexWrapper, FeaturePanel, ImageLink, SkewButton, Text } from '@/components';
 import { useEffect } from 'react';
-import { SEOHeaders } from '@/components/seo/index';
 export default function Main() {
   useEffect(() => {
     fetch('/api/test')
@@ -15,7 +14,6 @@ export default function Main() {
   }, []);
   return (
     <>
-      <SEOHeaders.Index title='世界轴承: RA2现代战争模组' keywords={[]} />
       <div className='flex flex-col'>
         <IndexWrapper path={'/assets/gw01.webp'} className='items-center'>
           <div className='mt-80'>
