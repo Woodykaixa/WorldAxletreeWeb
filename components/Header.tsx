@@ -57,7 +57,8 @@ const HeaderLayout: HeaderMenuProps['layout'] = [
     key: 'news',
     menu: [
       { link: '/', title: '最新版本' },
-      { link: '/news', title: '动态' },
+      { link: '/news', title: '最新资讯' },
+      { link: '/notice', title: '动态' },
     ],
   },
   {
