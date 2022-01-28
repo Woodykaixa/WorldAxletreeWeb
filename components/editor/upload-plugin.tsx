@@ -2,7 +2,10 @@ import type { BytemdPlugin } from 'bytemd';
 import { renderToString } from 'react-dom/server';
 import { UploadOutlined } from '@ant-design/icons';
 
-export function upload(): BytemdPlugin {
+export type UploadPluginOptions = {
+  onUpload: (value: string) => Promise<void>;
+};
+export function upload({ onUpload }: UploadPluginOptions): BytemdPlugin {
   return {
     actions: [
       {
@@ -12,8 +15,7 @@ export function upload(): BytemdPlugin {
           type: 'action',
           click: ctx => {
             const text = ctx.editor.getValue();
-
-            console.log('text', text);
+            onUpload(text);
           },
         },
       },

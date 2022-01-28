@@ -26,6 +26,7 @@
     "bytemd": "1.10.13",
     "cookie": "^0.4.1",
     "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
     "next": "^12.0.8",
     "prisma": "^3.8.1",
     "react": "^17.0.0",
@@ -36,6 +37,7 @@
   "devDependencies": {
     "@types/cookie": "^0.4.1",
     "@types/jsonwebtoken": "^8.5.8",
+    "@types/lodash": "^4.14.178",
     "@types/node": "^16.9.1",
     "@types/react": "^17.0.21",
     "@types/react-dom": "^17.0.0",
