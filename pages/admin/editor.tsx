@@ -3,7 +3,7 @@ import { Editor } from '@bytemd/react';
 import gfm from '@bytemd/plugin-gfm';
 import footnotes from '@bytemd/plugin-footnotes';
 import frontmatter from '@bytemd/plugin-frontmatter';
-import { Modal, notification, Typography } from 'antd';
+import { Modal, notification, Spin, Typography } from 'antd';
 import zhHans from 'bytemd/lib/locales/zh_Hans.json';
 import { EditorStyle, upload, consumeMeta, modal } from '@/components/editor';
 import { validateAndUpload } from '@/lib/meta';
@@ -17,7 +17,8 @@ let meta: {
 } = {
   value: null,
 };
-const onUpload = (text: string) => {
+const onUpload = (text: string, setUploading: (uploading: boolean) => void) => {
+  setUploading(true);
   if (!meta.value) {
     notification.error({
       message: '未填写元数据',
@@ -47,11 +48,15 @@ const onUpload = (text: string) => {
         description: error.message,
       });
       console.error(error);
+    })
+    .finally(() => {
+      setUploading(false);
     });
 };
 export default function ArticleEditor() {
   const [value, setValue] = useState('');
   const { visible, open, close } = useModal();
+  const [uploading, setUploading] = useState(false);
 
   const [editorPlugins, setPlugin] = useState<BytemdPlugin[]>([]);
   useEffect(() => {
@@ -65,7 +70,9 @@ export default function ArticleEditor() {
         title: '打开图片库',
       }),
       upload({
-        onUpload,
+        onUpload(text) {
+          onUpload(text, setUploading);
+        },
       }),
       consumeMeta({
         onReceiveMeta(m) {
@@ -89,18 +96,20 @@ export default function ArticleEditor() {
       <div className='w-full'>
         <EditorStyle>
           <Typography>
-            <Editor
-              locale={zhHans}
-              editorConfig={{
-                lineNumbers: true,
-                cursorScrollMargin: 100,
-              }}
-              value={value}
-              plugins={editorPlugins}
-              onChange={v => {
-                setValue(v);
-              }}
-            />
+            <Spin spinning={uploading}>
+              <Editor
+                locale={zhHans}
+                editorConfig={{
+                  lineNumbers: true,
+                  cursorScrollMargin: 100,
+                }}
+                value={value}
+                plugins={editorPlugins}
+                onChange={v => {
+                  setValue(v);
+                }}
+              />
+            </Spin>
           </Typography>
         </EditorStyle>
       </div>
