@@ -23,6 +23,7 @@ specifiers:
   eslint-config-next: 12.0.7
   eslint-config-prettier: ^8.3.0
   husky: ^7.0.2
+  image-size: ^1.0.1
   install: ^0.13.0
   jsonwebtoken: ^8.5.1
   lint-staged: ^11.1.2
@@ -49,6 +50,7 @@ dependencies:
   antd: 4.18.5_react-dom@17.0.2+react@17.0.2
   bytemd: 1.10.13
   cookie: 0.4.1
+  image-size: 1.0.1
   jsonwebtoken: 8.5.1
   lodash: 4.17.21
   moment: 2.29.1
@@ -2087,6 +2089,14 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
+  /image-size/1.0.1:
+    resolution: {integrity: sha512-VAwkvNSNGClRw9mDHhc5Efax8PLlsOGcUTh0T/LIriC8vPA3U5PdqXWqkz406MoYHMKW8Uf9gWr05T/rYB44kQ==, tarball: image-size/download/image-size-1.0.1.tgz}
+    engines: {node: '>=12.0.0'}
+    hasBin: true
+    dependencies:
+      queue: 6.0.2
+    dev: false
+
   /import-fresh/3.3.0:
     resolution: {integrity: sha1-NxYsJfy566oublPVtNiM4X2eDCs=, tarball: import-fresh/download/import-fresh-3.3.0.tgz}
     engines: {node: '>=6'}
@@ -3157,6 +3167,12 @@ packages:
   /queue-microtask/1.2.3:
     resolution: {integrity: sha1-SSkii7xyTfrEPg77BYyve2z7YkM=, tarball: queue-microtask/download/queue-microtask-1.2.3.tgz}
     dev: true
+
+  /queue/6.0.2:
+    resolution: {integrity: sha1-uRUlKD4jFcdVPS76GNg+dkMv7WU=, tarball: queue/download/queue-6.0.2.tgz}
+    dependencies:
+      inherits: 2.0.4
+    dev: false
 
   /quick-lru/5.1.1:
     resolution: {integrity: sha1-NmST5rPkKjpoheLpnRj4D7eoyTI=, tarball: quick-lru/download/quick-lru-5.1.1.tgz}

@@ -10,6 +10,9 @@ export default function AdminIndex() {
           <Menu.Item key='editor'>
             <Link href='/admin/editor'>编辑器</Link>
           </Menu.Item>
+          <Menu.Item key='image'>
+            <Link href='/admin/image'>图片库</Link>
+          </Menu.Item>
           <Menu.Item key='placeholder1'></Menu.Item>
           <Menu.Item key='placeholder2'></Menu.Item>
           <Menu.Item key='unauth'>

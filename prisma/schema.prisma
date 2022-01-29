@@ -119,3 +119,18 @@ model News {
   coverUrl String?
 
 }
+
+model Image {
+  id String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+
+  name String
+
+  encoding String
+
+  width Int
+
+  height Int
+
+  content Bytes @db.BinData
+
+}
