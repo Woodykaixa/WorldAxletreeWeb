@@ -20,14 +20,17 @@ type ImageItem = {
 export type ImageWallProps = {
   onPreview?: typeof defaultPreview;
   onCopy?: typeof defaultCopy;
-  initialImages: ImageItem[];
 };
 
-export function ImageWall({ onPreview = defaultPreview, onCopy = defaultCopy, initialImages }: ImageWallProps) {
+export function ImageWall({ onPreview = defaultPreview, onCopy = defaultCopy }: ImageWallProps) {
   const [images, setImages] = useState([] as ImageItem[]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    setImages([...images, ...initialImages]);
-  }, [initialImages]);
+    fetchInitialList().then(list => {
+      setImages([...images, ...list]);
+      setLoading(false);
+    });
+  }, []);
 
   const uploadFile = async () => {
     const files = await getFileInput();
@@ -86,46 +89,48 @@ export function ImageWall({ onPreview = defaultPreview, onCopy = defaultCopy, in
     }
   };
   return (
-    <div className='flex flex-wrap'>
-      {images.map(image => (
-        <div key={image.id} className='relative w-[200px] h-[200px] m-4 border-2 border-gray-500'>
-          {image.type === 'uploading' && (
-            <div className='bg-black opacity-50 flex items-center justify-center w-full h-full absolute z-10'>
-              <Spin></Spin>
-            </div>
-          )}
-          {image.type === 'done' && (
-            <div className='bg-black opacity-0 hover:opacity-80 flex items-center justify-evenly flex-wrap w-full h-full absolute z-10'>
-              <Tooltip overlay={'删除该图片'}>
-                <Button
-                  type='text'
-                  onClick={() => {
-                    message.error('尚未实现。在做了在做了。');
-                  }}
-                >
-                  <DeleteOutlined />
-                </Button>
-              </Tooltip>
-              <Tooltip overlay={'复制图片链接'}>
-                <Button type='text' onClick={() => onCopy(image.preview)}>
-                  <CopyOutlined />
-                </Button>
-              </Tooltip>
-              <Tooltip overlay={'预览图片'}>
-                <Button type='text' onClick={() => onPreview(image.preview)}>
-                  <EyeOutlined />
-                </Button>
-              </Tooltip>
-            </div>
-          )}
-          <Image alt='' src={image.preview} width={200} height={200} objectFit='contain'></Image>
-        </div>
-      ))}
-      <button onClick={uploadFile} className='w-[200px] h-[200px] bg-gray-700 hover:bg-gray-600 m-4'>
-        <PlusOutlined />
-        <div style={{ marginTop: 8 }}>Upload</div>
-      </button>
-    </div>
+    <Spin spinning={loading}>
+      <div className='flex flex-wrap'>
+        {images.map(image => (
+          <div key={image.id} className='relative w-[200px] h-[200px] m-4 border-2 border-gray-500'>
+            {image.type === 'uploading' && (
+              <div className='bg-black opacity-50 flex items-center justify-center w-full h-full absolute z-10'>
+                <Spin></Spin>
+              </div>
+            )}
+            {image.type === 'done' && (
+              <div className='bg-black opacity-0 hover:opacity-80 flex items-center justify-evenly flex-wrap w-full h-full absolute z-10'>
+                <Tooltip overlay={'删除该图片'}>
+                  <Button
+                    type='text'
+                    onClick={() => {
+                      message.error('尚未实现。在做了在做了。');
+                    }}
+                  >
+                    <DeleteOutlined />
+                  </Button>
+                </Tooltip>
+                <Tooltip overlay={'复制图片链接'}>
+                  <Button type='text' onClick={() => onCopy(image.preview)}>
+                    <CopyOutlined />
+                  </Button>
+                </Tooltip>
+                <Tooltip overlay={'预览图片'}>
+                  <Button type='text' onClick={() => onPreview(image.preview)}>
+                    <EyeOutlined />
+                  </Button>
+                </Tooltip>
+              </div>
+            )}
+            <Image alt='' src={image.preview} width={200} height={200} objectFit='contain'></Image>
+          </div>
+        ))}
+        <button onClick={uploadFile} className='w-[200px] h-[200px] bg-gray-700 hover:bg-gray-600 m-4'>
+          <PlusOutlined />
+          <div style={{ marginTop: 8 }}>Upload</div>
+        </button>
+      </div>
+    </Spin>
   );
 }
 
@@ -139,4 +144,18 @@ function defaultPreview(url: string) {
   const a = document.createElement('a');
   a.href = url;
   a.click();
+}
+
+async function fetchInitialList(): Promise<Array<ImageItem>> {
+  const response = await fetch('/api/image/admin/list');
+  const json = (await response.json()) as DTO.ListResp;
+  return json.map(item => {
+    const result: ImageItem = {
+      id: item.id,
+      name: item.name,
+      preview: process.env.NEXT_PUBLIC_BASE_URL + '/api/image/' + item.name,
+      type: 'done',
+    };
+    return result;
+  });
 }

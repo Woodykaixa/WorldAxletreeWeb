@@ -3,11 +3,14 @@ import { Editor } from '@bytemd/react';
 import gfm from '@bytemd/plugin-gfm';
 import footnotes from '@bytemd/plugin-footnotes';
 import frontmatter from '@bytemd/plugin-frontmatter';
-import { notification, Typography } from 'antd';
+import { Modal, notification, Typography } from 'antd';
 import zhHans from 'bytemd/lib/locales/zh_Hans.json';
-import { EditorStyle, upload, consumeMeta } from '@/components/editor';
+import { EditorStyle, upload, consumeMeta, modal } from '@/components/editor';
 import { validateAndUpload } from '@/lib/meta';
 import { BytemdPlugin } from 'bytemd';
+import { FileImageOutlined } from '@ant-design/icons';
+import { renderToString } from 'react-dom/server';
+import { ImageWall } from '@/components';
 
 let meta: {
   value: object | null | string;
@@ -48,12 +51,19 @@ const onUpload = (text: string) => {
 };
 export default function ArticleEditor() {
   const [value, setValue] = useState('');
+  const { visible, open, close } = useModal();
+
   const [editorPlugins, setPlugin] = useState<BytemdPlugin[]>([]);
   useEffect(() => {
     setPlugin([
       gfm(),
       footnotes(),
       frontmatter(),
+      modal({
+        openModal: open,
+        iconString: renderToString(<FileImageOutlined />),
+        title: '打开图片库',
+      }),
       upload({
         onUpload,
       }),
@@ -65,23 +75,44 @@ export default function ArticleEditor() {
     ]);
   }, []);
   return (
-    <div className='w-full'>
-      <EditorStyle>
-        <Typography>
-          <Editor
-            locale={zhHans}
-            editorConfig={{
-              lineNumbers: true,
-              cursorScrollMargin: 100,
-            }}
-            value={value}
-            plugins={editorPlugins}
-            onChange={v => {
-              setValue(v);
-            }}
-          />
-        </Typography>
-      </EditorStyle>
-    </div>
+    <>
+      <Modal
+        visible={visible}
+        onCancel={close}
+        mask
+        footer={null}
+        className=' overflow-y-auto w-3/4-screen max-h-[60vh]'
+        centered
+      >
+        <ImageWall></ImageWall>
+      </Modal>
+      <div className='w-full'>
+        <EditorStyle>
+          <Typography>
+            <Editor
+              locale={zhHans}
+              editorConfig={{
+                lineNumbers: true,
+                cursorScrollMargin: 100,
+              }}
+              value={value}
+              plugins={editorPlugins}
+              onChange={v => {
+                setValue(v);
+              }}
+            />
+          </Typography>
+        </EditorStyle>
+      </div>
+    </>
   );
+}
+
+function useModal() {
+  const [visible, setVisible] = useState(false);
+  return {
+    visible,
+    open: () => setVisible(true),
+    close: () => setVisible(false),
+  };
 }
