@@ -13,6 +13,14 @@ export default function AdminIndex() {
           <Menu.Item key='image'>
             <Link href='/admin/image'>图片库</Link>
           </Menu.Item>
+          <Menu.SubMenu title='使用说明' key='help'>
+            <Menu.Item key='editor' className='bg-[#888888]'>
+              <Link href='/admin/help/editor'>编辑器使用说明</Link>
+            </Menu.Item>
+            <Menu.Item key='image' className='bg-[#888888]'>
+              <Link href='/admin/help/image'>图片库使用说明</Link>
+            </Menu.Item>
+          </Menu.SubMenu>
           <Menu.Item key='placeholder1'></Menu.Item>
           <Menu.Item key='placeholder2'></Menu.Item>
           <Menu.Item key='unauth'>
