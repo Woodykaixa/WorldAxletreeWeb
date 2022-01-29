@@ -10,7 +10,7 @@ export function upload({ onUpload }: UploadPluginOptions): BytemdPlugin {
     actions: [
       {
         title: '上传文章',
-        icon: renderToString(<UploadOutlined />),
+        icon: renderToString(<UploadOutlined className='text-red-500' />),
         handler: {
           type: 'action',
           click: ctx => {
