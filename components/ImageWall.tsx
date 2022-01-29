@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { CopyOutlined, DeleteOutlined, EyeOutlined, PlusOutlined } from '@ant-design/icons';
 import { getDataUrl } from '@/util/image';
 import { getFileInput } from '@/util/file';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Image as DTO } from '@/dto/image';
 import { Err, OK } from '@/dto';
 import { randString } from '@/util/rand';
@@ -20,18 +20,37 @@ type ImageItem = {
 export type ImageWallProps = {
   onPreview?: typeof defaultPreview;
   onCopy?: typeof defaultCopy;
+  className?: string;
 };
 
-export function ImageWall({ onPreview = defaultPreview, onCopy = defaultCopy }: ImageWallProps) {
-  const [images, setImages] = useState([] as ImageItem[]);
+function useRender() {
+  const [_, __] = useState(false);
+  return () => __(prev => !prev);
+}
+
+export function ImageWall({ onPreview = defaultPreview, onCopy = defaultCopy, className = '' }: ImageWallProps) {
+  const imageRef = useRef([] as ImageItem[]);
   const [loading, setLoading] = useState(true);
+  const render = useRender();
   useEffect(() => {
     fetchInitialList().then(list => {
-      setImages([...images, ...list]);
+      imageRef.current.push(...list);
       setLoading(false);
     });
   }, []);
-
+  const onError = (filename: string) => {
+    imageRef.current = imageRef.current.filter(image => image.name !== filename);
+    render();
+  };
+  const onSuccess = (file: ImageItem) => {
+    imageRef.current = imageRef.current.map(image => {
+      if (image.name !== file.name) {
+        return image;
+      }
+      return file;
+    });
+    render();
+  };
   const uploadFile = async () => {
     const files = await getFileInput();
     if (files.length === 0) {
@@ -40,58 +59,36 @@ export function ImageWall({ onPreview = defaultPreview, onCopy = defaultCopy }: 
     const [file] = files;
 
     const dataUrl = await getDataUrl(file);
-    const dto: DTO.CreateDTO = {
-      dataUrl,
-      filename: file.name,
-    };
-    const request = fetch('/api/image/admin/create', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      credentials: 'include',
-      body: JSON.stringify(dto),
+    imageRef.current.push({
+      id: file.name + randString(),
+      type: 'uploading',
+      preview: dataUrl,
+      name: file.name,
     });
-    let newImages: ImageItem[] = [
-      ...images,
-      {
-        id: file.name + randString(),
-        type: 'uploading',
-        preview: dataUrl,
-        name: file.name,
-      },
-    ];
-    setImages(newImages);
-    const response = await request;
-    const data = await response.text();
+    render();
+    const { data, ok } = await uploadImage(file);
 
-    if (response.status !== OK.code) {
-      const error = JSON.parse(data) as Err.Resp;
-      newImages = newImages.filter(image => image.name !== file.name);
-      setImages(newImages);
+    if (!ok) {
+      const error = data as Err.Resp;
+      onError(file.name);
       notification.error({
         message: error.error,
         description: error.description,
       });
-    } else {
-      const resp = JSON.parse(data) as DTO.CreateResp;
-      newImages = newImages.map(image => {
-        if (image.name !== file.name) {
-          return image;
-        }
-        return {
-          ...image,
-          id: resp.id,
-          type: 'done',
-        };
-      });
-      setImages(newImages);
+      return;
     }
+    const resp = data as DTO.CreateResp;
+    onSuccess({
+      id: resp.id,
+      type: 'done',
+      name: file.name,
+      preview: process.env.NEXT_PUBLIC_BASE_URL + '/api/image/' + file.name,
+    });
   };
   return (
     <Spin spinning={loading}>
-      <div className='flex flex-wrap'>
-        {images.map(image => (
+      <div className={'flex flex-wrap overflow-y-auto ' + className}>
+        {imageRef.current.map(image => (
           <div key={image.id} className='relative w-[200px] h-[200px] m-4 border-2 border-gray-500'>
             {image.type === 'uploading' && (
               <div className='bg-black opacity-50 flex items-center justify-center w-full h-full absolute z-10'>
@@ -158,4 +155,26 @@ async function fetchInitialList(): Promise<Array<ImageItem>> {
     };
     return result;
   });
+}
+
+async function uploadImage(file: File): Promise<{ data: DTO.CreateResp | Err.Resp; response: Response; ok: boolean }> {
+  const dataUrl = await getDataUrl(file);
+  const dto: DTO.CreateDTO = {
+    dataUrl,
+    filename: file.name,
+  };
+  const response = await fetch('/api/image/admin/create', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify(dto),
+  });
+  const json = await response.json();
+  return {
+    response,
+    ok: response.status === OK.code,
+    data: json,
+  };
 }

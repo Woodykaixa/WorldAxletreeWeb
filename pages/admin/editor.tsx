@@ -83,15 +83,8 @@ export default function ArticleEditor() {
   }, []);
   return (
     <>
-      <Modal
-        visible={visible}
-        onCancel={close}
-        mask
-        footer={null}
-        className=' overflow-y-auto w-3/4-screen max-h-[60vh]'
-        centered
-      >
-        <ImageWall></ImageWall>
+      <Modal visible={visible} onCancel={close} mask footer={null} className='w-3/4-screen' centered>
+        <ImageWall className='max-h-[60vh]'></ImageWall>
       </Modal>
       <div className='w-full'>
         <EditorStyle>
