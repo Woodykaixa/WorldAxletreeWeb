@@ -157,7 +157,7 @@ export default function EditorHelp() {
               <p>
                 <b>
                   注意: 对于 <code>cover</code> 这类非必填的字段，请确保冒号后伴随空格来分隔，否则{' '}
-                  <code>cover:图片链接</code> 会被整体解析为一个<b className='bg-red-400'>其他字段</b>
+                  <code>cover:图片链接</code> 会被整体解析为一个<b className='text-red-500'>其他字段</b>
                   ，导致编辑器无法识别到 <code>cover</code>，最终导致上传后无法检测到封面图
                 </b>
               </p>
