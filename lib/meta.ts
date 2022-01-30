@@ -92,21 +92,7 @@ const Uploader: Partial<UploaderMapping> = {
     const dto: Notice.CreateDTO = {
       content,
     };
-    const response = await fetch('/api/notice/admin/create', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      credentials: 'include',
-      body: JSON.stringify(dto),
-    });
-
-    const data = await response.text();
-    if (response.status !== OK.code) {
-      const error = JSON.parse(data);
-      throw makeError(error);
-    }
-    return JSON.parse(data) as Wiki.CreateResp;
+    return upload(dto, '/api/notice/admin/create');
   },
 };
 
