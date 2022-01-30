@@ -37,7 +37,7 @@ const handler: NextApiHandler<News.ListResp | Err.Resp> = async (req, res) => {
       news.map(n => ({
         id: n.id,
         title: n.title,
-        coverUrl: n.content,
+        coverUrl: n.coverUrl,
         date: n.date,
         brief: createBrief(n.content),
       }))
