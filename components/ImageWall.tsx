@@ -1,5 +1,5 @@
 import { Container } from '@/components';
-import { Menu, Upload, UploadProps, List, Input, notification, Spin, Tooltip, Button, message } from 'antd';
+import { Menu, Upload, UploadProps, List, Input, notification, Spin, Tooltip, Button, message, Modal } from 'antd';
 import Link from 'next/link';
 import { CopyOutlined, DeleteOutlined, EyeOutlined, PlusOutlined } from '@ant-design/icons';
 import { getDataUrl } from '@/util/image';
@@ -69,15 +69,25 @@ export function ImageWall({ onPreview = defaultPreview, onCopy = defaultCopy, cl
     const { data, ok } = await uploadImage(file);
 
     if (!ok) {
-      const error = data as Err.Resp;
-      onError(file.name);
-      notification.error({
-        message: error.error,
-        description: error.description,
-      });
+      let error: string | Err.Resp = data;
+      try {
+        error = JSON.parse(error);
+      } finally {
+        onError(file.name);
+        notification.error(
+          typeof error === 'string'
+            ? {
+                message: error,
+              }
+            : {
+                message: error.error,
+                description: error.description,
+              }
+        );
+      }
       return;
     }
-    const resp = data as DTO.CreateResp;
+    const resp = JSON.parse(data) as DTO.CreateResp;
     onSuccess({
       id: resp.id,
       type: 'done',
@@ -97,16 +107,6 @@ export function ImageWall({ onPreview = defaultPreview, onCopy = defaultCopy, cl
             )}
             {image.type === 'done' && (
               <div className='bg-black opacity-0 hover:opacity-80 flex items-center justify-evenly flex-wrap w-full h-full absolute z-10'>
-                <Tooltip overlay={'删除该图片'}>
-                  <Button
-                    type='text'
-                    onClick={() => {
-                      message.error('尚未实现。在做了在做了。');
-                    }}
-                  >
-                    <DeleteOutlined />
-                  </Button>
-                </Tooltip>
                 <Tooltip overlay={'复制图片链接'}>
                   <Button type='text' onClick={() => onCopy(image.preview)}>
                     <CopyOutlined />
@@ -115,6 +115,31 @@ export function ImageWall({ onPreview = defaultPreview, onCopy = defaultCopy, cl
                 <Tooltip overlay={'预览图片'}>
                   <Button type='text' onClick={() => onPreview(image.preview)}>
                     <EyeOutlined />
+                  </Button>
+                </Tooltip>
+                <Tooltip overlay={'删除该图片'}>
+                  <Button
+                    type='text'
+                    onClick={() => {
+                      Modal.confirm({
+                        title: '即将删除图片: ' + image.name,
+                        content: '图片删除后无法从数据库中恢复，是否继续？',
+                        onOk: async () => {
+                          const result = await deleteImage(image);
+                          console.log(result.data);
+
+                          if (!result.ok) {
+                            message.error('删除失败: ' + result.data.error);
+                            return;
+                          }
+                          imageRef.current = imageRef.current.filter(img => img.id !== image.id);
+                          render();
+                          message.success('删除成功');
+                        },
+                      });
+                    }}
+                  >
+                    <DeleteOutlined />
                   </Button>
                 </Tooltip>
               </div>
@@ -157,7 +182,7 @@ async function fetchInitialList(): Promise<Array<ImageItem>> {
   });
 }
 
-async function uploadImage(file: File): Promise<{ data: DTO.CreateResp | Err.Resp; response: Response; ok: boolean }> {
+async function uploadImage(file: File) {
   const dataUrl = await getDataUrl(file);
   const dto: DTO.CreateDTO = {
     dataUrl,
@@ -171,10 +196,37 @@ async function uploadImage(file: File): Promise<{ data: DTO.CreateResp | Err.Res
     credentials: 'include',
     body: JSON.stringify(dto),
   });
-  const json = await response.json();
+  const json = await response.text();
   return {
     response,
     ok: response.status === OK.code,
     data: json,
+  };
+}
+
+async function deleteImage(image: ImageItem) {
+  const dto: DTO.DeleteDTO = {
+    id: image.id,
+  };
+
+  const resp = await fetch('/api/image/admin/delete', {
+    method: 'DELETE',
+    body: JSON.stringify(dto),
+    credentials: 'include',
+    headers: {
+      'content-type': 'application/json',
+    },
+  });
+  const data = await resp.json();
+  const ok = resp.status === OK.code;
+  if (ok) {
+    return {
+      data: data as DTO.DeleteResp,
+      ok: true as const,
+    };
+  }
+  return {
+    data: data as Err.Resp,
+    ok: false as const,
   };
 }

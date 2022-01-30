@@ -8,8 +8,8 @@ export namespace Image {
   };
   export type CreateResp = Simplify<Omit<Model, 'content'> & { size: number }>;
 
-  export type DeleteDTO = { name: string };
-  export type DeleteResp = Model;
+  export type DeleteDTO = { id: string };
+  export type DeleteResp = Omit<Model, 'content'>;
 
   export type DetailDTO = { name: string };
   export type DetailResp = Simplify<Omit<Model, 'content'> & { size: number }>;
