@@ -83,36 +83,45 @@ export default function EditorHelp() {
               <p>以一些公共的字段来区分上传类型，并在识别到类型后进一步检查、生成不同类型的文章各自需要的字段</p>
               <p>目前有以下公共字段: </p>
               <pre>
-                <code>type: 只能选 notice, changelog , news , article , wiki 中的一个</code>
+                <code>type: 只能选 notice, news , article , wiki 中的一个</code>
               </pre>
               <p>接下来还需要根据不同的类型，继续填写不同的元数据。</p>
               <p>不同类型的文章所需的元数据见下表</p>
-
               <h3>元数据一览</h3>
               <h4>动态</h4>
               <table>
                 <tr>
                   <th>字段</th>
                   <th>类型</th>
+                  <th>必填</th>
                 </tr>
                 <tr>
                   <td>type</td>
                   <td>notice</td>
+                  <td>是</td>
                 </tr>
               </table>
-              <h4>changelog</h4>
+              <h4>资讯</h4>
               <table>
                 <tr>
                   <th>字段</th>
                   <th>类型</th>
+                  <th>必填</th>
                 </tr>
                 <tr>
                   <td>type</td>
-                  <td>changelog</td>
+                  <td>news</td>
+                  <td>是</td>
                 </tr>
                 <tr>
-                  <td>version</td>
-                  <td>字符串, 格式为: 主版本.副版本.补丁版本</td>
+                  <td>title</td>
+                  <td>字符串</td>
+                  <td>是</td>
+                </tr>
+                <tr>
+                  <td>cover</td>
+                  <td>字符串，表示封面图片链接</td>
+                  <td>否</td>
                 </tr>
               </table>
               <h2>发布示例</h2>
@@ -128,25 +137,30 @@ export default function EditorHelp() {
               <p>
                 现在已经可以点击上传按钮发布了。这个类型的文章会被发布到 <Link href='/notice'>动态栏</Link>
               </p>
-              <h3>发布 changelog</h3>
+              <h3>发布资讯</h3>
               <p>
-                再以发布 changelog 为例，首先填写公共字段 <code>type: changelog</code>，然后我们还需要填写 changelog
-                类型的私有字段 version，version 是一个字符串，表示发布 changelog 的游戏版本，官网只允许发布新版本
-                changelog 而不能够覆盖旧版本。比如: 数据库中存在的最新版本的 changelog 是 <code>1.1.2</code>
-                ，那么你可以发布高于这个版本的任意版本，比如 <code>1.1.3</code>，<code>1.1.4514</code>，
-                <code>1.145.14</code>，<code>11.45.14</code>……
+                再以发布资讯为例，首先填写公共字段 <code>type: news</code>，然后我们还需要填写资讯类型的私有字段
+                <code>title</code>，<code>title</code> 是一个字符串，表示资讯的标题。
+                至此，已经可以点击上传按钮发布咨询。 但是你还可以额外指定资讯的封面图片。使用 <code>cover</code>{' '}
+                字段，提供一个封面图的链接即可。链接可以来自官网图库，也可以来自其他网站。
               </p>
-              <p>
-                假定发布的 changelog 版本是 <code>1.1.3</code>，那么我们最终填写的元数据如下
-              </p>
+              <p>至此，我们已经填写了上传资讯的全部元数据，最终填写的元数据如下</p>
               <pre>
                 <code>
                   --- <br></br>
-                  type: notice<br></br>
-                  version: 1.1.3<br></br>
+                  type: news<br></br>
+                  title: 可以发布资讯了<br></br>
+                  cover: 一个以 http 或 https 开头的图片链接 <br></br>
                   ---
                 </code>
               </pre>
+              <p>
+                <b>
+                  注意: 对于 <code>cover</code> 这类非必填的字段，请确保冒号后伴随空格来分隔，否则{' '}
+                  <code>cover:图片链接</code> 会被整体解析为一个<b className='bg-red-400'>其他字段</b>
+                  ，导致编辑器无法识别到 <code>cover</code>，最终导致上传后无法检测到封面图
+                </b>
+              </p>
             </Typography>
           </EditorStyle>
           下面的编辑器与编辑器页面完全相同，快来试试吧

@@ -158,6 +158,7 @@ export const EditorStyle = styled.div`
     border-left: #494949 solid 2px;
     border-top: #494949 solid 2px;
     padding: 12px;
+    text-align: center;
   }
 
   & tr {
