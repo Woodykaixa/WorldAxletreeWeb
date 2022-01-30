@@ -1,4 +1,4 @@
-import { Cl, News, Notice, OK, PlayerArticle, Wiki } from '@/dto';
+import { Cl, Err, News, Notice, OK, PlayerArticle, Wiki } from '@/dto';
 import { makeError } from './error';
 
 const UploadTypes = ['notice', 'changelog', 'news', 'article', 'wiki'] as const;
@@ -9,8 +9,14 @@ const Validator: Record<UploadType, (meta: any) => void | Promise<void>> = {
     throw new Error('目前尚未支持上传 article');
   },
   changelog: (meta: ChangelogMeta) => {
-    if (!meta.major || typeof meta.major !== 'number') {
-      throw new Error('目前尚未支持上传 changelog');
+    if (!meta.version) {
+      throw new MissingFieldError(['version']);
+    }
+    if (typeof meta.version !== 'string') {
+      throw new FieldTypeError('version', ['字符串, 且格式为: 主版本号.副版本号.补丁版本号']);
+    }
+    if (!/^(\d+)\.(\d+)\.(\d+)$/.test(meta.version)) {
+      throw new FieldFormatError('version', ['主版本号.副版本号.补丁版本号']);
     }
   },
   news: meta => {
@@ -27,9 +33,10 @@ type BasicMeta = {
 };
 
 type ChangelogMeta = BasicMeta & {
-  major: number;
-  minor: number;
-  patch: number;
+  /**
+   * Version string meta, format: {major}.{minor}.{patch}
+   */
+  version: string;
 };
 
 type UploaderReturn = {
@@ -40,13 +47,46 @@ type UploaderReturn = {
   wiki: Wiki.CreateResp;
 };
 
+type UploaderMeta = {
+  article: BasicMeta;
+  changelog: ChangelogMeta;
+  news: BasicMeta;
+  notice: BasicMeta;
+  wiki: BasicMeta;
+};
+
 type UploaderMapping = {
-  [type in UploadType]: (meta: any, content: string) => Promise<UploaderReturn[type]>;
+  [type in UploadType]: (meta: UploaderMeta[type], content: string) => Promise<UploaderReturn[type]>;
+};
+
+const upload = async <T>(dto: any, action: string): Promise<T> => {
+  const response = await fetch(action, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify(dto),
+  });
+
+  const data = await response.text();
+  if (response.status !== OK.code) {
+    const error = JSON.parse(data);
+    throw makeError(error);
+  }
+  return JSON.parse(data) as T;
 };
 
 const Uploader: Partial<UploaderMapping> = {
-  news: meta => {
-    throw new Error('目前尚未支持上传 news');
+  changelog: async (meta, content) => {
+    const [major, minor, patch] = meta.version.split('.').map(v => parseInt(v, 10));
+    const dto: Cl.CreateDTO = {
+      majorVersion: major,
+      minorVersion: minor,
+      patchVersion: patch,
+      content,
+    };
+    return upload(dto, '/api/changelog/admin/create');
   },
   notice: async (_, content) => {
     const dto: Notice.CreateDTO = {
@@ -86,7 +126,7 @@ export async function validateAndUpload(
   const validate = Validator[meta.type as UploadType];
   await validate(meta);
   const uploader = Uploader[meta.type as UploadType]!;
-  const result = await uploader(meta, content);
+  const result = await uploader(meta as any, content);
   return result;
 }
 
@@ -106,5 +146,11 @@ class MissingFieldError extends MetaError {
 class FieldTypeError extends MetaError {
   constructor(field: string, expect: string[]) {
     super(`元数据 ${field} 字段类型错误`, '应声明以下类型: ' + expect.join(' | '));
+  }
+}
+
+class FieldFormatError extends MetaError {
+  constructor(field: string, format: string[]) {
+    super(`元数据 ${field} 字段格式错误`, '应为以下格式: ' + format.join(' | '));
   }
 }
