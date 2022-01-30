@@ -1,7 +1,7 @@
 import type { Simplify } from '@/util/type';
 import type { News as Model } from '@prisma/client';
 export namespace News {
-  export type CreateDTO = Simplify<Omit<Model, 'id'>>;
+  export type CreateDTO = Simplify<Omit<Model, 'id' | 'brief' | 'date'>>;
   export type CreateResp = Model;
 
   export type DeleteDTO = { id: string };

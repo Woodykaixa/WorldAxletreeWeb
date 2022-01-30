@@ -118,6 +118,12 @@ model News {
   /// 资讯封面
   coverUrl String?
 
+  /// 摘要，从资讯列表页面看到一个简要版本的内容
+  brief String
+
+  /// 发布时间
+  date DateTime
+
 }
 
 model Image {
