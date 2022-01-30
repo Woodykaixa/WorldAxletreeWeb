@@ -1,24 +1,24 @@
 import { Cl, Err, News, Notice, OK, PlayerArticle, Wiki } from '@/dto';
 import { makeError } from './error';
 
-const UploadTypes = ['notice', 'changelog', 'news', 'article', 'wiki'] as const;
+const UploadTypes = ['notice', 'news', 'article', 'wiki'] as const;
 type UploadType = typeof UploadTypes[number];
 
 const Validator: Record<UploadType, (meta: any) => void | Promise<void>> = {
   article: meta => {
     throw new Error('目前尚未支持上传 article');
   },
-  changelog: (meta: ChangelogMeta) => {
-    if (!meta.version) {
-      throw new MissingFieldError(['version']);
-    }
-    if (typeof meta.version !== 'string') {
-      throw new FieldTypeError('version', ['字符串, 且格式为: 主版本号.副版本号.补丁版本号']);
-    }
-    if (!/^(\d+)\.(\d+)\.(\d+)$/.test(meta.version)) {
-      throw new FieldFormatError('version', ['主版本号.副版本号.补丁版本号']);
-    }
-  },
+  // changelog: (meta: ChangelogMeta) => {
+  //   if (!meta.version) {
+  //     throw new MissingFieldError(['version']);
+  //   }
+  //   if (typeof meta.version !== 'string') {
+  //     throw new FieldTypeError('version', ['字符串, 且格式为: 主版本号.副版本号.补丁版本号']);
+  //   }
+  //   if (!/^(\d+)\.(\d+)\.(\d+)$/.test(meta.version)) {
+  //     throw new FieldFormatError('version', ['主版本号.副版本号.补丁版本号']);
+  //   }
+  // },
   news: (meta: NewsMeta) => {
     if (!meta.title) {
       throw new MissingFieldError(['title']);
@@ -43,12 +43,12 @@ type BasicMeta<T extends UploadType> = {
   type: T;
 };
 
-type ChangelogMeta = BasicMeta<'changelog'> & {
-  /**
-   * Version string meta, format: {major}.{minor}.{patch}
-   */
-  version: string;
-};
+// type ChangelogMeta = BasicMeta<'changelog'> & {
+//   /**
+//    * Version string meta, format: {major}.{minor}.{patch}
+//    */
+//   version: string;
+// };
 
 type NewsMeta = BasicMeta<'news'> & {
   /**
@@ -72,7 +72,7 @@ type UploaderReturn = {
 
 type UploaderMeta = {
   article: BasicMeta<'article'>;
-  changelog: ChangelogMeta;
+  // changelog: ChangelogMeta;
   news: NewsMeta;
   notice: BasicMeta<'notice'>;
   wiki: BasicMeta<'wiki'>;
@@ -101,16 +101,16 @@ const upload = async <T>(dto: any, action: string): Promise<T> => {
 };
 
 const Uploader: Partial<UploaderMapping> = {
-  changelog: async (meta, content) => {
-    const [major, minor, patch] = meta.version.split('.').map(v => parseInt(v, 10));
-    const dto: Cl.CreateDTO = {
-      majorVersion: major,
-      minorVersion: minor,
-      patchVersion: patch,
-      content,
-    };
-    return upload(dto, '/api/changelog/admin/create');
-  },
+  // changelog: async (meta, content) => {
+  //   const [major, minor, patch] = meta.version.split('.').map(v => parseInt(v, 10));
+  //   const dto: Cl.CreateDTO = {
+  //     majorVersion: major,
+  //     minorVersion: minor,
+  //     patchVersion: patch,
+  //     content,
+  //   };
+  //   return upload(dto, '/api/changelog/admin/create');
+  // },
   notice: async (_, content) => {
     const dto: Notice.CreateDTO = {
       content,
