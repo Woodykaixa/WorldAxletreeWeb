@@ -152,4 +152,21 @@ export const EditorStyle = styled.div`
     color: #3794ff;
     text-decoration: underline;
   }
+
+  & td,
+  & th {
+    border-left: #494949 solid 2px;
+    border-top: #494949 solid 2px;
+    padding: 12px;
+  }
+
+  & tr {
+    border-right: #494949 solid 2px;
+    border-bottom: #494949 solid 2px;
+  }
+
+  & table {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
 `;
