@@ -1,5 +1,5 @@
 import type { NextApiHandler } from 'next';
-import { Cl, Err, News, OK } from '@/dto';
+import { Err, News, OK } from '@/dto';
 import { parseParam, errorHandler, ensureMethod } from '@/lib/api';
 import prismaClient from '@/lib/prisma';
 import { createBrief } from '@/util/brief';

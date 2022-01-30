@@ -1,52 +1,37 @@
 import { Container } from '@/components';
-import { List, Avatar, Space, Skeleton } from 'antd';
-import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
+import { List, Divider, Space, Skeleton, Typography } from 'antd';
 import { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { News, OK } from '@/dto';
+import { makeError } from '@/lib/error';
+import moment from 'moment';
 import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
 
-type Item = {
-  href: string;
-  title: string;
-  description: string;
-  content: string;
-};
-
-const listData = [] as Item[];
-for (let i = 0; i < 23; i++) {
-  listData.push({
-    href: 'https://ant.design',
-    title: `ant design part ${i}`,
-    description: 'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-    content:
-      'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-  });
-}
-export default function NewsIndex() {
+type NewsItem = News.ListResp[number];
+const PAGE_SIZE = 5;
+const placeHolder = '1'.repeat(PAGE_SIZE).split('');
+export default function NoticePage() {
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([] as Item[]);
-
+  const [data, setData] = useState([] as NewsItem[]);
+  const [hasMore, setHasMore] = useState(true);
   const loadData = async () => {
     if (loading) {
       return;
     }
     try {
-      const response = await fetch('https://randomuser.me/api/?results=10&inc=name,gender,email,nat,picture&noinfo');
-      const json = await response.json();
-      if (json.error) {
-        throw json.error;
+      const response = await fetch(`/api/news/list?size=${PAGE_SIZE}&page=${data.length / PAGE_SIZE}`);
+      const respData = await response.text();
+      if (response.status !== OK.code) {
+        throw makeError(JSON.parse(respData));
       }
+      const json = JSON.parse(respData) as News.ListResp;
 
-      setData([
-        ...data,
-        ...json.results.map((o: any) => ({
-          href: 'https://ant.design',
-          title: o.name.last,
-          description: o.email,
-          content:
-            'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-        })),
-      ]);
+      setData([...data, ...json]);
+      if (json.length < PAGE_SIZE) {
+        setHasMore(false);
+      }
     } catch (err) {
       console.error(err);
     } finally {
@@ -66,13 +51,16 @@ export default function NewsIndex() {
           <meta name='og:url' content={process.env.NEXT_PUBLIC_BASE_URL + '/news'} />
         )}
       </Head>
-      <Container background='/assets/gw01.webp' preloadBackground>
+      <Container background='/assets/gw02.webp' preloadBackground>
         <div id='news-list'>
           <InfiniteScroll
-            hasMore={data.length < 50}
+            hasMore={hasMore}
             next={loadData}
             dataLength={data.length}
-            loader={<Skeleton paragraph={{ rows: 2 }} active></Skeleton>}
+            loader={placeHolder.map((_, i) => (
+              <Skeleton key={i} paragraph={{ rows: 2 }} active></Skeleton>
+            ))}
+            endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
           >
             <List
               itemLayout='vertical'
@@ -82,26 +70,20 @@ export default function NewsIndex() {
               }}
               dataSource={data}
               renderItem={item => (
-                <div className='bg-[#686868] m-4 mb-8'>
+                <div className='bg-[#383838] m-4 mb-8'>
                   <List.Item
-                    key={item.title}
-                    actions={[<Space key='date'>11年45月14日</Space>]}
+                    key={item.id}
+                    actions={[<Space key='date'>{moment(item.date).format('yyyy年MM月DD日 HH:mm:ss')}</Space>]}
                     extra={
-                      <img
-                        width={272}
-                        alt='logo'
-                        src='https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png'
-                      />
+                      item.coverUrl && (
+                        <Image src={item.coverUrl} alt='' objectFit='contain' width={250} height={250}></Image>
+                      )
                     }
                   >
                     <List.Item.Meta
-                      title={
-                        <a href={item.href} className='text-2xl'>
-                          {item.title}
-                        </a>
-                      }
+                      title={<Link href={`/news/${item.id}`}>{item.title}</Link>}
+                      description={item.brief + '...'}
                     />
-                    <div className='break-all text-xl '>{item.content}</div>
                   </List.Item>
                 </div>
               )}
