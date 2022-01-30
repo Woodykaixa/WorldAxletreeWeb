@@ -1,1 +1,1 @@
-export const createBrief = (content: string) => content.trim().split('\n')[0];
+export const createBrief = (content: string) => content.split('---')[2].trim().split('\n')[0];

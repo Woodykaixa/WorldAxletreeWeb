@@ -19,8 +19,19 @@ const Validator: Record<UploadType, (meta: any) => void | Promise<void>> = {
       throw new FieldFormatError('version', ['主版本号.副版本号.补丁版本号']);
     }
   },
-  news: meta => {
-    throw new Error('目前尚未支持上传 news');
+  news: (meta: NewsMeta) => {
+    if (!meta.title) {
+      throw new MissingFieldError(['title']);
+    }
+    if (typeof meta.title !== 'string') {
+      throw new FieldTypeError('title', ['字符串']);
+    }
+    if (meta.cover && typeof meta.cover !== 'string') {
+      throw new FieldTypeError('cover', ['图片链接']);
+    }
+    if (meta.cover && !meta.cover.startsWith('http')) {
+      throw new FieldTypeError('cover', ['图片链接 (http或https)']);
+    }
   },
   notice: meta => {},
   wiki: meta => {
@@ -28,15 +39,27 @@ const Validator: Record<UploadType, (meta: any) => void | Promise<void>> = {
   },
 };
 
-type BasicMeta = {
-  type: UploadType;
+type BasicMeta<T extends UploadType> = {
+  type: T;
 };
 
-type ChangelogMeta = BasicMeta & {
+type ChangelogMeta = BasicMeta<'changelog'> & {
   /**
    * Version string meta, format: {major}.{minor}.{patch}
    */
   version: string;
+};
+
+type NewsMeta = BasicMeta<'news'> & {
+  /**
+   * title of this news
+   */
+  title: string;
+
+  /**
+   * cover image url of this news
+   */
+  cover?: string;
 };
 
 type UploaderReturn = {
@@ -48,11 +71,11 @@ type UploaderReturn = {
 };
 
 type UploaderMeta = {
-  article: BasicMeta;
+  article: BasicMeta<'article'>;
   changelog: ChangelogMeta;
-  news: BasicMeta;
-  notice: BasicMeta;
-  wiki: BasicMeta;
+  news: NewsMeta;
+  notice: BasicMeta<'notice'>;
+  wiki: BasicMeta<'wiki'>;
 };
 
 type UploaderMapping = {
@@ -94,6 +117,14 @@ const Uploader: Partial<UploaderMapping> = {
     };
     return upload(dto, '/api/notice/admin/create');
   },
+  news: async (meta, content) => {
+    const dto: News.CreateDTO = {
+      content,
+      title: meta.title,
+      coverUrl: meta.cover ?? null,
+    };
+    return upload(dto, '/api/news/admin/create');
+  },
 };
 
 /**
@@ -109,9 +140,9 @@ export async function validateAndUpload(
   if (!UploadTypes.includes(meta.type)) {
     throw new FieldTypeError('type', UploadTypes as unknown as string[]);
   }
-  const validate = Validator[meta.type as UploadType];
+  const validate = Validator[meta.type];
   await validate(meta);
-  const uploader = Uploader[meta.type as UploadType]!;
+  const uploader = Uploader[meta.type]!;
   const result = await uploader(meta as any, content);
   return result;
 }
