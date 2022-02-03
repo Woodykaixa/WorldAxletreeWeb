@@ -10,9 +10,8 @@ export namespace Wiki {
   export type GetDTO = { id: string };
   export type GetResp = Model;
 
-  export type ListDTO = { size: number; page: number };
-  export type ListResp = ListItem[];
-  type ListItem = Simplify<Omit<Model, 'content'> & { brief: string }>;
+  export type ListDTO = { type: WikiT; side: SideType };
+  export type ListResp = Model[];
 
   export type UpdateDTO = Simplify<Omit<Model, 'id' | 'date'> & { id: string }>;
   export type UpdateResp = Model;
@@ -22,4 +21,19 @@ export namespace Wiki {
 
   export type WikiType = WikiT;
   export const AllWikiTypes: WikiT[] = ['Building', 'Infantry', 'Support', 'Unit'];
+
+  export const SideMapping: Record<Side, Side> = {
+    CISUF: 'CISUF',
+    EFRRF: 'EFRRF',
+    FECO: 'FECO',
+    NACSF: 'NACSF',
+    RITC: 'RITC',
+  };
+
+  export const TypeMapping: Record<WikiT, WikiT> = {
+    Building: 'Building',
+    Infantry: 'Infantry',
+    Support: 'Support',
+    Unit: 'Unit',
+  };
 }
