@@ -23,6 +23,7 @@
     "@bytemd/react": "1.10.13",
     "@prisma/client": "^3.8.1",
     "antd": "^4.18.5",
+    "bson-objectid": "^2.0.2",
     "bytemd": "1.10.13",
     "cookie": "^0.4.1",
     "image-size": "^1.0.1",

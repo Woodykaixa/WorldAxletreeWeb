@@ -54,15 +54,25 @@ enum Side {
   RITC
 }
 
+enum WikiType {
+  Infantry
+  Unit
+  Building
+  Support
+}
+
 /// 百科
 model WikiArticle {
   id String @id @default(dbgenerated()) @map("_id") @db.ObjectId
 
   /// 标题
-  title String
+  title String @unique
 
   /// 阵营所属
   side Side
+
+  /// 类型
+  type WikiType
 
   /// 发布/更新时间
   date DateTime

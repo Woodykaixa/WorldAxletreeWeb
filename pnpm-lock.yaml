@@ -16,6 +16,7 @@ specifiers:
   '@types/styled-components': ^5.1.14
   antd: ^4.18.5
   autoprefixer: ^10.4.2
+  bson-objectid: ^2.0.2
   bytemd: 1.10.13
   cookie: ^0.4.1
   cross-env: ^7.0.3
@@ -48,6 +49,7 @@ dependencies:
   '@bytemd/react': 1.10.13_react@17.0.2
   '@prisma/client': 3.8.1_prisma@3.8.1
   antd: 4.18.5_react-dom@17.0.2+react@17.0.2
+  bson-objectid: 2.0.2
   bytemd: 1.10.13
   cookie: 0.4.1
   image-size: 1.0.1
@@ -1022,6 +1024,10 @@ packages:
       picocolors: 1.0.0
     dev: true
 
+  /bson-objectid/2.0.2:
+    resolution: {integrity: sha512-61Yo6MBAftkyc+nU0smq+VX2SCeKgtC6+cRI+JkatdCy1tPdAzvR1ezEQFlio6St2tDhKZm/IUXc2bzg0QSnqQ==}
+    dev: false
+
   /buffer-equal-constant-time/1.0.1:
     resolution: {integrity: sha1-+OcRMvf/5uAaXJaXpMbz5I1cyBk=, tarball: buffer-equal-constant-time/download/buffer-equal-constant-time-1.0.1.tgz}
     dev: false
@@ -1836,7 +1842,7 @@ packages:
     dev: true
 
   /fsevents/2.3.2:
-    resolution: {integrity: sha1-ilJveLj99GI7cJ4Ll1xSwkwC/Ro=, tarball: fsevents/download/fsevents-2.3.2.tgz}
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
     requiresBuild: true

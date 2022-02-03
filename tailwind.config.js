@@ -681,6 +681,8 @@ module.exports = {
       '-3': '-3deg',
       '-2': '-2deg',
       '-1': '-1deg',
+      '-theme': '-30deg',
+      theme: '30deg',
       0: '0deg',
       1: '1deg',
       2: '2deg',

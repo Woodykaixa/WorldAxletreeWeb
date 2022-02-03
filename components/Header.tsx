@@ -70,7 +70,7 @@ const HeaderLayout: HeaderMenuProps['layout'] = [
     key: 'introduction',
     menu: [
       { link: '/', title: '故事背景' },
-      { link: '/', title: '单位百科' },
+      { link: '/wiki/NACSF', title: '单位百科' },
       { link: '/', title: '食用指南' },
     ],
   },

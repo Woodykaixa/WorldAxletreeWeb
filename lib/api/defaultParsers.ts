@@ -13,20 +13,20 @@ export function isType(param: any, type: TypeOfJson) {
 type ParserResult<T> = { valid: boolean; parsed: T } | Promise<{ valid: boolean; parsed: T }>;
 export type ParamParser<T> = (value?: unknown) => ParserResult<T>;
 
-async function secondaryCheck<T>(
+async function secondaryCheck<TBase, TExtend extends TBase = TBase>(
   param: unknown,
-  parser: ParamParser<T>,
-  secondaryParser: (param: T) => boolean | Promise<boolean>
+  parser: ParamParser<TBase>,
+  secondaryParser: (param: TBase) => boolean | Promise<boolean>
 ) {
-  const { parsed, valid } = await parser(param as T);
+  const { parsed, valid } = await parser(param as TBase);
   if (!valid) {
     return {
-      parsed,
+      parsed: parsed as TExtend,
       valid,
     };
   }
   return {
-    parsed,
+    parsed: parsed as TExtend,
     valid: await secondaryParser(parsed),
   };
 }
@@ -116,7 +116,10 @@ export const DefaultParser = {
    * @param parser One of default parsers
    * @param secondaryParser Another parser called after `parser`
    */
-  secondaryCheck<T>(parser: ParamParser<T>, secondaryParser: (param: T) => boolean | Promise<boolean>) {
-    return (param: unknown) => secondaryCheck(param, parser, secondaryParser);
+  secondaryCheck<TBase, TExtend extends TBase = TBase>(
+    parser: ParamParser<TBase>,
+    secondaryParser: (param: TBase) => boolean | Promise<boolean>
+  ) {
+    return (param: unknown) => secondaryCheck<TBase, TExtend>(param, parser, secondaryParser);
   },
 };

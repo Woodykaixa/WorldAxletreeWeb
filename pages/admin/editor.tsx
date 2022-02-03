@@ -24,6 +24,7 @@ const onUpload = (text: string, setUploading: (uploading: boolean) => void) => {
       message: '未填写元数据',
       description: '我们使用 frontmatter 语法编写的元数据来识别上传的文章内容',
     });
+    setUploading(false);
     return;
   }
   if (typeof meta.value === 'string') {
@@ -31,6 +32,7 @@ const onUpload = (text: string, setUploading: (uploading: boolean) => void) => {
       message: '元数据应该为对象而不是字符串',
       description: '请参考 yaml 语法，编写对象类型的元数据',
     });
+    setUploading(false);
     return;
   }
   validateAndUpload(meta.value as any, text)
