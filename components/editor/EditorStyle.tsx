@@ -153,6 +153,10 @@ export const EditorStyle = styled.div`
     text-decoration: underline;
   }
 
+  & .markdown-body p img {
+    margin: auto;
+  }
+
   & td,
   & th {
     border-left: #494949 solid 2px;
