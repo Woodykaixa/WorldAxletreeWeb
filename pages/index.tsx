@@ -1,17 +1,6 @@
 import { IndexWrapper, FeaturePanel, ImageLink, SkewButton, Text } from '@/components';
-import { useEffect } from 'react';
+
 export default function Main() {
-  useEffect(() => {
-    fetch('/api/test')
-      .then(async res => {
-        if (res.ok) {
-          return res.text();
-        }
-        throw await res.json();
-      })
-      .then(console.log)
-      .catch(console.error);
-  }, []);
   return (
     <div className='flex flex-col'>
       <IndexWrapper path={'/assets/gw01.webp'} className='items-center'>
@@ -36,7 +25,7 @@ export default function Main() {
           Project制作的PC游戏《命令与征服：红色警戒2尤里的复仇》的非官方模组。WA是一款以高质量美工和创意作为亮点的MOD，虽然是以《尤里的复仇》作为载体但是抛弃了几乎所有和《尤里的复仇》有关的东西，抛弃引擎来说可以看做是一款全新的游戏。
         </Text>
         <div className='flex flex-col lg:flex-row justify-between mt-20'>
-          {PART_4_BUTTON_PROPS.map(props => (
+          {PART_2_BUTTON_PROPS.map(props => (
             <SkewButton key={props.text} className='px-20 my-4 text-3xl lg:text-5xl ' skewX={-30} link={props.href}>
               {props.text}
             </SkewButton>
@@ -106,7 +95,7 @@ export default function Main() {
   );
 }
 
-const PART_4_BUTTON_PROPS = [
+const PART_2_BUTTON_PROPS = [
   {
     text: '故事背景',
     href: '/example',
@@ -117,7 +106,7 @@ const PART_4_BUTTON_PROPS = [
   },
   {
     text: '单位百科',
-    href: '/',
+    href: '/wiki',
   },
 ];
 
