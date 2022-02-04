@@ -55,7 +55,6 @@ enum Side {
 }
 
 enum WikiType {
-  Infantry
   Unit
   Building
   Support

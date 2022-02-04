@@ -165,9 +165,9 @@ export default function EditorHelp() {
                 </tr>
                 <tr>
                   <td>kind</td>
-                  <td>Infantry | Unit | Building | Support | I | U | B | S</td>
+                  <td>Unit | Building | Support | U | B | S</td>
                   <td>是</td>
-                  <td>Wiki 类型，前四种分别表示步兵、载具、建筑、支援技能四类，后四种为前四种依次对应的简写</td>
+                  <td>Wiki 类型，前三类分别表示单位、建筑、支援技能，后三类为前三类依次对应的简写</td>
                 </tr>
                 <tr>
                   <td>order</td>

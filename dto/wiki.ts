@@ -20,7 +20,7 @@ export namespace Wiki {
   export const AllSides: Side[] = ['CISUF', 'EFRRF', 'FECO', 'NACSF', 'RITC'];
 
   export type WikiType = WikiT;
-  export const AllWikiTypes: WikiT[] = ['Building', 'Infantry', 'Support', 'Unit'];
+  export const AllWikiTypes: WikiT[] = ['Building', 'Support', 'Unit'];
 
   export const SideMapping: Record<Side, Side> = {
     CISUF: 'CISUF',
@@ -32,7 +32,6 @@ export namespace Wiki {
 
   export const TypeMapping: Record<WikiT, WikiT> = {
     Building: 'Building',
-    Infantry: 'Infantry',
     Support: 'Support',
     Unit: 'Unit',
   };

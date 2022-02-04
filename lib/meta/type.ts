@@ -25,12 +25,10 @@ export type NewsMeta = BasicMeta<'news'> & {
   cover?: string;
 };
 
-export const WikiMetaTypes = [...Wiki.AllWikiTypes, 'B', 'I', 'S', 'U'] as const;
+export const WikiMetaTypes = [...Wiki.AllWikiTypes, 'B', 'S', 'U'] as const;
 export const WikiMetaTypeMapping: Record<typeof WikiMetaTypes[number], Wiki.WikiType> = {
   B: 'Building',
   Building: 'Building',
-  I: 'Infantry',
-  Infantry: 'Infantry',
   S: 'Support',
   Support: 'Support',
   U: 'Unit',
