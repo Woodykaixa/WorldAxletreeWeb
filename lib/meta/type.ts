@@ -44,6 +44,7 @@ export type WikiMeta = BasicMeta<'wiki'> & {
   kind: typeof WikiMetaTypes[number];
   side: Wiki.Side;
   action?: typeof WikiMetaActions[number];
+  order: number;
 };
 
 export type UploaderReturn = {

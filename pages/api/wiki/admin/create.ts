@@ -6,7 +6,7 @@ import { greater } from '@/lib/game-ver';
 import prismaClient from '@/lib/prisma';
 import { pick } from 'lodash';
 const {
-  parser: { secondaryCheck, string },
+  parser: { secondaryCheck, string, int },
 } = parseParam;
 const handler: NextApiHandler<Wiki.CreateResp | Err.Resp> = async (req, res) => {
   try {
@@ -21,10 +21,11 @@ const handler: NextApiHandler<Wiki.CreateResp | Err.Resp> = async (req, res) => 
       content: string,
       title: string,
       type: secondaryCheck<string, Wiki.WikiType>(string, param => Wiki.AllWikiTypes.includes(param as any)),
+      order: int,
     });
 
     await connection;
-    const { content, side, title, type } = await parse;
+    const { content, side, title, type, order } = await parse;
     const sameTitleWiki = await prismaClient.wikiArticle.findFirst({
       where: {
         title,
@@ -41,6 +42,7 @@ const handler: NextApiHandler<Wiki.CreateResp | Err.Resp> = async (req, res) => 
         type,
         date,
         title,
+        order,
       },
     });
     res.status(OK.code).json(wiki);

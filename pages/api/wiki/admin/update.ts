@@ -7,7 +7,7 @@ import prismaClient from '@/lib/prisma';
 import { pick } from 'lodash';
 import objectId from 'bson-objectid';
 const {
-  parser: { secondaryCheck, string },
+  parser: { secondaryCheck, string, int },
 } = parseParam;
 const handler: NextApiHandler<Wiki.UpdateResp | Err.Resp> = async (req, res) => {
   try {
@@ -23,10 +23,11 @@ const handler: NextApiHandler<Wiki.UpdateResp | Err.Resp> = async (req, res) => 
       content: string,
       title: string,
       type: secondaryCheck<string, Wiki.WikiType>(string, param => Wiki.AllWikiTypes.includes(param as any)),
+      order: int,
     });
 
     await connection;
-    const { content, side, title, type, id } = await parse;
+    const { content, side, title, type, id, order } = await parse;
     {
       const wiki = await prismaClient.wikiArticle.findFirst({
         where: {
@@ -49,6 +50,7 @@ const handler: NextApiHandler<Wiki.UpdateResp | Err.Resp> = async (req, res) => 
         type,
         date,
         title,
+        order,
       },
     });
     res.status(OK.code).json(wiki);

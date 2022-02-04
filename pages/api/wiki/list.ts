@@ -22,6 +22,9 @@ const handler: NextApiHandler<Wiki.ListResp | Err.Resp> = async (req, res) => {
         side,
         type,
       },
+      orderBy: {
+        order: 'asc',
+      },
     });
     res.status(OK.code).json(wiki);
   } catch (err) {

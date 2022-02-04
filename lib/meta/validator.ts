@@ -168,6 +168,15 @@ export const Validator: Record<UploadType, (meta: any) => void | Promise<void>> 
         }
         return null;
       },
+      order(value) {
+        if (typeof value !== 'number') {
+          return {
+            error: 'value',
+            validValues: ['任意数字'],
+          };
+        }
+        return null;
+      },
     });
   },
 };

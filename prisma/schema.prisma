@@ -79,6 +79,9 @@ model WikiArticle {
 
   /// 内容
   content String
+
+  /// 展示顺序，数字越小越靠前，order相同时数据库自行排序
+  order Int
 }
 
 /// 一个 Changelog 对应一个版本的更新

@@ -51,6 +51,7 @@ export const Uploader: UploaderMapping = {
         id: localStorage.getItem('wiki-update-id') ?? '',
         side: meta.side,
         title: meta.title,
+        order: meta.order,
         type,
         content,
       };
@@ -59,6 +60,7 @@ export const Uploader: UploaderMapping = {
     const dto: Wiki.CreateDTO = {
       side: meta.side,
       title: meta.title,
+      order: meta.order,
       type,
       content,
     };
