@@ -1,5 +1,5 @@
 import { Typography } from 'antd';
-import { Container, WikiSwitch } from '@/components';
+import { Container, WikiSwitch, WikiNavLink } from '@/components';
 import { RITC } from '@/util/side';
 export default function WikiIndex() {
   return (
@@ -9,6 +9,9 @@ export default function WikiIndex() {
         {RITC.description.map((p, i) => (
           <p key={i}>{p}</p>
         ))}
+        <WikiNavLink href={`/wiki/${RITC.nameEnAbbr}/unit`}>单位百科</WikiNavLink>
+        <WikiNavLink href={`/wiki/${RITC.nameEnAbbr}/building`}>建筑百科</WikiNavLink>
+        <WikiNavLink href={`/wiki/${RITC.nameEnAbbr}/support`}>支援技能</WikiNavLink>
       </Typography>
     </Container>
   );
