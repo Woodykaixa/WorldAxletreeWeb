@@ -3,4 +3,4 @@ import { fetchWiki } from '@/util/fetchWiki';
 
 export default Wiki;
 
-export const getServerSideProps = fetchWiki('NACSF', 'Unit');
+export const getServerSideProps = fetchWiki('RITC', 'Support');
