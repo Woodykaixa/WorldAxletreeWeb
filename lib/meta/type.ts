@@ -40,11 +40,11 @@ export const WikiMetaTypeMapping: Record<typeof WikiMetaTypes[number], Wiki.Wiki
 export const WikiMetaActions = ['new', 'update'] as const;
 
 export type WikiMeta = BasicMeta<'wiki'> & {
-  title: string;
-  kind: typeof WikiMetaTypes[number];
-  side: Wiki.Side;
   action?: typeof WikiMetaActions[number];
+  kind: typeof WikiMetaTypes[number];
   order: number;
+  side: Wiki.Side;
+  title: string;
 };
 
 export type UploaderReturn = {

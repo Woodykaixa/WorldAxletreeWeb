@@ -77,7 +77,13 @@ export default function EditorHelp() {
               </p>
               <p>
                 中间的内容需要遵循 YAML 语法，但是我们并不需要那么多 YAML 的知识，只需要知道以 <code>key: value</code>
-                的形式输入数据即可。
+                的形式输入数据即可。其中 <code>key</code> 是元数据的字段，<code>value</code>{' '}
+                是这个字段的值。值可以是一个字符串、数字、或数组。
+              </p>
+              <p>
+                <b>注意: </b>在 <code>:</code> 后面请务必跟随至少一个空格，否则 <code>key:value</code>{' '}
+                会被整体解析为一个<b className='text-red-500'>其他字段</b>，这会导致编辑器检测不到 <code>key</code> 和{' '}
+                <code>value</code>
               </p>
               <h3>元数据整体逻辑</h3>
               <p>以一些公共的字段来区分上传类型，并在识别到类型后进一步检查、生成不同类型的文章各自需要的字段</p>
@@ -88,17 +94,23 @@ export default function EditorHelp() {
               <p>接下来还需要根据不同的类型，继续填写不同的元数据。</p>
               <p>不同类型的文章所需的元数据见下表</p>
               <h3>元数据一览</h3>
+              <p>
+                格式说明: 以 <code>|</code> 隔开多个可选值的类型叫做“枚举类型”，表示你只能填写枚举值中的一个。例如:{' '}
+                <code>A | B | C</code> 表示这个字段只允许填写 A 或 B 或 C
+              </p>
               <h4>动态</h4>
               <table>
                 <tr>
                   <th>字段</th>
                   <th>类型</th>
                   <th>必填</th>
+                  <th>描述</th>
                 </tr>
                 <tr>
                   <td>type</td>
                   <td>notice</td>
                   <td>是</td>
+                  <td>上传文章类型</td>
                 </tr>
               </table>
               <h4>资讯</h4>
@@ -107,21 +119,73 @@ export default function EditorHelp() {
                   <th>字段</th>
                   <th>类型</th>
                   <th>必填</th>
+                  <th>描述</th>
                 </tr>
                 <tr>
                   <td>type</td>
                   <td>news</td>
                   <td>是</td>
+                  <td>上传文章类型</td>
+                </tr>
+                <tr>
+                  <td>cover</td>
+                  <td>字符串</td>
+                  <td>否</td>
+                  <td>
+                    用于资讯封面的图片链接。如果填写，则资讯页面会展示该图片。链接需要以 <code>http</code> 或{' '}
+                    <code>https</code> 开头
+                  </td>
                 </tr>
                 <tr>
                   <td>title</td>
                   <td>字符串</td>
                   <td>是</td>
+                  <td>文章标题</td>
+                </tr>
+              </table>
+              <h4>Wiki</h4>
+              <table>
+                <tr>
+                  <th>字段</th>
+                  <th>类型</th>
+                  <th>必填</th>
+                  <th>描述</th>
                 </tr>
                 <tr>
-                  <td>cover</td>
-                  <td>字符串，表示封面图片链接</td>
+                  <td>type</td>
+                  <td>wiki</td>
+                  <td>是</td>
+                  <td>上传文章类型</td>
+                </tr>
+                <tr>
+                  <td>action</td>
+                  <td>new | update</td>
                   <td>否</td>
+                  <td>上传操作，new 表示上传新文章，update 表示更新已有文章。默认为 new</td>
+                </tr>
+                <tr>
+                  <td>kind</td>
+                  <td>Infantry | Unit | Building | Support | I | U | B | S</td>
+                  <td>是</td>
+                  <td>Wiki 类型，前四种分别表示步兵、载具、建筑、支援技能四类，后四种为前四种依次对应的简写</td>
+                </tr>
+                <tr>
+                  <td>order</td>
+                  <td>整数</td>
+                  <td>是</td>
+                  <td>Wiki 的展示顺序，数字小的会排在大的前面，如果两个 Wiki 的 order 相同，则由数据库自行排列。</td>
+                </tr>
+                <tr>
+                  <td>title</td>
+                  <td>字符串</td>
+                  <td>是</td>
+                  <td>文章标题</td>
+                </tr>
+                <tr>
+                  <td>side</td>
+                  <td>NACSF | CISUF | EFRRF | FECO | RITC</td>
+                  <td>是</td>
+                  <td>所属阵营，分别对应世界轴承中五个阵营的缩写</td>
                 </tr>
               </table>
               <h2>发布示例</h2>
