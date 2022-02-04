@@ -106,42 +106,45 @@ export function ImageWall({ onPreview = defaultPreview, onCopy = defaultCopy, cl
               </div>
             )}
             {image.type === 'done' && (
-              <div className='bg-black opacity-0 hover:opacity-80 flex items-center justify-evenly flex-wrap w-full h-full absolute z-10'>
-                <Tooltip overlay={'复制图片链接'}>
-                  <Button type='text' onClick={() => onCopy(image.preview)}>
-                    <CopyOutlined />
-                  </Button>
-                </Tooltip>
-                <Tooltip overlay={'预览图片'}>
-                  <Button type='text' onClick={() => onPreview(image.preview)}>
-                    <EyeOutlined />
-                  </Button>
-                </Tooltip>
-                <Tooltip overlay={'删除该图片'}>
-                  <Button
-                    type='text'
-                    onClick={() => {
-                      Modal.confirm({
-                        title: '即将删除图片: ' + image.name,
-                        content: '图片删除后无法从数据库中恢复，是否继续？',
-                        onOk: async () => {
-                          const result = await deleteImage(image);
-                          console.log(result.data);
+              <div className='bg-black opacity-0 hover:opacity-80 flex flex-col items-center justify-center flex-wrap w-full h-full absolute z-10'>
+                <div className='flex'>
+                  <Tooltip overlay={'复制图片链接'}>
+                    <Button type='text' onClick={() => onCopy(image.preview)}>
+                      <CopyOutlined />
+                    </Button>
+                  </Tooltip>
+                  <Tooltip overlay={'预览图片'}>
+                    <Button type='text' onClick={() => onPreview(image.preview)}>
+                      <EyeOutlined />
+                    </Button>
+                  </Tooltip>
+                  <Tooltip overlay={'删除该图片'}>
+                    <Button
+                      type='text'
+                      onClick={() => {
+                        Modal.confirm({
+                          title: '即将删除图片: ' + image.name,
+                          content: '图片删除后无法从数据库中恢复，是否继续？',
+                          onOk: async () => {
+                            const result = await deleteImage(image);
+                            console.log(result.data);
 
-                          if (!result.ok) {
-                            message.error('删除失败: ' + result.data.error);
-                            return;
-                          }
-                          imageRef.current = imageRef.current.filter(img => img.id !== image.id);
-                          render();
-                          message.success('删除成功');
-                        },
-                      });
-                    }}
-                  >
-                    <DeleteOutlined />
-                  </Button>
-                </Tooltip>
+                            if (!result.ok) {
+                              message.error('删除失败: ' + result.data.error);
+                              return;
+                            }
+                            imageRef.current = imageRef.current.filter(img => img.id !== image.id);
+                            render();
+                            message.success('删除成功');
+                          },
+                        });
+                      }}
+                    >
+                      <DeleteOutlined />
+                    </Button>
+                  </Tooltip>
+                </div>
+                <div className='text-white flex flex-wrap break-all text-center'>{image.name}</div>
               </div>
             )}
             <Image alt='' src={image.preview} width={200} height={200} objectFit='contain'></Image>
