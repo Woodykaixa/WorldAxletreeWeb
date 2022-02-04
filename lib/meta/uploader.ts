@@ -1,4 +1,4 @@
-import { UploaderMapping, WikiMetaTypeMapping } from './type';
+import { LocalStorageWikiKey, UploaderMapping, WikiMetaTypeMapping } from './type';
 import { Notice, Wiki, PlayerArticle, News, OK } from '@/dto';
 import { makeError } from '../error';
 const upload = async <T>(dto: any, action: string): Promise<T> => {
@@ -48,7 +48,7 @@ export const Uploader: UploaderMapping = {
     const type = WikiMetaTypeMapping[meta.kind];
     if (meta.action === 'update') {
       const dto: Wiki.UpdateDTO = {
-        id: localStorage.getItem('wiki-update-id') ?? '',
+        id: localStorage.getItem(LocalStorageWikiKey) ?? '',
         side: meta.side,
         title: meta.title,
         order: meta.order,

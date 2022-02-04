@@ -1,16 +1,25 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Editor } from '@bytemd/react';
 import gfm from '@bytemd/plugin-gfm';
+import gfmZh from '@bytemd/plugin-gfm/lib/locales/zh_Hans.json';
 import footnotes from '@bytemd/plugin-footnotes';
 import frontmatter from '@bytemd/plugin-frontmatter';
-import { Modal, notification, Spin, Typography } from 'antd';
+import { Button, Form, Input, message, Modal, notification, Spin, Typography } from 'antd';
 import zhHans from 'bytemd/lib/locales/zh_Hans.json';
 import { EditorStyle, upload, consumeMeta, modal } from '@/components/editor';
 import { validateAndUpload } from '@/lib/meta';
 import { BytemdPlugin } from 'bytemd';
-import { FileImageOutlined } from '@ant-design/icons';
+import { FileImageOutlined, DownloadOutlined } from '@ant-design/icons';
 import { renderToString } from 'react-dom/server';
 import { ImageWall } from '@/components';
+import styled from 'styled-components';
+import { Err, OK, Wiki } from '@/dto';
+import { LocalStorageWikiKey, WikiMeta } from '@/lib/meta/type';
+const Item = styled(Form.Item)`
+  .ant-form-item-has-error > input {
+    border-color: blue !important;
+  }
+`;
 
 let meta: {
   value: object | null | string;
@@ -42,6 +51,10 @@ const onUpload = (text: string, setUploading: (uploading: boolean) => void) => {
       });
       console.log('meta', meta.value);
       console.log('api return', res);
+      const v = meta.value as WikiMeta;
+      if (v.type === 'wiki' && v.action === 'update') {
+        localStorage.removeItem(LocalStorageWikiKey);
+      }
     })
     .catch(err => {
       const error = err as Error;
@@ -57,19 +70,41 @@ const onUpload = (text: string, setUploading: (uploading: boolean) => void) => {
 };
 export default function ArticleEditor() {
   const [value, setValue] = useState('');
-  const { visible, open, close } = useModal();
+  const { visible: imageWallVisible, open: openImageWall, close: closeImageWall } = useModal();
+  const { visible: downloadVisible, open: openDownload, close: closeDownload } = useModal();
   const [uploading, setUploading] = useState(false);
-
+  const fetchWiki = async ({ title }: { title: string }) => {
+    const resp = await fetch(`/api/wiki/admin/get-by-title?title=${title}`);
+    const json = (await resp.json()) as Wiki.GetByTitleResp;
+    if (resp.status !== OK.code) {
+      const err = json as unknown as Err.Resp;
+      notification.error({
+        message: err.error,
+        description: err.description,
+      });
+    } else {
+      setValue(json.content);
+      localStorage.setItem(LocalStorageWikiKey, json.id);
+      closeDownload();
+    }
+  };
   const [editorPlugins, setPlugin] = useState<BytemdPlugin[]>([]);
   useEffect(() => {
     setPlugin([
-      gfm(),
+      gfm({
+        locale: gfmZh,
+      }),
       footnotes(),
       frontmatter(),
       modal({
-        openModal: open,
+        openModal: openImageWall,
         iconString: renderToString(<FileImageOutlined />),
         title: '打开图片库',
+      }),
+      modal({
+        openModal: openDownload,
+        iconString: renderToString(<DownloadOutlined />),
+        title: '拉取文章',
       }),
       upload({
         onUpload(text) {
@@ -85,8 +120,19 @@ export default function ArticleEditor() {
   }, []);
   return (
     <>
-      <Modal visible={visible} onCancel={close} mask footer={null} className='w-3/4-screen' centered>
+      <Modal visible={imageWallVisible} onCancel={closeImageWall} mask footer={null} className='w-3/4-screen' centered>
         <ImageWall className='max-h-[60vh]'></ImageWall>
+      </Modal>
+      <Modal
+        visible={downloadVisible}
+        onCancel={closeDownload}
+        mask
+        footer={null}
+        className='w-3/4-screen'
+        closable={false}
+        centered
+      >
+        <WikiDownloader fetchWiki={fetchWiki} />
       </Modal>
       <div className='w-full'>
         <EditorStyle>
@@ -119,4 +165,33 @@ function useModal() {
     open: () => setVisible(true),
     close: () => setVisible(false),
   };
+}
+
+function WikiDownloader({ fetchWiki }: { fetchWiki: (form: { title: string }) => void }) {
+  return (
+    <Form requiredMark={false} labelCol={{ span: 4 }} wrapperCol={{ span: 16 }} onFinish={fetchWiki}>
+      <Item
+        label='标题'
+        name='title'
+        rules={[
+          {
+            required: true,
+            type: 'string',
+            message: '请输入标题',
+          },
+        ]}
+      >
+        <Input className='hover:border-red-400 focus:border-red-500'></Input>
+      </Item>
+      <Form.Item wrapperCol={{ offset: 18, span: 2 }}>
+        <Button
+          type='primary'
+          htmlType='submit'
+          className='border-red-500 hover:border-red-600 hover:bg-red-600 focus:bg-red-600'
+        >
+          下载
+        </Button>
+      </Form.Item>
+    </Form>
+  );
 }

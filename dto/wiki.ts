@@ -7,8 +7,8 @@ export namespace Wiki {
   export type DeleteDTO = { id: string };
   export type DeleteResp = Model;
 
-  export type GetDTO = { id: string };
-  export type GetResp = Model;
+  export type GetByTitleDTO = { title: string };
+  export type GetByTitleResp = Model;
 
   export type ListDTO = { type: WikiT; side: SideType };
   export type ListResp = Model[];

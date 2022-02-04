@@ -66,3 +66,5 @@ export type UploaderMeta = {
 export type UploaderMapping = {
   [type in UploadType]: (meta: UploaderMeta[type], content: string) => Promise<UploaderReturn[type]>;
 };
+
+export const LocalStorageWikiKey = 'wiki-update-id';
