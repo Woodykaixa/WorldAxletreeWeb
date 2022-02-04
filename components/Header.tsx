@@ -2,22 +2,24 @@ import Link from 'next/link';
 import Image from 'next/image';
 import AntimoLogo from '@/public/assets/antimo-logo.webp';
 import WaLogo from '@/public/assets/wa.webp';
-import { Dropdown, Menu, MenuProps, Button } from 'antd';
+import { Dropdown, Menu } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { ReactNode } from 'react';
 
 export function Header() {
   return (
     <header className='flex text-xl bg-black py-2 text-white items-center px-4'>
-      <div className='px-6 border-r-2 border-white '>
-        <Image
-          src={WaLogo.src}
-          alt='World Axletree Logo'
-          layout='intrinsic'
-          width={WaLogo.width / 4}
-          height={WaLogo.height / 4}
-        />
-      </div>
+      <Link href='/' passHref>
+        <div className='px-6 border-r-2 border-white cursor-pointer'>
+          <Image
+            src={WaLogo.src}
+            alt='World Axletree Logo'
+            layout='intrinsic'
+            width={WaLogo.width / 4}
+            height={WaLogo.height / 4}
+          />
+        </div>
+      </Link>
       <div className='w-4  '></div>
       <HeaderMenu layout={HeaderLayout} />
       <div className='m-4 1920:m-0 1920:flex-1 flex justify-center'>
