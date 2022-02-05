@@ -1,6 +1,6 @@
 import type { Simplify } from '@/util/type';
-import type { PlayerArticle as Model } from '@prisma/client';
-export namespace PlayerArticle {
+import type { Article as Model } from '@prisma/client';
+export namespace Article {
   export type CreateDTO = Simplify<Omit<Model, 'id' | 'date'>>;
   export type CreateResp = Model;
 

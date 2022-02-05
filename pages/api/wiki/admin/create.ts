@@ -1,10 +1,9 @@
 import type { NextApiHandler } from 'next';
-import { Cl, Err, Notice, OK, Wiki } from '@/dto';
+import { Err, OK, Wiki } from '@/dto';
 import { parseParam, errorHandler, ensureMethod } from '@/lib/api';
 import { BadRequest } from '@/lib/error';
-import { greater } from '@/lib/game-ver';
 import prismaClient from '@/lib/prisma';
-import { pick } from 'lodash';
+
 const {
   parser: { secondaryCheck, string, int },
 } = parseParam;
@@ -26,7 +25,7 @@ const handler: NextApiHandler<Wiki.CreateResp | Err.Resp> = async (req, res) => 
 
     await connection;
     const { content, side, title, type, order } = await parse;
-    const sameTitleWiki = await prismaClient.wikiArticle.findFirst({
+    const sameTitleWiki = await prismaClient.wiki.findFirst({
       where: {
         title,
       },
@@ -35,7 +34,7 @@ const handler: NextApiHandler<Wiki.CreateResp | Err.Resp> = async (req, res) => 
       throw new BadRequest('存在相同标题的 Wiki，如果是有意为之，请使用修改 Wiki 功能');
     }
     const date = new Date();
-    const wiki = await prismaClient.wikiArticle.create({
+    const wiki = await prismaClient.wiki.create({
       data: {
         content,
         side,

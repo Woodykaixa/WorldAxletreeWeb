@@ -1,5 +1,5 @@
 import { LocalStorageWikiKey, UploaderMapping, WikiMetaTypeMapping } from './type';
-import { Notice, Wiki, PlayerArticle, News, OK } from '@/dto';
+import { Notice, Wiki, Article, News, OK } from '@/dto';
 import { makeError } from '../error';
 const upload = async <T>(dto: any, action: string): Promise<T> => {
   const response = await fetch(action, {

@@ -1,11 +1,10 @@
 import type { NextApiHandler } from 'next';
-import { Cl, Err, Notice, OK, Wiki } from '@/dto';
+import { Err, OK, Wiki } from '@/dto';
 import { parseParam, errorHandler, ensureMethod } from '@/lib/api';
-import { BadRequest, NotFound } from '@/lib/error';
-import { greater } from '@/lib/game-ver';
+import { NotFound } from '@/lib/error';
 import prismaClient from '@/lib/prisma';
-import { pick } from 'lodash';
 import objectId from 'bson-objectid';
+
 const {
   parser: { secondaryCheck, string, int },
 } = parseParam;
@@ -29,7 +28,7 @@ const handler: NextApiHandler<Wiki.UpdateResp | Err.Resp> = async (req, res) => 
     await connection;
     const { content, side, title, type, id, order } = await parse;
     {
-      const wiki = await prismaClient.wikiArticle.findFirst({
+      const wiki = await prismaClient.wiki.findFirst({
         where: {
           id,
         },
@@ -40,7 +39,7 @@ const handler: NextApiHandler<Wiki.UpdateResp | Err.Resp> = async (req, res) => 
     }
     const date = new Date();
 
-    const wiki = await prismaClient.wikiArticle.update({
+    const wiki = await prismaClient.wiki.update({
       where: {
         id,
       },

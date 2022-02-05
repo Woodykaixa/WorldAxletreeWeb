@@ -1,5 +1,5 @@
 import type { Simplify } from '@/util/type';
-import type { WikiArticle as Model, Side as SideType, WikiType as WikiT } from '@prisma/client';
+import type { Wiki as Model, Side as SideType, WikiType as WikiT } from '@prisma/client';
 export namespace Wiki {
   export type CreateDTO = Simplify<Omit<Model, 'id' | 'date'>>;
   export type CreateResp = Model;

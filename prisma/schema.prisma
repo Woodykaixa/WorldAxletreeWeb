@@ -12,7 +12,7 @@ datasource db {
 }
 
 /// 深度好文
-model PlayerArticle {
+model Article {
   id String @id @default(dbgenerated()) @map("_id") @db.ObjectId
 
   /// 标题
@@ -61,7 +61,7 @@ enum WikiType {
 }
 
 /// 百科
-model WikiArticle {
+model Wiki {
   id String @id @default(dbgenerated()) @map("_id") @db.ObjectId
 
   /// 标题

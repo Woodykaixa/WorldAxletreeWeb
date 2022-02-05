@@ -3,7 +3,7 @@ import { Wiki, Err, OK } from '@/dto';
 import { parseParam, errorHandler, ensureMethod } from '@/lib/api';
 import prismaClient from '@/lib/prisma';
 const {
-  parser: { intGe, intGt, strLengthGt, secondaryCheck, string },
+  parser: { secondaryCheck, string },
 } = parseParam;
 const handler: NextApiHandler<Wiki.ListResp | Err.Resp> = async (req, res) => {
   try {
@@ -17,7 +17,7 @@ const handler: NextApiHandler<Wiki.ListResp | Err.Resp> = async (req, res) => {
 
     await connection;
 
-    const wiki = await prismaClient.wikiArticle.findMany({
+    const wiki = await prismaClient.wiki.findMany({
       where: {
         side,
         type,

@@ -1,4 +1,4 @@
-import { Wiki, PlayerArticle, Cl, News, Notice } from '@/dto';
+import { Wiki, Article, Cl, News, Notice } from '@/dto';
 export const UploadTypes = ['notice', 'news', 'article', 'wiki'] as const;
 export type UploadType = typeof UploadTypes[number];
 
@@ -46,7 +46,7 @@ export type WikiMeta = BasicMeta<'wiki'> & {
 };
 
 export type UploaderReturn = {
-  article: PlayerArticle.CreateResp;
+  article: Article.CreateResp;
   changelog: Cl.CreateResp;
   news: News.CreateResp;
   notice: Notice.CreateResp;
