@@ -59,7 +59,6 @@ function checkMeta<TMeta extends object, TSchema extends CheckFieldSchema<TMeta,
     }
     missingKeys.delete(key);
     const error = validator!(value);
-    console.log(error);
     if (error) {
       errors.push({
         ...error,
@@ -73,7 +72,6 @@ function checkMeta<TMeta extends object, TSchema extends CheckFieldSchema<TMeta,
     return;
   }
   const formatErrors = errors.filter(e => e.error === 'format') as FormatErrorWithField[];
-  console.log('missing', missing, missingKeys);
 
   const valueErrors = errors.filter(e => e.error === 'value') as ValueErrorWithField[];
   let errorDesc = '遇到以下错误: \n';
@@ -96,7 +94,6 @@ function checkMeta<TMeta extends object, TSchema extends CheckFieldSchema<TMeta,
 
 export const Validator: Record<UploadType, (meta: any) => void | Promise<void>> = {
   article: (meta: Omit<ArticleMeta, 'type'>) => {
-    console.log(meta);
     checkMeta(meta, {
       action: {
         optional: true,
@@ -141,7 +138,6 @@ export const Validator: Record<UploadType, (meta: any) => void | Promise<void>> 
         return null;
       },
     });
-    throw new Error('目前尚未支持上传 article');
   },
   news: (meta: Omit<NewsMeta, 'type'>) => {
     checkMeta(meta, {
