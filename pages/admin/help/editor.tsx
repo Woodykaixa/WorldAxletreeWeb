@@ -193,6 +193,39 @@ export default function EditorHelp() {
                   <td>所属阵营，分别对应世界轴承中五个阵营的缩写</td>
                 </tr>
               </table>
+              <h4>文章</h4>
+              <table>
+                <tr>
+                  <th>字段</th>
+                  <th>类型</th>
+                  <th>必填</th>
+                  <th>描述</th>
+                </tr>
+                <tr>
+                  <td>type</td>
+                  <td>article</td>
+                  <td>是</td>
+                  <td>上传文章类型</td>
+                </tr>
+                <tr>
+                  <td>action</td>
+                  <td>new | update</td>
+                  <td>否</td>
+                  <td>上传操作，new 表示上传新文章，update 表示更新已有文章。默认为 new</td>
+                </tr>
+                <tr>
+                  <td>keywords</td>
+                  <td>字符串数组</td>
+                  <td>是</td>
+                  <td>文章关键字</td>
+                </tr>
+                <tr>
+                  <td>title</td>
+                  <td>字符串</td>
+                  <td>是</td>
+                  <td>文章标题</td>
+                </tr>
+              </table>
               <h2>发布示例</h2>
               <h3>发布动态</h3>
               <p>以发布动态为例，只需要在文章开头编写以下元数据</p>
