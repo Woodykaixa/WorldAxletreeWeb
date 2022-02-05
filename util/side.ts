@@ -1,10 +1,12 @@
+import { Wiki } from '@/dto';
+
 export type Side = {
   /** 中文全称 */
   name: string;
   /** 英文全称 */
   nameEn: string;
   /** 英文缩写 */
-  nameEnAbbr: string;
+  nameEnAbbr: Wiki.Side;
   /** 阵营图标 */
   icon: Partial<{
     x128: string;
