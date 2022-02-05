@@ -76,3 +76,4 @@ export type UploaderMapping = {
 };
 
 export const LocalStorageWikiKey = 'wiki-update-id';
+export const LocalStorageArticleKey = 'article-update-id';

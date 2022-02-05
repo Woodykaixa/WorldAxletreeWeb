@@ -1,4 +1,4 @@
-import { LocalStorageWikiKey, UploaderMapping, WikiMetaTypeMapping } from './type';
+import { LocalStorageArticleKey, LocalStorageWikiKey, UploaderMapping, WikiMetaTypeMapping } from './type';
 import { Notice, Wiki, Article, News, OK } from '@/dto';
 import { makeError } from '../error';
 const upload = async <T>(dto: any, action: string): Promise<T> => {
@@ -66,7 +66,23 @@ export const Uploader: UploaderMapping = {
     };
     return upload(dto, '/api/wiki/admin/create');
   },
-  article: () => {
-    throw new Error('Not Implemented');
+  article: async (meta, content) => {
+    if (meta.action === 'update') {
+      const dto: Article.UpdateDTO = {
+        id: localStorage.getItem(LocalStorageArticleKey) ?? '',
+        title: meta.title,
+        author: meta.author,
+        keywords: meta.keywords,
+        content,
+      };
+      return upload<Article.UpdateResp>(dto, '/api/article/admin/update');
+    }
+    const dto: Article.CreateDTO = {
+      title: meta.title,
+      author: meta.author,
+      keywords: meta.keywords,
+      content,
+    };
+    return upload(dto, '/api/article/admin/create');
   },
 };
