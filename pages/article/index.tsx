@@ -1,6 +1,6 @@
 import { Container } from '@/components';
-import { List, Divider, Space, Skeleton, Typography, Spin } from 'antd';
-import { useEffect, useState } from 'react';
+import { List, Divider, Space, Skeleton, Typography, Spin, Tag } from 'antd';
+import { ReactNode, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Article, News, OK } from '@/dto';
 import { makeError } from '@/lib/error';
@@ -70,7 +70,14 @@ export default function NoticePage() {
                 <div className='bg-[#383838] m-4 mb-8'>
                   <List.Item
                     key={item.id}
-                    actions={[<Space key='date'>{moment(item.date).format('yyyy年MM月DD日 HH:mm:ss')}</Space>]}
+                    actions={[
+                      <Space key='date'>{moment(item.date).format('yyyy年MM月DD日 HH:mm:ss')}</Space>,
+                      <Space key='keywords'>
+                        {item.keywords.map(kw => (
+                          <Tag key={kw}>{kw}</Tag>
+                        ))}
+                      </Space>,
+                    ]}
                     // extra={
                     //   item.coverUrl && (
                     //     <Image src={item.coverUrl} alt='' objectFit='contain' width={250} height={250}></Image>

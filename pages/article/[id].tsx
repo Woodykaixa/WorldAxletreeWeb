@@ -44,7 +44,8 @@ export default function NoticePage({ data }: ServerSideProps) {
         <EditorStyle>
           <Typography className='px-8'>
             <h1 className='text-center'>{data.title}</h1>
-            <p className='text-center'>{data.author}</p>
+            <p className='text-center text-lg'>作者: {data.author}</p>
+            {data.keywords.length > 0 && <p className='text-center text-lg'>关键字: {data.keywords.join(', ')}</p>}
             <Viewer plugins={[gfm(), frontmatter(), footnotes()]} value={data.content}></Viewer>
           </Typography>
         </EditorStyle>
