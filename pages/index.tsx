@@ -102,7 +102,7 @@ const PART_2_BUTTON_PROPS = [
   },
   {
     text: '游戏特色',
-    href: '/',
+    href: '/article',
   },
   {
     text: '单位百科',

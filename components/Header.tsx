@@ -73,7 +73,7 @@ const HeaderLayout: HeaderMenuProps['layout'] = [
     menu: [
       { link: '/', title: '故事背景' },
       { link: '/wiki', title: '单位百科' },
-      { link: '/', title: '食用指南' },
+      { link: '/article', title: '食用指南' },
     ],
   },
   {
