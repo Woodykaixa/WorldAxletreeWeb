@@ -1,9 +1,9 @@
 import ArticleEditor from '../editor';
 import Head from 'next/head';
-import { FileImageOutlined, UploadOutlined } from '@ant-design/icons';
+import { FileImageOutlined, UploadOutlined, DownloadOutlined } from '@ant-design/icons';
 import { EditorStyle } from '@/components/editor';
 import { Typography } from 'antd';
-import { Container, ImageWall, ImageWallProps } from '@/components';
+import { Container } from '@/components';
 import Link from 'next/link';
 export default function EditorHelp() {
   return (
@@ -51,12 +51,17 @@ export default function EditorHelp() {
                   />
                 </svg>
                 ，则会在光标位置语句的前后方插入 <code>*</code>，同时右侧预览区域可以看到该语句变为斜体。
-                大多数按钮只是基本的语法按钮。
+                大多数按钮只是基本的语法按钮。只有功能区左侧的最后三个按钮具有特殊功能。
               </p>
-              <p>有两个需要特别注意，则是左功能区的最后两个按钮。</p>
               <p>
                 <FileImageOutlined /> 是照片库按钮，点击后可以打开照片库对话框，其功能与
                 <Link href='/admin/help/image'>照片库页面</Link>完全一致。
+              </p>
+              <p>
+                <DownloadOutlined />{' '}
+                是下载按钮。点击后可以打开一个对话框，在对话框中输入标题和类型，可以下载文章，以便于修改。
+                务必使用下载按钮从数据库下载文章，然后再修改上传，而不是直接写好新文章然后上传。
+                因为下载功能会在编辑器以外的地方记录文章id，通过id来更新指定文章，而不是通过标题。这样的设计可以提供修改标题的能力。
               </p>
               <p>
                 <UploadOutlined className='text-red-500' />{' '}
