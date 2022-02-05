@@ -25,12 +25,12 @@ const handler: NextApiHandler<Article.UpdateResp | Err.Resp> = async (req, res) 
     await connection;
     const { id, ...dto } = await parse;
     {
-      const wiki = await prismaClient.wiki.findFirst({
+      const article = await prismaClient.article.findFirst({
         where: {
           id,
         },
       });
-      if (!wiki) {
+      if (!article) {
         throw new NotFound('不存在该文章，如果是有意为之，请使用创建文章功能');
       }
     }

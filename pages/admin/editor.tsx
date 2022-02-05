@@ -4,7 +4,7 @@ import gfm from '@bytemd/plugin-gfm';
 import gfmZh from '@bytemd/plugin-gfm/lib/locales/zh_Hans.json';
 import footnotes from '@bytemd/plugin-footnotes';
 import frontmatter from '@bytemd/plugin-frontmatter';
-import { Button, Form, Input, message, Modal, notification, Spin, Typography } from 'antd';
+import { Button, Form, Input, message, Modal, notification, Select, Spin, Typography } from 'antd';
 import zhHans from 'bytemd/lib/locales/zh_Hans.json';
 import { EditorStyle, upload, consumeMeta, modal } from '@/components/editor';
 import { validateAndUpload } from '@/lib/meta';
@@ -12,14 +12,11 @@ import { BytemdPlugin } from 'bytemd';
 import { FileImageOutlined, DownloadOutlined } from '@ant-design/icons';
 import { renderToString } from 'react-dom/server';
 import { ImageWall } from '@/components';
-import styled from 'styled-components';
 import { Err, OK, Wiki } from '@/dto';
-import { LocalStorageWikiKey, WikiMeta } from '@/lib/meta/type';
-const Item = styled(Form.Item)`
-  .ant-form-item-has-error > input {
-    border-color: blue !important;
-  }
-`;
+import { LocalStorageArticleKey, LocalStorageWikiKey, WikiMeta } from '@/lib/meta/type';
+
+const Updatable = ['wiki', 'article'] as const;
+type UpdatableType = typeof Updatable[number];
 
 let meta: {
   value: object | null | string;
@@ -73,9 +70,13 @@ export default function ArticleEditor() {
   const { visible: imageWallVisible, open: openImageWall, close: closeImageWall } = useModal();
   const { visible: downloadVisible, open: openDownload, close: closeDownload } = useModal();
   const [uploading, setUploading] = useState(false);
-  const fetchWiki = async ({ title }: { title: string }) => {
-    const resp = await fetch(`/api/wiki/admin/get-by-title?title=${title}`);
-    const json = (await resp.json()) as Wiki.GetByTitleResp;
+
+  const fetchContent = async ({ title, type }: { title: string; type: UpdatableType }) => {
+    if (!Updatable.includes(type)) {
+      return;
+    }
+    const resp = await fetch(`/api/${type}/admin/get-by-title?title=${title}`);
+    const json = (await resp.json()) as { content: string; id: string };
     if (resp.status !== OK.code) {
       const err = json as unknown as Err.Resp;
       notification.error({
@@ -84,10 +85,12 @@ export default function ArticleEditor() {
       });
     } else {
       setValue(json.content);
-      localStorage.setItem(LocalStorageWikiKey, json.id);
+      localStorage.setItem(type === 'wiki' ? LocalStorageWikiKey : LocalStorageArticleKey, json.id);
       closeDownload();
     }
   };
+  useClearId();
+
   const [editorPlugins, setPlugin] = useState<BytemdPlugin[]>([]);
   useEffect(() => {
     setPlugin([
@@ -118,6 +121,7 @@ export default function ArticleEditor() {
       }),
     ]);
   }, []);
+
   return (
     <>
       <Modal visible={imageWallVisible} onCancel={closeImageWall} mask footer={null} className='w-3/4-screen' centered>
@@ -132,7 +136,7 @@ export default function ArticleEditor() {
         closable={false}
         centered
       >
-        <WikiDownloader fetchWiki={fetchWiki} />
+        <WikiDownloader fetchWiki={fetchContent} />
       </Modal>
       <div className='w-full'>
         <EditorStyle>
@@ -167,10 +171,17 @@ function useModal() {
   };
 }
 
-function WikiDownloader({ fetchWiki }: { fetchWiki: (form: { title: string }) => void }) {
+function useClearId() {
+  useEffect(() => {
+    localStorage.removeItem(LocalStorageArticleKey);
+    localStorage.removeItem(LocalStorageWikiKey);
+  }, []);
+}
+
+function WikiDownloader({ fetchWiki }: { fetchWiki: (form: { title: string; type: UpdatableType }) => void }) {
   return (
     <Form requiredMark={false} labelCol={{ span: 4 }} wrapperCol={{ span: 16 }} onFinish={fetchWiki}>
-      <Item
+      <Form.Item
         label='标题'
         name='title'
         rules={[
@@ -181,14 +192,19 @@ function WikiDownloader({ fetchWiki }: { fetchWiki: (form: { title: string }) =>
           },
         ]}
       >
-        <Input className='hover:border-red-400 focus:border-red-500'></Input>
-      </Item>
+        <Input></Input>
+      </Form.Item>
+      <Form.Item label='下载类型' name='type'>
+        <Select>
+          {Updatable.map(t => (
+            <Select.Option key={t} value={t}>
+              {t === 'wiki' ? 'Wiki' : '文章'}
+            </Select.Option>
+          ))}
+        </Select>
+      </Form.Item>
       <Form.Item wrapperCol={{ offset: 18, span: 2 }}>
-        <Button
-          type='primary'
-          htmlType='submit'
-          className='border-red-500 hover:border-red-600 hover:bg-red-600 focus:bg-red-600'
-        >
+        <Button type='primary' htmlType='submit'>
           下载
         </Button>
       </Form.Item>
