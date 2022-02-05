@@ -10,10 +10,13 @@ export namespace Article {
   export type GetDTO = { id: string };
   export type GetResp = Model;
 
+  export type GetByTitleDTO = { title: string };
+  export type GetByTitleResp = Model;
+
   export type ListDTO = { size: number; page: number };
   export type ListResp = ListItem[];
   type ListItem = Simplify<Omit<Model, 'content'> & { brief: string }>;
 
-  export type UpdateDTO = Simplify<Partial<Omit<Model, 'id' | 'date'>> & { id: string }>;
+  export type UpdateDTO = Simplify<Omit<Model, 'id' | 'date'> & { id: string }>;
   export type UpdateResp = Model;
 }

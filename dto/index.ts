@@ -3,7 +3,7 @@ export * from './changelog';
 export * from './error';
 export * from './news';
 export * from './notice';
-export * from './player-article';
+export * from './article';
 export * from './wiki';
 
 export namespace OK {
