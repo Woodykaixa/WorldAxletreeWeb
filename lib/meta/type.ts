@@ -35,15 +35,25 @@ export const WikiMetaTypeMapping: Record<typeof WikiMetaTypes[number], Wiki.Wiki
   Unit: 'Unit',
 };
 
-export const WikiMetaActions = ['new', 'update'] as const;
-
-export type WikiMeta = BasicMeta<'wiki'> & {
-  action?: typeof WikiMetaActions[number];
-  kind: typeof WikiMetaTypes[number];
-  order: number;
-  side: Wiki.Side;
-  title: string;
+export const ModifiableMetaActions = ['new', 'update'] as const;
+export type ModifiableMeta = {
+  action?: typeof ModifiableMetaActions[number];
 };
+
+export type WikiMeta = BasicMeta<'wiki'> &
+  ModifiableMeta & {
+    kind: typeof WikiMetaTypes[number];
+    order: number;
+    side: Wiki.Side;
+    title: string;
+  };
+
+export type ArticleMeta = BasicMeta<'article'> &
+  ModifiableMeta & {
+    author: string;
+    keywords: string[];
+    title: string;
+  };
 
 export type UploaderReturn = {
   article: Article.CreateResp;
@@ -54,7 +64,7 @@ export type UploaderReturn = {
 };
 
 export type UploaderMeta = {
-  article: BasicMeta<'article'>;
+  article: ArticleMeta;
   // changelog: ChangelogMeta;
   news: NewsMeta;
   notice: BasicMeta<'notice'>;

@@ -1,6 +1,6 @@
 import { Wiki } from '@/dto';
 import { MetaError, MissingFieldError, FieldTypeError } from './meta-error';
-import { UploadType, UploadTypes, NewsMeta, WikiMeta, WikiMetaActions, WikiMetaTypes } from './type';
+import { UploadType, UploadTypes, NewsMeta, WikiMeta, ModifiableMetaActions, WikiMetaTypes, ArticleMeta } from './type';
 
 type WithField<T> = T & {
   field: string;
@@ -35,7 +35,7 @@ type CheckFieldSchema<TMeta extends object, TField extends keyof TMeta> = {
       };
 };
 
-function checkField<TMeta extends object, TSchema extends CheckFieldSchema<TMeta, keyof TMeta>>(
+function checkMeta<TMeta extends object, TSchema extends CheckFieldSchema<TMeta, keyof TMeta>>(
   meta: TMeta,
   schema: TSchema
 ) {
@@ -95,47 +95,98 @@ function checkField<TMeta extends object, TSchema extends CheckFieldSchema<TMeta
 }
 
 export const Validator: Record<UploadType, (meta: any) => void | Promise<void>> = {
-  article: meta => {
-    throw new Error('目前尚未支持上传 article');
-  },
-  // changelog: (meta: ChangelogMeta) => {
-  //   if (!meta.version) {
-  //     throw new MissingFieldError(['version']);
-  //   }
-  //   if (typeof meta.version !== 'string') {
-  //     throw new FieldTypeError('version', ['字符串, 且格式为: 主版本号.副版本号.补丁版本号']);
-  //   }
-  //   if (!/^(\d+)\.(\d+)\.(\d+)$/.test(meta.version)) {
-  //     throw new FieldFormatError('version', ['主版本号.副版本号.补丁版本号']);
-  //   }
-  // },
-  news: (meta: NewsMeta) => {
-    if (!meta.title) {
-      throw new MissingFieldError(['title']);
-    }
-    if (typeof meta.title !== 'string') {
-      throw new FieldTypeError('title', ['字符串']);
-    }
-    if (meta.cover && typeof meta.cover !== 'string') {
-      throw new FieldTypeError('cover', ['图片链接']);
-    }
-    if (meta.cover && !meta.cover.startsWith('http')) {
-      throw new FieldTypeError('cover', ['图片链接 (http或https)']);
-    }
-  },
-  notice: meta => {},
-  wiki: (meta: Omit<WikiMeta, 'type'>) => {
-    checkField(meta, {
+  article: (meta: Omit<ArticleMeta, 'type'>) => {
+    console.log(meta);
+    checkMeta(meta, {
       action: {
         optional: true,
         validator(value) {
           if (value === undefined) {
             return null;
           }
-          if (typeof value !== 'string' || !WikiMetaActions.includes(value as any)) {
+          if (typeof value !== 'string' || !ModifiableMetaActions.includes(value as any)) {
             return {
               error: 'value',
-              validValues: WikiMetaActions as any,
+              validValues: ModifiableMetaActions as any,
+            };
+          }
+          return null;
+        },
+      },
+      author(value) {
+        if (typeof value !== 'string' || value.length === 0) {
+          return {
+            error: 'value',
+            validValues: ['长度大于 0 的字符串'],
+          };
+        }
+        return null;
+      },
+      keywords(value) {
+        if (!Array.isArray(value) || value.find(e => typeof e !== 'string') !== undefined) {
+          return {
+            error: 'value',
+            validValues: ['字符串数组'],
+          };
+        }
+        return null;
+      },
+      title(value) {
+        if (typeof value !== 'string' || value.length === 0) {
+          return {
+            error: 'value',
+            validValues: ['长度大于 0 的字符串'],
+          };
+        }
+        return null;
+      },
+    });
+    throw new Error('目前尚未支持上传 article');
+  },
+  news: (meta: Omit<NewsMeta, 'type'>) => {
+    checkMeta(meta, {
+      title(value) {
+        if (typeof value !== 'string' || value.length === 0) {
+          return {
+            error: 'value',
+            validValues: ['长度大于 0 的字符串'],
+          };
+        }
+        return null;
+      },
+      cover: {
+        optional: true,
+        validator(value) {
+          if (typeof value !== 'string') {
+            return {
+              error: 'value',
+              validValues: ['图片链接'],
+            };
+          }
+          if (/^https?:\/\//.test(value)) {
+            return null;
+          }
+          return {
+            error: 'format',
+            formats: ['图片链接 (http或https)'],
+          };
+        },
+      },
+    });
+  },
+  notice() {},
+  wiki: (meta: Omit<WikiMeta, 'type'>) => {
+    checkMeta(meta, {
+      action: {
+        optional: true,
+        validator(value) {
+          if (value === undefined) {
+            return null;
+          }
+          if (typeof value !== 'string' || !ModifiableMetaActions.includes(value as any)) {
+            return {
+              error: 'value',
+              validValues: ModifiableMetaActions as any,
             };
           }
           return null;
