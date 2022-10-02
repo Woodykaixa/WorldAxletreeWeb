@@ -2,8 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["mongoDb"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -13,7 +12,7 @@ datasource db {
 
 /// 深度好文
 model Article {
-  id String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
 
   /// 标题
   title String
@@ -32,7 +31,6 @@ model Article {
 }
 
 enum Side {
-
   /// 北美联合打击力量
   /// Northern American Coalition Strike Force
   NACSF
@@ -62,7 +60,7 @@ enum WikiType {
 
 /// 百科
 model Wiki {
-  id String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
 
   /// 标题
   title String @unique
@@ -86,7 +84,7 @@ model Wiki {
 /// 一个 Changelog 对应一个版本的更新
 /// Changelog 页面查询所有的 Changelog 然后按照版本/时间降序排列、渲染
 model Changelog {
-  id String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
 
   /// Changelog 内容
   content String
@@ -102,24 +100,22 @@ model Changelog {
 
   /// 游戏补丁版本号
   patchVersion Int
-
 }
 
 /// 公告
 model Notice {
-  id String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
 
   /// 公告内容
   content String
 
   /// 发布时间
   date DateTime
-
 }
 
 /// 资讯/专栏
 model News {
-  id String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
 
   /// 标题
   title String
@@ -132,11 +128,10 @@ model News {
 
   /// 发布时间
   date DateTime
-
 }
 
 model Image {
-  id String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
 
   name String
 
@@ -147,5 +142,4 @@ model Image {
   height Int
 
   content Bytes @db.BinData
-
 }
