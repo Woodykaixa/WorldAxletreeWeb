@@ -1,15 +1,15 @@
 import type { NextApiHandler } from 'next';
-import { Cl, Err, Notice, OK } from '@/dto';
+import { Err, Notice, OK } from '@/dto';
 import { parseParam, errorHandler, ensureMethod } from '@/lib/api';
-import { BadRequest } from '@/lib/error';
-import { greater } from '@/lib/game-ver';
 import prismaClient from '@/lib/prisma';
-import { pick } from 'lodash';
+import { ensureAuth } from '@/lib/jwt';
+
 const {
   parser: { strLengthGt },
 } = parseParam;
 const handler: NextApiHandler<Notice.CreateResp | Err.Resp> = async (req, res) => {
   try {
+    await ensureAuth(req);
     await ensureMethod(req.method, ['POST']);
 
     const connection = prismaClient.$connect();

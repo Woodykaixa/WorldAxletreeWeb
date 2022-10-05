@@ -1,10 +1,10 @@
 import type { NextApiHandler } from 'next';
-import { Cl, Err, Notice, OK } from '@/dto';
+import { Err, OK } from '@/dto';
 import { parseParam, errorHandler, ensureMethod } from '@/lib/api';
 import { BadRequest } from '@/lib/error';
-import { greater } from '@/lib/game-ver';
 import prismaClient from '@/lib/prisma';
 import imageSize from 'image-size';
+import { ensureAuth } from '@/lib/jwt';
 
 import { Image } from '@/dto/image';
 const {
@@ -12,6 +12,7 @@ const {
 } = parseParam;
 const handler: NextApiHandler<Image.CreateResp | Err.Resp> = async (req, res) => {
   try {
+    await ensureAuth(req);
     await ensureMethod(req.method, ['POST']);
 
     const connection = prismaClient.$connect();

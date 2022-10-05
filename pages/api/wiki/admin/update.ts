@@ -4,12 +4,14 @@ import { parseParam, errorHandler, ensureMethod } from '@/lib/api';
 import { NotFound } from '@/lib/error';
 import prismaClient from '@/lib/prisma';
 import objectId from 'bson-objectid';
+import { ensureAuth } from '@/lib/jwt';
 
 const {
   parser: { secondaryCheck, string, int },
 } = parseParam;
 const handler: NextApiHandler<Wiki.UpdateResp | Err.Resp> = async (req, res) => {
   try {
+    await ensureAuth(req);
     await ensureMethod(req.method, ['POST']);
 
     const connection = prismaClient.$connect();

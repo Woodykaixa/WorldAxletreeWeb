@@ -2,12 +2,14 @@ import type { NextApiHandler } from 'next';
 import { Err, News, OK } from '@/dto';
 import { parseParam, errorHandler, ensureMethod } from '@/lib/api';
 import prismaClient from '@/lib/prisma';
+import { ensureAuth } from '@/lib/jwt';
 
 const {
   parser: { strLengthGt },
 } = parseParam;
 const handler: NextApiHandler<News.CreateResp | Err.Resp> = async (req, res) => {
   try {
+    await ensureAuth(req);
     await ensureMethod(req.method, ['POST']);
     await prismaClient.$connect();
 

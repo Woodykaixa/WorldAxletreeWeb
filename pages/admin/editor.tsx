@@ -14,6 +14,7 @@ import { renderToString } from 'react-dom/server';
 import { ImageWall } from '@/components';
 import { Err, OK, Wiki } from '@/dto';
 import { LocalStorageArticleKey, LocalStorageWikiKey, WikiMeta } from '@/lib/meta/type';
+import { EditorForm } from '@/components/editor/form';
 
 const Updatable = ['wiki', 'article'] as const;
 type UpdatableType = typeof Updatable[number];

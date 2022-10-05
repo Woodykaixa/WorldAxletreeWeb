@@ -16,7 +16,9 @@ const handler: NextApiHandler<Err.Resp> = (req, res) => {
       if (auth !== process.env.ADMIN) {
         throw new Unauthorized('wrong password');
       }
-      const jwt = signJwt();
+      return signJwt();
+    })
+    .then(jwt => {
       setCookie(res, JwtConfig.Key, jwt);
       res.status(302).redirect('/admin');
     })

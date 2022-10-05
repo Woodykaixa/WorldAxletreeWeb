@@ -5,11 +5,14 @@ import { BadRequest } from '@/lib/error';
 import { greater } from '@/lib/game-ver';
 import prismaClient from '@/lib/prisma';
 import { pick } from 'lodash';
+import { ensureAuth } from '@/lib/jwt';
+
 const {
   parser: { strLengthGt, int },
 } = parseParam;
 const handler: NextApiHandler<Cl.CreateResp | Err.Resp> = async (req, res) => {
   try {
+    await ensureAuth(req);
     await ensureMethod(req.method, ['POST']);
     const connection = prismaClient.$connect();
 
