@@ -28,7 +28,6 @@
     "cookie": "^0.4.1",
     "image-size": "^1.0.1",
     "jose": "^4.10.0",
-    "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "next": "^12.3.1",
@@ -36,14 +35,11 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-infinite-scroll-component": "^6.1.0",
-    "styled-components": "^5.3.1"
+    "styled-components": "^5.3.1",
+    "zustand": "^4.1.1"
   },
   "devDependencies": {
-    "@formily/antd": "^2.2.6",
-    "@formily/core": "^2.2.6",
-    "@formily/react": "^2.2.6",
     "@types/cookie": "^0.4.1",
-    "@types/jsonwebtoken": "^8.5.8",
     "@types/lodash": "^4.14.178",
     "@types/node": "^16.11.21",
     "@types/react": "^17.0.21",
@@ -57,6 +53,7 @@
     "husky": "^7.0.2",
     "install": "^0.13.0",
     "lint-staged": "^11.1.2",
+    "next-with-less": "^2.0.5",
     "postcss": "^8.4.5",
     "prettier": "^2.4.0",
     "tailwindcss": "^3.0.16",
