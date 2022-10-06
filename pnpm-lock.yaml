@@ -1191,7 +1191,7 @@ packages:
     dev: true
 
   /bytemd/1.10.13:
-    resolution: {integrity: sha1-pPr1IbCxwd+//Vpb9SNRYxiQUjo=, tarball: bytemd/download/bytemd-1.10.13.tgz}
+    resolution: {integrity: sha512-rqLNAM2BoZxz+nHyOEDPGPvdnXCa4GzRBbfkooH0Gd4nMeqr249Awawha2mAo37GscppfBgMpc1YzVXGqADENA==}
     dependencies:
       '@popperjs/core': 2.11.6
       '@types/codemirror': 0.0.108
