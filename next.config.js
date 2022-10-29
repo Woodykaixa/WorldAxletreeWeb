@@ -11,4 +11,7 @@ module.exports = {
   images: {
     domains: ['wa-staging.xkein.cn', 'worldaxletree.xkein.cn', 'localhost'],
   },
+  experimental: {
+    appDir: true,
+  },
 };
