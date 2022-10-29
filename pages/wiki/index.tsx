@@ -1,6 +1,6 @@
 import { Descriptions, Typography } from 'antd';
 import { Container, WikiNavLink } from '@/components';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { ImplementedSides } from '@/util/side';
 
 const { Item } = Descriptions;

@@ -12,6 +12,6 @@ module.exports = {
     domains: ['wa-staging.xkein.cn', 'worldaxletree.xkein.cn', 'localhost'],
   },
   experimental: {
-    appDir: true,
+    // appDir: true,
   },
 };

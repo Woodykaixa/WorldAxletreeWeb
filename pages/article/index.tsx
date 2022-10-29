@@ -6,7 +6,6 @@ import { Article, News, OK } from '@/dto';
 import { makeError } from '@/lib/error';
 import moment from 'moment';
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
 
 type ArticleItem = Article.ListResp[number];

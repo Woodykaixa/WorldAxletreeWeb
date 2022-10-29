@@ -1,13 +1,7 @@
 import { Container } from '@/components';
-import { List, Divider, Space, Skeleton, Typography } from 'antd';
-import { useEffect, useState } from 'react';
-import InfiniteScroll from 'react-infinite-scroll-component';
+import { Typography } from 'antd';
 import { News, OK } from '@/dto';
-import { makeError } from '@/lib/error';
-import moment from 'moment';
 import Head from 'next/head';
-import Image from 'next/image';
-import Link from 'next/link';
 import { GetServerSideProps } from 'next';
 import { createBrief } from '@/util/brief';
 import { EditorStyle } from '@/components/editor';

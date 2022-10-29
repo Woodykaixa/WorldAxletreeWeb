@@ -1,5 +1,5 @@
 import { ImplementedSides, WipSides } from '@/util/side';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 
 export type WikiSwitchProps = {

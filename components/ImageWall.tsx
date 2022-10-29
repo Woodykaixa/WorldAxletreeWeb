@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Image as DTO } from '@/dto/image';
 import { Err, OK } from '@/dto';
 import { randString } from '@/util/rand';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 type ImageItem = {
   type: 'uploading' | 'done' | 'error';
