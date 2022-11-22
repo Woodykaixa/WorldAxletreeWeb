@@ -16,6 +16,7 @@ declare global {
       ADMIN: string;
       DATABASE_URL: string;
       JWT_SECRET: string;
+      DATOCMS_READONLY_TOKEN: string;
     }
   }
 }

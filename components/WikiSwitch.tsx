@@ -1,26 +1,29 @@
-import { ImplementedSides, WipSides } from '@/util/side';
-import Image from 'next/legacy/image';
+import { Side } from '@/dto/side';
+import { Image as CmsImage } from 'react-datocms';
 import Link from 'next/link';
 
 export type WikiSwitchProps = {
-  navigation: {
-    url: string;
-    image: string;
-  }[];
+  sides: Side[];
 };
 
-export function WikiSwitch() {
+export function WikiSwitch({ sides = [] }: WikiSwitchProps) {
+  const visibleSides = sides.filter(side => side.visibility);
+  const invisibleSideName = sides.filter(side => !side.visibility).map(s => s.abbr);
   return (
     <div className='flex justify-evenly my-4'>
-      {ImplementedSides.map(n => (
-        <Link href={'/wiki/' + n.nameEnAbbr} key={n.nameEnAbbr}>
-          <a className='bg-black py-4 px-12 rounded-lg -skew-x-theme'>
-            <Image src={n.icon.x128!} width={120} height={120} alt='' layout='fixed' className='skew-x-theme'></Image>
-          </a>
+      {visibleSides.map(side => (
+        <Link href={'/wiki/' + side.abbr} key={side.abbr} className='bg-black py-4 px-12 rounded-lg -skew-x-theme'>
+          <CmsImage
+            data={{
+              ...side.logo.responsiveImage,
+            }}
+            className='skew-x-theme'
+          />
         </Link>
       ))}
-      {WipSides.map(side => (
-        <div className='bg-black py-4 px-12 rounded-lg -skew-x-theme' key={side.nameEnAbbr}>
+
+      {invisibleSideName.map(sideName => (
+        <div className='bg-black py-4 px-12 rounded-lg -skew-x-theme' key={sideName}>
           <div className='skew-x-theme h-[120px] w-[120px] flex justify-center items-center'>
             <div className='text-white text-[8rem] select-none'>?</div>
           </div>

@@ -101,8 +101,8 @@ function HeaderMenu({ layout }: HeaderMenuProps) {
               <Menu className='px-4 py-2 bg-black'>
                 {menu.menu.map(item => (
                   <Menu.Item key={item.title} className='py-4 text-center opacity-80 hover:opacity-100 hover:bg-black'>
-                    <Link href={item.link} passHref>
-                      <a className='text-2xl text-white'>{item.title}</a>
+                    <Link href={item.link} passHref className='text-2xl text-white'>
+                      {item.title}
                     </Link>
                   </Menu.Item>
                 ))}

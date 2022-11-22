@@ -2,7 +2,7 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['wa-staging.xkein.cn', 'worldaxletree.xkein.cn', 'localhost'],
+    domains: ['wa-staging.xkein.cn', 'worldaxletree.xkein.cn', 'localhost', 'https://www.datocms-assets.com'],
   },
   experimental: {
     // appDir: true,

@@ -1,23 +1,44 @@
 import type { WikiProps } from '@/components';
 import { Wiki as DTO, OK } from '@/dto';
+import { query, responsiveImageFragment } from '@/lib/cms';
 import type { GetServerSideProps } from 'next';
-export function fetchWiki(side: DTO.Side, type: DTO.WikiType): GetServerSideProps<WikiProps> {
+export function fetchWiki(type: DTO.WikiType): GetServerSideProps<WikiProps> {
   return async ctx => {
-    const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + `/api/wiki/list?type=${type}&side=${side}`);
-    const json = (await response.json()) as DTO.ListResp;
-    if (response.status !== OK.code) {
-      console.error('fetch wiki', side, type, 'failed:', json);
-      return {
-        redirect: {
-          destination: '/404',
-          permanent: false,
-        },
-      };
+    const { side } = ctx.params as Record<string, string>;
+    const { allWikis: wiki, allSides } = await query(
+      `query QueryWiki($side: String, $kind: String) {
+      allWikis(orderBy: order_ASC, filter: {kind: {eq: $kind}, side: {eq: $side}}) {
+        content
+        order
+        title
+        updatedAt
+        createdAt
+        id
+      }
+      allSides {
+        name
+        logo {
+          responsiveImage {
+            ...responsiveImageFragment
+          }
+        }
+        abbr
+        visibility
+      }
     }
+    ${responsiveImageFragment}`,
+      {
+        variables: {
+          side,
+          kind: type,
+        },
+      }
+    );
 
     return {
       props: {
-        wiki: json,
+        wiki,
+        sides: allSides,
       },
     };
   };
