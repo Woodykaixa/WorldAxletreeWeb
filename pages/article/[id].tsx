@@ -9,11 +9,12 @@ import { Viewer } from '@bytemd/react';
 import gfm from '@bytemd/plugin-gfm';
 import frontmatter from '@bytemd/plugin-frontmatter';
 import footnotes from '@bytemd/plugin-footnotes';
+import { renderMetaTags } from 'react-datocms';
 
 export default function NoticePage({ data }: ServerSideProps) {
   const title = data.title + ' - 世界轴承';
-  const description = createBrief(data.content);
-  const image = null;
+  const seo = data.seoMeta;
+  const description = seo?.description;
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/news/${data.id}`;
   return (
     <>
@@ -27,26 +28,26 @@ export default function NoticePage({ data }: ServerSideProps) {
         {/* <meta name='twitter:creator' content='@RTMO_kaixa' /> */}
         <meta name='twitter:title' content={title} />
         <meta name='twitter:description' content={description} />
-        {image && <meta property='twitter:image' content={image} />}
+        {seo && seo.image && <meta property='twitter:image' content={seo.image.responsiveImage.src ?? undefined} />}
         {/*  Open Graph data */}
         <meta property='og:title' content={title} />
         <meta property='og:type' content='article' />
         <meta property='og:url' content={url} />
-        {image && <meta property='og:image' content={image} />}
+        {seo && seo.image && <meta property='og:image' content={seo.image.responsiveImage.src ?? undefined} />}
         <meta property='og:description' content={description} />
         <meta property='og:site_name' content={title} />
         {/* Schema.org markup for Google+ */}
         <meta itemProp='name' content={title} />
         <meta itemProp='description' content={description} />
-        {image && <meta itemProp='image' content={image} />}
+        {seo && seo.image && <meta itemProp='image' content={seo.image.responsiveImage.src ?? undefined} />}
       </Head>
-      <Container background={image ?? undefined} preloadBackground>
+      <Container>
         <EditorStyle>
           <Typography className='px-8'>
             <h1 className='text-center'>{data.title}</h1>
             <p className='text-center text-lg'>作者: {data.author}</p>
             {data.keywords.length > 0 && <p className='text-center text-lg'>关键字: {data.keywords.join(', ')}</p>}
-            <Viewer plugins={[gfm(), frontmatter(), footnotes()]} value={data.content}></Viewer>
+            <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
           </Typography>
         </EditorStyle>
       </Container>

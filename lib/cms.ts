@@ -31,6 +31,22 @@ function specialHeaders(): Record<string, string> {
   };
 }
 
+type CmsError = {
+  message: string;
+  locations: { line: number; column: number }[];
+  path: string[];
+  extensions: {
+    code: string;
+    typeName: string;
+  };
+};
+
+export class QueryError extends Error {
+  constructor(public readonly errors: CmsError[]) {
+    super();
+  }
+}
+
 export async function query<T = any>(queryString: string, { variables }: QueryConfig = {}) {
   const headers = {
     'Content-Type': 'application/json',
@@ -50,7 +66,7 @@ export async function query<T = any>(queryString: string, { variables }: QueryCo
   const json = await res.json();
   if (json.errors) {
     console.error(json.errors);
-    throw new Error('Failed to fetch API');
+    throw new QueryError(json.errors);
   }
   return json.data as T;
 }

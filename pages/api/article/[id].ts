@@ -1,37 +1,57 @@
 import type { NextApiHandler } from 'next';
 import { Article, Cl, Err, News, OK } from '@/dto';
 import { parseParam, errorHandler, ensureMethod } from '@/lib/api';
-import prismaClient from '@/lib/prisma';
 import { NotFound } from '@/lib/error';
-import ObjectID from 'bson-objectid';
+import { query, responsiveImageFragment } from '@/lib/cms';
 
 const {
-  parser: { string, secondaryCheck },
+  parser: { string },
 } = parseParam;
 const handler: NextApiHandler<Article.GetResp | Err.Resp> = async (req, res) => {
   try {
     await ensureMethod(req.method, ['GET']);
 
-    const connection = prismaClient.$connect();
-
     const { id } = await parseParam<Article.GetDTO>(req.query, {
-      id: secondaryCheck(string, param => ObjectID.isValid(param)),
+      id: string,
     });
-    await connection;
 
-    const article = await prismaClient.article.findFirst({
-      where: {
-        id,
-      },
-    });
+    const { article } = await query<{
+      article: Article.GetResp | null;
+    }>(
+      `query QueryArticleById($articleId: ItemId) {
+      article(filter: {id: {eq: $articleId}}) {
+        author
+        content
+        id
+        keywords
+        seoMeta {
+          description
+          title
+          twitterCard
+          image {
+            responsiveImage {
+              ...responsiveImageFragment
+            }
+          }
+        }
+        title
+        updatedAt
+      }
+    }
+    ${responsiveImageFragment}
+    `,
+      {
+        variables: {
+          articleId: id,
+        },
+      }
+    );
     if (!article) {
       throw new NotFound();
     }
     res.status(OK.code).send(article);
   } catch (err) {
     errorHandler(res)(err);
-  } finally {
-    await prismaClient.$disconnect();
   }
 };
 
