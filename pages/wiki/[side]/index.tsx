@@ -59,7 +59,7 @@ export const getStaticProps: GetStaticProps<Props> = async ctx => {
     },
     redirect: {
       permanent: false,
-      destination: 404,
+      destination: '/404',
     },
   };
 };

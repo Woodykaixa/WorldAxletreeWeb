@@ -1,6 +1,19 @@
 import type { Simplify } from '@/util/type';
 import type { Article as Model } from '@prisma/client';
 export namespace Article {
+  export type Item = {
+    keywords: string[];
+    updatedAt: string;
+    id: string;
+    title: string;
+    content: string;
+    brief: null | string;
+    author: string;
+    seoMeta: null | {
+      description: string;
+      title: string;
+    };
+  };
   export type CreateDTO = Simplify<Omit<Model, 'id' | 'date'>>;
   export type CreateResp = Model;
 
@@ -15,8 +28,7 @@ export namespace Article {
 
   export type ListDTO = { size: number; page: number };
   export type ListResp = ListItem[];
-  type ListItem = Simplify<Omit<Model, 'content'> & { brief: string }>;
-
+  type ListItem = Omit<Item, 'seoMeta' | 'content'>;
   export type UpdateDTO = Simplify<Omit<Model, 'id' | 'date'> & { id: string }>;
   export type UpdateResp = Model;
 }
