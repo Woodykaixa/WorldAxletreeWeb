@@ -12,8 +12,8 @@ import footnotes from '@bytemd/plugin-footnotes';
 
 export default function NoticePage({ data }: ServerSideProps) {
   const title = data.title + ' - 世界轴承';
-  const description = createBrief(data.content);
-  const image = data.coverUrl;
+  const description = data.brief ?? undefined;
+  const image = data.cover;
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/news/${data.id}`;
   return (
     <>
@@ -27,23 +27,23 @@ export default function NoticePage({ data }: ServerSideProps) {
         {/* <meta name='twitter:creator' content='@RTMO_kaixa' /> */}
         <meta name='twitter:title' content={title} />
         <meta name='twitter:description' content={description} />
-        {image && <meta property='twitter:image' content={image} />}
+        {image && <meta property='twitter:image' content={image.responsiveImage.src ?? undefined} />}
         {/*  Open Graph data */}
         <meta property='og:title' content={title} />
         <meta property='og:type' content='article' />
         <meta property='og:url' content={url} />
-        {image && <meta property='og:image' content={image} />}
+        {image && <meta property='og:image' content={image.responsiveImage.src ?? undefined} />}
         <meta property='og:description' content={description} />
         <meta property='og:site_name' content={title} />
         {/* Schema.org markup for Google+ */}
         <meta itemProp='name' content={title} />
         <meta itemProp='description' content={description} />
-        {image && <meta itemProp='image' content={image} />}
+        {image && <meta itemProp='image' content={image.responsiveImage.src ?? undefined} />}
       </Head>
-      <Container background={image ?? undefined} preloadBackground>
+      <Container>
         <EditorStyle>
           <Typography>
-            <Viewer plugins={[gfm(), frontmatter(), footnotes()]} value={data.content}></Viewer>
+            <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
           </Typography>
         </EditorStyle>
       </Container>
