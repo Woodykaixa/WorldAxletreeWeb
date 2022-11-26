@@ -3,12 +3,7 @@ import { Typography } from 'antd';
 import { News, OK } from '@/dto';
 import Head from 'next/head';
 import { GetServerSideProps } from 'next';
-import { createBrief } from '@/util/brief';
 import { EditorStyle } from '@/components/editor';
-import { Viewer } from '@bytemd/react';
-import gfm from '@bytemd/plugin-gfm';
-import frontmatter from '@bytemd/plugin-frontmatter';
-import footnotes from '@bytemd/plugin-footnotes';
 
 export default function NoticePage({ data }: ServerSideProps) {
   const title = data.title + ' - 世界轴承';

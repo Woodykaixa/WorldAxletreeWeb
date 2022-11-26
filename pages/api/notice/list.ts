@@ -5,13 +5,13 @@ import { BadRequest } from '@/lib/error';
 import { greater } from '@/lib/game-ver';
 import prismaClient from '@/lib/prisma';
 import { pick } from 'lodash';
+import { query } from '@/lib/cms';
 const {
   parser: { intGe, intGt, strLengthGt, secondaryCheck },
 } = parseParam;
 const handler: NextApiHandler<Notice.ListResp | Err.Resp> = async (req, res) => {
   try {
     await ensureMethod(req.method, ['GET']);
-    const connection = prismaClient.$connect();
 
     const dto = await parseParam<{
       page: string;
@@ -25,16 +25,27 @@ const handler: NextApiHandler<Notice.ListResp | Err.Resp> = async (req, res) => 
       }),
     });
 
-    await connection;
     const page = parseInt(dto.page);
     const size = parseInt(dto.size);
-    const notices = await prismaClient.notice.findMany({
-      take: size,
-      skip: size * page,
-      orderBy: {
-        date: 'desc',
-      },
-    });
+    const { notices } = await query<{
+      notices: Notice.ListResp;
+    }>(
+      `query ListNotices($skip: IntType, $take: IntType){
+      notices: allNotices(skip: $skip, first: $take, orderBy: updatedAt_DESC) {
+        id
+        updatedAt
+        content {
+          value
+        }
+      }
+    }`,
+      {
+        variables: {
+          skip: page * size,
+          take: size,
+        },
+      }
+    );
     res.status(OK.code).json(notices);
   } catch (err) {
     errorHandler(res)(err);

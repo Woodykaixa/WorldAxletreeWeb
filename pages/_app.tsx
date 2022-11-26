@@ -1,6 +1,5 @@
 import 'antd/dist/antd.dark.css';
 import '@/styles/index.css';
-import 'bytemd/dist/index.css';
 
 import { Layout } from '@/components/Layout';
 import type { AppProps } from 'next/app';
