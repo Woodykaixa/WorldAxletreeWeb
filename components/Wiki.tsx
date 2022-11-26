@@ -1,12 +1,6 @@
 import { Collapse, Typography } from 'antd';
 import { Container, WikiSwitch } from '@/components';
 
-import { EditorStyle } from '@/components/editor';
-import { Viewer } from '@bytemd/react';
-import gfm from '@bytemd/plugin-gfm';
-import footnotes from '@bytemd/plugin-footnotes';
-import frontmatter from '@bytemd/plugin-frontmatter';
-import { Wiki as DTO } from '@/dto';
 const { Panel } = Collapse;
 
 import { FC } from 'react';
@@ -27,11 +21,9 @@ export const Wiki: FC<WikiProps> = ({ wiki, sides }) => {
       <Collapse>
         {wiki.map(w => (
           <Panel key={w.id} header={w.title}>
-            <EditorStyle>
-              <Typography>
-                <div dangerouslySetInnerHTML={{ __html: w.content }}></div>
-              </Typography>
-            </EditorStyle>
+            <Typography>
+              <div dangerouslySetInnerHTML={{ __html: w.content }}></div>
+            </Typography>
           </Panel>
         ))}
       </Collapse>

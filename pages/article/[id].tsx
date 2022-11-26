@@ -3,7 +3,6 @@ import { Typography } from 'antd';
 import { Article, OK } from '@/dto';
 import Head from 'next/head';
 import { GetServerSideProps } from 'next';
-import { EditorStyle } from '@/components/editor';
 
 export default function NoticePage({ data }: ServerSideProps) {
   const title = data.title + ' - 世界轴承';
@@ -36,14 +35,12 @@ export default function NoticePage({ data }: ServerSideProps) {
         {seo && seo.image && <meta itemProp='image' content={seo.image.responsiveImage.src ?? undefined} />}
       </Head>
       <Container>
-        <EditorStyle>
-          <Typography className='px-8'>
-            <h1 className='text-center'>{data.title}</h1>
-            <p className='text-center text-lg'>作者: {data.author}</p>
-            {data.keywords.length > 0 && <p className='text-center text-lg'>关键字: {data.keywords.join(', ')}</p>}
-            <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
-          </Typography>
-        </EditorStyle>
+        <Typography className='px-8'>
+          <h1 className='text-center'>{data.title}</h1>
+          <p className='text-center text-lg'>作者: {data.author}</p>
+          {data.keywords.length > 0 && <p className='text-center text-lg'>关键字: {data.keywords.join(', ')}</p>}
+          <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
+        </Typography>
       </Container>
     </>
   );

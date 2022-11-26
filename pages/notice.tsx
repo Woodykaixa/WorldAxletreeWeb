@@ -2,7 +2,6 @@ import { Container } from '@/components';
 import { List, Divider, Space, Skeleton, Typography } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Notice } from '@/dto';
-import { EditorStyle } from '@/components/editor';
 import moment from 'moment';
 import Head from 'next/head';
 import { PAGE_SIZE, useRecordList } from '@/hooks/record-list';
@@ -47,11 +46,9 @@ export default function NoticePage() {
                     key={item.id}
                     actions={[<Space key='date'>{moment(item.updatedAt).format('yyyy年MM月DD日 HH:mm:ss')}</Space>]}
                   >
-                    <EditorStyle>
-                      <Typography>
-                        <StructuredText data={item.content.value} />
-                      </Typography>
-                    </EditorStyle>
+                    <Typography>
+                      <StructuredText data={item.content.value} />
+                    </Typography>
                   </List.Item>
                 </div>
               )}

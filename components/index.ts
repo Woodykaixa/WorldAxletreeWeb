@@ -4,7 +4,6 @@ export * from './FeaturePanel';
 export * from './Footer';
 export * from './Header';
 export * from './ImageLink';
-export * from './ImageWall';
 export * from './IndexWrapper';
 export * from './Layout';
 export * from './SkewButton';

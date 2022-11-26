@@ -3,7 +3,6 @@ import { Typography } from 'antd';
 import { News, OK } from '@/dto';
 import Head from 'next/head';
 import { GetServerSideProps } from 'next';
-import { EditorStyle } from '@/components/editor';
 
 export default function NoticePage({ data }: ServerSideProps) {
   const title = data.title + ' - 世界轴承';
@@ -36,11 +35,9 @@ export default function NoticePage({ data }: ServerSideProps) {
         {image && <meta itemProp='image' content={image.responsiveImage.src ?? undefined} />}
       </Head>
       <Container>
-        <EditorStyle>
-          <Typography>
-            <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
-          </Typography>
-        </EditorStyle>
+        <Typography>
+          <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
+        </Typography>
       </Container>
     </>
   );
