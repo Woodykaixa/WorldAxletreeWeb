@@ -87,10 +87,12 @@ export default function NoticePage() {
                     extra={
                       item.cover && (
                         <CmsImage
+                          pictureClassName='object-contain'
                           data={{
                             ...item.cover.responsiveImage,
                             width: 250,
                             height: 250,
+                            aspectRatio: 1,
                           }}
                         />
                       )

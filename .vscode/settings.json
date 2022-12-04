@@ -9,11 +9,16 @@
   },
   "files.eol": "\n",
   "editor.fontLigatures": false,
-  "editor.rulers": [120],
+  "editor.rulers": [
+    120
+  ],
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "editor.trimAutoWhitespace": true,
-  "todo-tree.general.tags": ["FIXME:", "TODO:"],
+  "todo-tree.general.tags": [
+    "FIXME:",
+    "TODO:"
+  ],
   "todo-tree.highlights.defaultHighlight": {
     "gutterIcon": true
   },
@@ -30,7 +35,9 @@
       "iconColour": "#f06292"
     }
   },
-  "todo-tree.filtering.excludeGlobs": ["**/node_modules"],
+  "todo-tree.filtering.excludeGlobs": [
+    "**/node_modules"
+  ],
   "prettier.useEditorConfig": false,
   "cSpell.diagnosticLevel": "Hint",
   "editor.codeActionsOnSave": {
@@ -53,5 +60,11 @@
     },
     "editor.suggest.insertMode": "replace",
     "editor.defaultFormatter": "vscode.typescript-language-features"
-  }
+  },
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "ngClass",
+    "pictureClassName"
+  ]
 }

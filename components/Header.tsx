@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import AntimoLogo from '@/public/assets/antimo-logo.webp';
 import WaLogo from '@/public/assets/wa.webp';
 import { Dropdown, Menu } from 'antd';
@@ -9,15 +9,17 @@ import { ReactNode } from 'react';
 export function Header() {
   return (
     <header className='flex text-xl bg-black py-2 text-white items-center px-4'>
-      <Link href='/' passHref>
-        <div className='px-6 border-r-2 border-white cursor-pointer'>
-          <Image
-            src={WaLogo.src}
-            alt='World Axletree Logo'
-            layout='intrinsic'
-            width={WaLogo.width / 4}
-            height={WaLogo.height / 4}
-          />
+      <Link
+        href='/'
+        passHref
+        style={{
+          maxWidth: WaLogo.width / 4,
+          maxHeight: WaLogo.height / 4,
+        }}
+        className='h-[96px] w-1/4 px-6 border-r-2 border-white'
+      >
+        <div className='cursor-pointer relative w-full h-full'>
+          <Image src={WaLogo.src} alt='World Axletree Logo' fill className='object-contain' />
         </div>
       </Link>
       <div className='w-4  '></div>
@@ -28,10 +30,8 @@ export function Header() {
       <Image
         src={AntimoLogo.src}
         alt='Antimo Project Logo'
-        className='w-16 mx-6'
         width={AntimoLogo.width / 13}
         height={AntimoLogo.height / 13}
-        layout='intrinsic'
       />
     </header>
   );
@@ -109,7 +109,7 @@ function HeaderMenu({ layout }: HeaderMenuProps) {
               </Menu>
             }
           >
-            <a className='text-white border-0 bg-black text-2xl my-2 py-2 px-8 opacity-80 hover:opacity-100'>
+            <a className='text-white border-0 bg-black text-2xl my-2 py-2 px-8 opacity-80 hover:opacity-100 whitespace-nowrap'>
               {menu.text}
             </a>
           </Dropdown>
@@ -120,7 +120,7 @@ function HeaderMenu({ layout }: HeaderMenuProps) {
           href='https://www.baidu.com'
           target='_blank'
           rel='noopener noreferrer'
-          className='my-2 py-2 px-8 bg-red-500 opacity-80 hover:opacity-100 text-white  text-2xl'
+          className='my-2 py-2 px-8 bg-red-500 opacity-80 hover:opacity-100 text-white text-2xl whitespace-nowrap'
         >
           下载
         </a>
